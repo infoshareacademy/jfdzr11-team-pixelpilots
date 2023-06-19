@@ -25,10 +25,10 @@ function App() {
         {/* Ściezki prywatne */}
         <Route element={<PrivateRoute />}>
           <Route path="/:userId" element={<PanelGlowny />} />
-          <Route path="/:userId/mojeoferty" element={<MojeOferty />} />
-          <Route path="/:userId/dodajoferte" element={<DodajOferte />} />
-          <Route path="/:userId/mojezlecenia" element={<MojeZlecenia />} />
-          <Route path="/:userId/znajdzzlecenie" element={<ZnajdzZlecenie />} />
+          <Route path="/mojeoferty" element={<MojeOferty />} />
+          <Route path="/dodajoferte" element={<DodajOferte />} />
+          <Route path="/mojezlecenia" element={<MojeZlecenia />} />
+          <Route path="/znajdzzlecenie" element={<ZnajdzZlecenie />} />
         </Route>
       </Route>
     </Routes>

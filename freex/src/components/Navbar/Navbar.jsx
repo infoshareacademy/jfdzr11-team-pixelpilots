@@ -1,15 +1,16 @@
-import { NavLink } from "react-router-dom";
+import styles from "./Navbar.module.css";
+import NavbarLink from "../UI/NavbarLink/NavbarLink";
 
 const Navbar = () => {
   return (
-    <div>
-      <div>
-        <NavLink to="/">Panel główny</NavLink>
-        <NavLink to="/students">Moje oferty</NavLink>
-        <NavLink to="/grades">Dodaj ofertę</NavLink>
-        <NavLink to="/grades">Znajdź freeleancera</NavLink>
-        <NavLink to="/notes">Moje zlecenia</NavLink>
-        <NavLink to="/notes">Znajdź zlecenie</NavLink>
+    <div className={styles.navbar}>
+      <div className={styles.links}>
+        <NavbarLink linkURL="/">Home</NavbarLink>
+        <NavbarLink linkURL="/:userId">Panel główny</NavbarLink>
+        <NavbarLink linkURL="/mojeoferty">Moje oferty</NavbarLink>
+        <NavbarLink linkURL="/dodajoferte">Dodaj ofertę</NavbarLink>
+        <NavbarLink linkURL="/mojezlecenia">Moje zlecenia</NavbarLink>
+        <NavbarLink linkURL="/znajdzzlecenie">Znajdź zlecenie</NavbarLink>
       </div>
     </div>
   );
