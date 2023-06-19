@@ -4,7 +4,7 @@ import Footer from "./Footer/Footer";
 import Layout from "./Layout/Layout";
 import Login from "./Auth/Login/Login";
 import Register from "./Auth/Register/Register";
-import ProfilUzytkownika from "./ProfilUzytkownika/ProfilUzytkownika";
+import PanelGlowny from "./PanelGlowny/ProfilUzytkownika";
 import MojeOferty from "./MojeOferty/MojeOferty";
 import DodajOferte from "./DodajOferte/DodajOferte";
 import MojeZlecenia from "./MojeZlecenia/MojeZlecenia";
@@ -18,7 +18,7 @@ export {
   Layout,
   Login,
   Register,
-  ProfilUzytkownika,
+  PanelGlowny,
   MojeOferty,
   DodajOferte,
   MojeZlecenia,

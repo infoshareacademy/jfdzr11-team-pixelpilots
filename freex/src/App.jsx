@@ -5,7 +5,7 @@ import {
   Home,
   Login,
   Register,
-  ProfilUzytkownika,
+  PanelGlowny,
   MojeOferty,
   DodajOferte,
   MojeZlecenia,
@@ -24,7 +24,7 @@ function App() {
 
         {/* Ściezki prywatne */}
         <Route element={<PrivateRoute />}>
-          <Route path="/:userId" element={<ProfilUzytkownika />} />
+          <Route path="/:userId" element={<PanelGlowny />} />
           <Route path="/:userId/mojeoferty" element={<MojeOferty />} />
           <Route path="/:userId/dodajoferte" element={<DodajOferte />} />
           <Route path="/:userId/mojezlecenia" element={<MojeZlecenia />} />
