@@ -10,6 +10,7 @@ import DodajOferte from "./DodajOferte/DodajOferte";
 import MojeZlecenia from "./MojeZlecenia/MojeZlecenia";
 import ZnajdzZlecenie from "./ZnajdzZlecenie/ZnajdzZlecenie";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Cards from "./Cards/Cards";
 import InvalidAddress from "./InvalidAddress/InvalidAddress";
 
 export {
@@ -25,5 +26,6 @@ export {
   MojeZlecenia,
   ZnajdzZlecenie,
   PrivateRoute,
+  Cards,
   InvalidAddress,
 };
