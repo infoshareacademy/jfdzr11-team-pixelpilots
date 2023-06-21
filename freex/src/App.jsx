@@ -12,6 +12,8 @@ import {
   ZnajdzZlecenie,
   PrivateRoute,
   InvalidAddress,
+  UserProfile,
+  Favorites,
 } from "./components";
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route path="/userID/dodajoferte" element={<DodajOferte />} />
           <Route path="/userID/mojezlecenia" element={<MojeZlecenia />} />
           <Route path="/userID/znajdzzlecenie" element={<ZnajdzZlecenie />} />
+          <Route path="/userID/profil" element={<UserProfile />} />
+          <Route path="/userID/ulubione" element={<Favorites />} />
         </Route>
       </Route>
     </Routes>

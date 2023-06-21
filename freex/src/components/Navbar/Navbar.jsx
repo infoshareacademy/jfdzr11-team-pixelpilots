@@ -47,12 +47,18 @@ const Navbar = () => {
               <button className={styles.button_icon}>
                 <img
                   className={styles.icon}
+                  onClick={() => {
+                    navigate("/userID/ulubione");
+                  }}
                   src="../../../Navbar/icon_ulubione.png"
                 />
               </button>
               <button className={styles.button_icon}>
                 <img
                   className={styles.icon}
+                  onClick={() => {
+                    navigate("/userID/profil");
+                  }}
                   src="../../../Navbar/icon_profil.png"
                 />
               </button>
