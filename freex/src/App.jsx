@@ -11,6 +11,9 @@ import {
   MojeZlecenia,
   ZnajdzZlecenie,
   PrivateRoute,
+  InvalidAddress,
+  UserProfile,
+  Favorites,
 } from "./components";
 
 function App() {
@@ -19,16 +22,19 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* Publiczne ściezki */}
         <Route path="/" element={<Home />} />
+        <Route path="/*" element={<InvalidAddress />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         {/* Ściezki prywatne */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/:userId" element={<PanelGlowny />} />
-          <Route path="/mojeoferty" element={<MojeOferty />} />
-          <Route path="/dodajoferte" element={<DodajOferte />} />
-          <Route path="/mojezlecenia" element={<MojeZlecenia />} />
-          <Route path="/znajdzzlecenie" element={<ZnajdzZlecenie />} />
+        <Route path="/userID" element={<PrivateRoute />}>
+          <Route path="/userID/panelglowny" element={<PanelGlowny />} />
+          <Route path="/userID/mojeoferty" element={<MojeOferty />} />
+          <Route path="/userID/dodajoferte" element={<DodajOferte />} />
+          <Route path="/userID/mojezlecenia" element={<MojeZlecenia />} />
+          <Route path="/userID/znajdzzlecenie" element={<ZnajdzZlecenie />} />
+          <Route path="/userID/profil" element={<UserProfile />} />
+          <Route path="/userID/ulubione" element={<Favorites />} />
         </Route>
       </Route>
     </Routes>
