@@ -1,0 +1,33 @@
+.cardsContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.cardWrapper {
+	display: flex;
+	flex-direction: column;
+	max-width: 15rem;
+	letter-spacing: -0.5px;
+	line-height: 1.5rem;
+	padding: 1rem;
+	/* margin: 1rem; */
+}
+
+.cardImg {
+	height: 15rem;
+	display: flex;
+	align-items: center;
+}
+
+.cardImg img {
+	width: 100%;
+	object-fit: contain;
+	bottom: 0;
+}
+
+.cardWrapper h3 {
+	font-size: 1.25rem;
+	font-weight: 700;
+	text-align: center;
+	padding: 0rem 0.75rem 1rem;
+}
