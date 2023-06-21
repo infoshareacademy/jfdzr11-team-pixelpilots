@@ -14,6 +14,7 @@ import Cards from "./Cards/Cards";
 import InvalidAddress from "./InvalidAddress/InvalidAddress";
 import Favorites from "./Favorites/Favorites";
 import UserProfile from "./UserProfile/UserProfile";
+import PrimaryButton from "./UI/PrimaryButton/PrimaryButton";
 
 export {
   Home,
@@ -32,4 +33,5 @@ export {
   InvalidAddress,
   Favorites,
   UserProfile,
+  PrimaryButton,
 };
