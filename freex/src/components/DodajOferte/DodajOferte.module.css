@@ -1,0 +1,23 @@
+.add_offer_wrapper {
+  width: 80%;
+  max-width: 864px;
+  margin: 0 auto;
+}
+
+.add_offer_form {
+  width: 80%;
+}
+
+.add_offer_form,
+textarea {
+  width: 100%;
+}
+
+.project_title {
+  width: 100%;
+}
+
+.character_counter {
+  display: flex;
+  justify-content: space-between;
+}

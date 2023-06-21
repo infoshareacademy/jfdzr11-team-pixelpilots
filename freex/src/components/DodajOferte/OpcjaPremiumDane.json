@@ -1,0 +1,26 @@
+[
+  {
+    "plan_title": "Wyróżniona oferta 20 zł",
+    "plan_name": "highlight",
+    "plan_description": "Dajemy Ci możliwość wyróżnienia swojej oferty na naszej stronie głównej, co zwiększy jej widoczność i szanse na przyciągnięcie uwagi potencjalnych freelancerów. Będziesz na pierwszym planie, wśród innych projektów, przyciągając tym samym większą uwagę specjalistów.",
+    "img": "../../../public/images/prioritise.png"
+  },
+  {
+    "plan_title": "Profesjonalna analiza 100 zł",
+    "plan_name": "analysis",
+    "plan_description": "Oferujemy Ci usługę profesjonalnej analizy Twojego projektu przez naszych ekspertów UX. Otrzymasz szczegółową ocenę projektu, wskazówki i sugestie, jak go ulepszyć, aby zapewnić optymalne doświadczenia użytkownika. Ta usługa pozwoli Ci na jeszcze lepsze dopasowanie się do potrzeb rynku i zwiększenie atrakcyjności Twojej oferty.",
+    "img": "../../../public/images/projections.png"
+  },
+  {
+    "plan_title": "Priorytetowe wsparcie 60 zł",
+    "plan_name": "support",
+    "plan_description": "Z naszym planem premium otrzymasz dostęp do priorytetowego wsparcia klienta. Masz pytania, potrzebujesz porady lub napotykasz trudności? Nasz zespół będzie Cię obsługiwać w pierwszej kolejności, zapewniając szybką i skuteczną pomoc w realizacji Twojego projektu.",
+    "img": "../../../public/images/collaboration.png"
+  },
+  {
+    "plan_title": "Umowy i przeniesienie własności intelektualnej 150 zł",
+    "plan_name": "contracts",
+    "plan_description": "Wybierając tę opcję premium, możesz skorzystać z naszego profesjonalnego systemu umów, który zapewnia jasne warunki współpracy między Tobą a freelancerem UX designerem. Nasze umowy są dostosowane do potrzeb projektów UX i chronią prawa własności intelektualnej. Dodatkowo, nasza platforma ułatwia przeniesienie własności intelektualnej na Ciebie jako klienta, zapewniając Ci pełną kontrolę nad rezultatami projektu",
+    "img": "../../../public/images/analysis.png"
+  }
+]

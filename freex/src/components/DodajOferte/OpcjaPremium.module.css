@@ -1,0 +1,8 @@
+.premium_option {
+  display: flex;
+  padding: 20px;
+}
+
+.image {
+  height: 150px;
+}
