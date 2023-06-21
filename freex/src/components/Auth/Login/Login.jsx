@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import styles from "./Login.module.css";
 import useAuth from "../../Context/AuthContext";
 import { toast } from "react-hot-toast";
@@ -6,6 +6,8 @@ import { firebaseErrors } from "../../../utils/firebaseErrors";
 
 const Login = () => {
   const { login, currentUser } = useAuth();
+
+  const location = useLocation();
 
   const handleSubmit = async (formEvent) => {
     formEvent.preventDefault();
@@ -18,7 +20,7 @@ const Login = () => {
       toast.success("Logowanie zakończone sukcesem");
     } catch (error) {
       {
-        error.code
+        firebaseErrors[error.code]
           ? toast.error(firebaseErrors[error.code])
           : toast.error("Wystąpił błąd. Spróbuj później");
       }
@@ -41,8 +43,10 @@ const Login = () => {
             </p>
           </form>
         </div>
+      ) : location.state ? (
+        <Navigate to={location.state.from.pathname} />
       ) : (
-        <Navigate to="/" />
+        <Navigate to="/userID/panelglowny" />
       )}
     </>
   );

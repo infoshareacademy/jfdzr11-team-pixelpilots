@@ -1,30 +1,40 @@
 import styles from "./Navbar.module.css";
 import NavbarLink from "../UI/NavbarLink/NavbarLink";
 import useAuth from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
-    <div className={styles.navbar}>
+    <nav className={styles.navbar}>
       <div className={styles.links}>
-        <NavbarLink linkURL="/">Home</NavbarLink>
-        <NavbarLink linkURL="/:userId">Panel główny</NavbarLink>
-        <NavbarLink linkURL="/mojeoferty">Moje oferty</NavbarLink>
-        <NavbarLink linkURL="/dodajoferte">Dodaj ofertę</NavbarLink>
-        <NavbarLink linkURL="/mojezlecenia">Moje zlecenia</NavbarLink>
-        <NavbarLink linkURL="/znajdzzlecenie">Znajdź zlecenie</NavbarLink>
-        {currentUser ? <span>Zalogowoany</span> : null}
-        <button
-          onClick={() => {
-            logout();
-            console.log("logout");
-          }}
-        >
-          Logout
-        </button>
+        {!currentUser ? (
+          <NavbarLink linkURL="/">Home</NavbarLink>
+        ) : (
+          <>
+            <NavbarLink linkURL="/userID/panelglowny">Panel główny</NavbarLink>
+            <NavbarLink linkURL="/userID/mojeoferty">Moje oferty</NavbarLink>
+            <NavbarLink linkURL="/userID/dodajoferte">Dodaj ofertę</NavbarLink>
+            <NavbarLink linkURL="/userID/mojezlecenia">
+              Moje zlecenia
+            </NavbarLink>
+            <NavbarLink linkURL="/userID/znajdzzlecenie">
+              Znajdź zlecenie
+            </NavbarLink>
+            <button
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
+            >
+              Logout
+            </button>
+          </>
+        )}
       </div>
-    </div>
+    </nav>
   );
 };
 
