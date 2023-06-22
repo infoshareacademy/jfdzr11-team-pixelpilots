@@ -10,6 +10,11 @@ import DodajOferte from "./DodajOferte/DodajOferte";
 import MojeZlecenia from "./MojeZlecenia/MojeZlecenia";
 import ZnajdzZlecenie from "./ZnajdzZlecenie/ZnajdzZlecenie";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Cards from "./Cards/Cards";
+import InvalidAddress from "./InvalidAddress/InvalidAddress";
+import Favorites from "./Favorites/Favorites";
+import UserProfile from "./UserProfile/UserProfile";
+import PrimaryButton from "./UI/PrimaryButton/PrimaryButton";
 
 export {
   Home,
@@ -24,4 +29,9 @@ export {
   MojeZlecenia,
   ZnajdzZlecenie,
   PrivateRoute,
+  Cards,
+  InvalidAddress,
+  Favorites,
+  UserProfile,
+  PrimaryButton,
 };

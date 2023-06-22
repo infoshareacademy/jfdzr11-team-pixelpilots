@@ -1,13 +1,13 @@
 .app {
-  min-width: 100vw;
+  /* min-width: 100vw; */
   min-height: 100vh;
-
   display: grid;
-  grid-template-rows: 50px 1fr 100px;
+  grid-template-rows: 80px 1fr 100px;
   grid-template-areas:
     "navbar"
     "page_content"
     "footer";
+  margin: 0 60px;
 }
 
 .navbar {
