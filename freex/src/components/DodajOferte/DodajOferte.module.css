@@ -2,10 +2,20 @@
   width: 80%;
   max-width: 864px;
   margin: 0 auto;
+  border: 2px solid var(--clr-base-lighter-blue);
+  border-radius: 12px;
+  padding: 1rem 6rem;
+  margin-top: 4rem;
+}
+
+.title {
+  font-size: 20px;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .add_offer_form {
-  width: 80%;
+  width: 60%;
 }
 
 .add_offer_form,
@@ -15,9 +25,98 @@ textarea {
 
 .project_title {
   width: 100%;
+  height: 30px;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  padding-left: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.description,
+.skills {
+  height: 5rem;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+  padding-left: 0.5rem;
+}
+
+.add_file button {
+  margin-top: 2rem;
+  height: 39px;
+  width: 104px;
+  color: white;
+  background-color: var(--clr-base-darker-blue);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add_file button:hover {
+  background-color: #159adc;
 }
 
 .character_counter {
   display: flex;
   justify-content: space-between;
+  color: #c2c2c2;
+  font-size: 12px;
+}
+
+.skills {
+  height: 4rem;
+}
+
+.radio label {
+  padding: 0.5rem;
+  font-size: 14px;
+}
+
+.radio input {
+  transform: scale(1.2);
+}
+
+.dropdown {
+  margin-top: 2rem;
+}
+
+.dropdown select {
+  height: 42px;
+  width: 188px;
+  border-radius: 5px;
+  padding: 12px 21px 12px 12px;
+  background-color: var(--clr-light-blue);
+  border: none;
+  font-size: 12px;
+  color: #373f49;
+  margin: 0.5rem 0 2rem 0;
+}
+
+.premium_plan_section {
+  border: 1px solid #e8e9ec;
+  padding: 1rem;
+}
+
+.total {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.submit_section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.submit_button {
+  height: 44px;
+  width: 162px;
+  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid #0099e6;
+  background-color: #80d4ff;
+  color: #0099e6;
+  margin: 2rem 0;
 }

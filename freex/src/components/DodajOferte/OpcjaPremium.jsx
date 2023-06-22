@@ -20,7 +20,7 @@ const OpcjaPremium = ({ plan_name, plan_title, plan_description, img }) => {
           onChange={handleChange}
         />
         <label htmlFor={plan_name}>{plan_title}</label>
-        <p>{plan_description}</p>
+        <p className={styles.description}>{plan_description}</p>
       </div>
       <img className={styles.image} src={img}></img>
     </div>
