@@ -1,6 +1,6 @@
-import OpcjaPremium from './OpcjaPremium';
-import Data from './OpcjaPremiumDane.json';
-import Podsumowanie from './Podsumowanie';
+import OpcjaPremium from './OpcjaPremium/OpcjaPremium';
+import Data from '../DodajOferte/OpcjaPremium/OpcjaPremiumDane.json';
+import Podsumowanie from './Podsumowanie/Podsumowanie';
 import styles from './DodajOferte.module.css';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
