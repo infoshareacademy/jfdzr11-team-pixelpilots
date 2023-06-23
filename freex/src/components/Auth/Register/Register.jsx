@@ -36,7 +36,7 @@ const Register = () => {
 	return (
 		<div className={styles.container}>
 			<form onSubmit={handleSubmit} className={styles.form}>
-				<label htmlFor="email">Email</label>
+				<label htmlFor="email">Adres email</label>
 				<input
 					type="email"
 					name="email"
@@ -48,7 +48,7 @@ const Register = () => {
 					type="password"
 					name="password"
 					id="password"
-					placeholder="Wpisz hasło"
+					placeholder="Wpisz hasło..."
 				/>
 				<label htmlFor="password_confirm">Potwierdź hasło</label>
 				<input
