@@ -1,0 +1,30 @@
+.summary_wrapper {
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 12px;
+  min-height: 352px;
+}
+
+.top_summary {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.summary_data {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.description_summary {
+  height: 5rem;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+  padding-left: 0.5rem;
+}
