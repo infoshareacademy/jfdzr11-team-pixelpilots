@@ -19,10 +19,10 @@ const Navbar = () => {
               <NavbarLink linkURL="/panelglowny">Panel główny</NavbarLink>
               <NavbarLink linkURL="/mojeoferty">Moje oferty</NavbarLink>
               <NavbarLink linkURL="/dodajoferte">Dodaj ofertę</NavbarLink>
-              <NavbarLink linkURL="/znajdzfreelancera">
+              <NavbarLink linkURL="/freelancerzy">
                 Znajdź freelancera
               </NavbarLink>
-              <NavbarLink linkURL="/znajdzzlecenie">Znajdź zlecenie</NavbarLink>
+              <NavbarLink linkURL="/zlecenia">Znajdź zlecenie</NavbarLink>
             </>
           )}
         </div>
