@@ -42,7 +42,7 @@ const Navbar = () => {
                 <img
                   className={styles.icon}
                   onClick={() => {
-                    navigate("/userID/ulubione");
+                    navigate("/ulubione");
                   }}
                   src="../../../Navbar/icon_ulubione.png"
                 />
@@ -51,7 +51,7 @@ const Navbar = () => {
                 <img
                   className={styles.icon}
                   onClick={() => {
-                    navigate("/userID/profil");
+                    navigate("/profil");
                   }}
                   src="../../../Navbar/icon_profil.png"
                 />
