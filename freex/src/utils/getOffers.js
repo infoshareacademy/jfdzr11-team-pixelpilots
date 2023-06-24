@@ -9,8 +9,8 @@ export const getOffers = async (setData) => {
     const data = await getDocs(offersCollectionRef);
     const filteredData = data.docs.map((doc) => ({
       ...doc.data(),
-      id: doc.id,
     }));
+
     setData(filteredData);
   } catch (error) {
     toast(`Something went wrong`);
