@@ -27,14 +27,14 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* Ściezki prywatne */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/userID/panelglowny" element={<MainPanel />} />
-          <Route path="/userID/mojeoferty" element={<MyOffers />} />
-          <Route path="/userID/dodajoferte" element={<AddOffer />} />
-          <Route path="/userID/freelancerzy" element={<Freelancers />} />
-          <Route path="/userID/zlecenia" element={<Offers />} />
-          <Route path="/userID/profil" element={<UserProfile />} />
-          <Route path="/userID/ulubione" element={<Favorites />} />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/panelglowny" element={<MainPanel />} />
+          <Route path="/mojeoferty" element={<MyOffers />} />
+          <Route path="/dodajoferte" element={<AddOffer />} />
+          <Route path="/freelancerzy" element={<Freelancers />} />
+          <Route path="/zlecenia" element={<Offers />} />
+          <Route path="/profil" element={<UserProfile />} />
+          <Route path="/ulubione" element={<Favorites />} />
         </Route>
       </Route>
     </Routes>

@@ -16,19 +16,13 @@ const Navbar = () => {
           </NavLink>
           {!currentUser ? null : (
             <>
-              <NavbarLink linkURL="/userID/panelglowny">
-                Panel główny
-              </NavbarLink>
-              <NavbarLink linkURL="/userID/mojeoferty">Moje oferty</NavbarLink>
-              <NavbarLink linkURL="/userID/dodajoferte">
-                Dodaj ofertę
-              </NavbarLink>
-              <NavbarLink linkURL="/userID/znajdzfreelancera">
+              <NavbarLink linkURL="/panelglowny">Panel główny</NavbarLink>
+              <NavbarLink linkURL="/mojeoferty">Moje oferty</NavbarLink>
+              <NavbarLink linkURL="/dodajoferte">Dodaj ofertę</NavbarLink>
+              <NavbarLink linkURL="/znajdzfreelancera">
                 Znajdź freelancera
               </NavbarLink>
-              <NavbarLink linkURL="/userID/znajdzzlecenie">
-                Znajdź zlecenie
-              </NavbarLink>
+              <NavbarLink linkURL="/znajdzzlecenie">Znajdź zlecenie</NavbarLink>
             </>
           )}
         </div>
