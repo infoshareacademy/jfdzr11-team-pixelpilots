@@ -4,11 +4,11 @@ import Footer from "./Footer/Footer";
 import Layout from "./Layout/Layout";
 import Login from "./Auth/Login/Login";
 import Register from "./Auth/Register/Register";
-import PanelGlowny from "./PanelGlowny/ProfilUzytkownika";
-import MojeOferty from "./MojeOferty/MojeOferty";
-import DodajOferte from "./DodajOferte/DodajOferte";
-import MojeZlecenia from "./MojeZlecenia/MojeZlecenia";
-import ZnajdzZlecenie from "./ZnajdzZlecenie/ZnajdzZlecenie";
+import MainPanel from "./MainPanel/MainPanel";
+import MyOffers from "./MyOffers/MyOffers";
+import AddOffer from "./AddOffer/AddOffer/AddOffer";
+import Freelancers from "./Freelancers/Freelancers";
+import Offers from "./Offers/Offers";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Cards from "./Cards/Cards";
 import InvalidAddress from "./InvalidAddress/InvalidAddress";
@@ -23,11 +23,11 @@ export {
   Layout,
   Login,
   Register,
-  PanelGlowny,
-  MojeOferty,
-  DodajOferte,
-  MojeZlecenia,
-  ZnajdzZlecenie,
+  MainPanel,
+  MyOffers,
+  AddOffer,
+  Freelancers,
+  Offers,
   PrivateRoute,
   Cards,
   InvalidAddress,

@@ -15,7 +15,7 @@ const useAuth = () => {
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
 
   function register(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
