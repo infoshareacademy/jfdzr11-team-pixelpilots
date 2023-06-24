@@ -35,6 +35,23 @@ const Register = () => {
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.text}>
+				<h2>
+					Cieszymy się, że to właśnie z nami chcesz rozwijać swój
+					biznes
+				</h2>
+				<p>
+					Jeszcze tylko kilka kroków i będziesz mógł w pełni korzystać
+					z funkcjonalności FreeX. Uzupełnij podstawowe dane i znajdź
+					specjalistów na miarę Twoich potrzeb.
+				</p>
+				<div className={styles.image}>
+					<img
+						src="../../../../public/Register/Register.png"
+						alt="register icon"
+					/>
+				</div>
+			</div>
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<label htmlFor="email">Adres email</label>
 				<input
