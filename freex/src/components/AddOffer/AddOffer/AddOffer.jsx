@@ -35,6 +35,7 @@ const AddOffer = () => {
     };
 
     addDoc(offersCollectionRef, offerData);
+    console.log(offers);
   };
 
   useEffect(() => {
