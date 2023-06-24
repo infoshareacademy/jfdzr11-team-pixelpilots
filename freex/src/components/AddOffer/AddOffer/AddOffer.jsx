@@ -1,23 +1,29 @@
-import PremiumOption from "../PremiumOption/PremiumOption";
-import Data from "../PremiumOption/PremiumOptionData.json";
-import Summary from "../Summary/Summary";
-import styles from "./AddOffer.module.css";
-import { doc, setDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../../../config/firebase";
-import useAuth from "../../Context/AuthContext";
+import PremiumOption from '../PremiumOption/PremiumOption';
+import Data from '../PremiumOption/PremiumOptionData.json';
+import Summary from '../Summary/Summary';
+import styles from './AddOffer.module.css';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../../config/firebase';
+import useAuth from '../../Context/AuthContext';
+import { getOffers } from '../../../utils/getOffers';
+import { useState, useEffect } from 'react';
 
 const AddOffer = () => {
   const { currentUser } = useAuth();
 
-  const userRef = doc(db, "users", currentUser.uid);
+  const [offers, setOffers] = useState();
+
+  const offersCollectionRef = collection(db, 'offers');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const offerData = {
+      ...offers,
+      userId: currentUser.uid,
       title: e.target.title.value,
       description: e.target.description.value,
-      skills: [...e.target.skills.value.split(",")],
+      skills: [...e.target.skills.value.split(',')],
       hourly_rate: e.target.rate.value,
       payment_method: e.target.payment_method.value,
       premium_plan: {
@@ -28,14 +34,12 @@ const AddOffer = () => {
       },
     };
 
-    setDoc(
-      userRef,
-      {
-        offers: arrayUnion(offerData),
-      },
-      { merge: true }
-    );
+    addDoc(offersCollectionRef, offerData);
   };
+
+  useEffect(() => {
+    getOffers(setOffers);
+  }, []);
 
   return (
     <div className={styles.add_offer_wrapper}>
