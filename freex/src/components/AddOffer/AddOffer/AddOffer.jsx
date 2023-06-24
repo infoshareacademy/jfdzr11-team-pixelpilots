@@ -1,15 +1,15 @@
-import OpcjaPremium from './OpcjaPremium/OpcjaPremium';
-import Data from '../DodajOferte/OpcjaPremium/OpcjaPremiumDane.json';
-import Podsumowanie from './Podsumowanie/Podsumowanie';
-import styles from './DodajOferte.module.css';
-import { doc, setDoc, arrayUnion } from 'firebase/firestore';
-import { db } from '../../config/firebase';
-import useAuth from '../Context/AuthContext';
+import PremiumOption from "../PremiumOption/PremiumOption";
+import Data from "../PremiumOption/PremiumOptionData.json";
+import Summary from "../Summary/Summary";
+import styles from "./AddOffer.module.css";
+import { doc, setDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../../config/firebase";
+import useAuth from "../../Context/AuthContext";
 
-const DodajOferte = () => {
+const AddOffer = () => {
   const { currentUser } = useAuth();
 
-  const userRef = doc(db, 'users', currentUser.uid);
+  const userRef = doc(db, "users", currentUser.uid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ const DodajOferte = () => {
     const offerData = {
       title: e.target.title.value,
       description: e.target.description.value,
-      skills: [...e.target.skills.value.split(',')],
+      skills: [...e.target.skills.value.split(",")],
       hourly_rate: e.target.rate.value,
       payment_method: e.target.payment_method.value,
       premium_plan: {
@@ -114,7 +114,7 @@ const DodajOferte = () => {
         </div>
         <div className={styles.premium_plan_section}>
           {Data.map((option, idx) => (
-            <OpcjaPremium
+            <PremiumOption
               key={idx}
               plan_name={option.plan_name}
               plan_title={option.plan_title}
@@ -124,7 +124,7 @@ const DodajOferte = () => {
           ))}
         </div>
         <h2 className={styles.title}>Podsumowanie</h2>
-        <Podsumowanie />
+        <Summary />
         <div className={styles.submit_section}>
           <h2 className={styles.total}>Łącznie: 160 PLN</h2>
           <button className={styles.submit_button} type="submit">
@@ -136,4 +136,4 @@ const DodajOferte = () => {
   );
 };
 
-export default DodajOferte;
+export default AddOffer;

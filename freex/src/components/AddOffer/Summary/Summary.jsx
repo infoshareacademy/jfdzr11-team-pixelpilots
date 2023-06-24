@@ -1,6 +1,6 @@
-import styles from './Podsumowanie.module.css';
+import styles from "./Summary.module.css";
 
-const Podsumowanie = () => {
+const Summary = () => {
   return (
     <div className={styles.summary_wrapper}>
       <div className={styles.top_summary}>
@@ -18,4 +18,4 @@ const Podsumowanie = () => {
     </div>
   );
 };
-export default Podsumowanie;
+export default Summary;
