@@ -20,7 +20,7 @@ const Register = () => {
 		} else {
 			try {
 				await register(email, password);
-				navigate('/userID/panelglowny');
+				navigate('/panelglowny');
 				toast.success('Rejestracja zakończona sukcesem');
 			} catch (error) {
 				{
