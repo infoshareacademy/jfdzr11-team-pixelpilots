@@ -23,10 +23,10 @@ const Navbar = () => {
               <NavbarLink linkURL="/userID/dodajoferte">
                 Dodaj ofertę
               </NavbarLink>
-              <NavbarLink linkURL="/userID/znajdzfreelancera">
+              <NavbarLink linkURL="/userID/freelancerzy">
                 Znajdź freelancera
               </NavbarLink>
-              <NavbarLink linkURL="/userID/znajdzzlecenie">
+              <NavbarLink linkURL="/userID/zlecenia">
                 Znajdź zlecenie
               </NavbarLink>
             </>
