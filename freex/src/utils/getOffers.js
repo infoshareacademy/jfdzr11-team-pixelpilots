@@ -10,7 +10,6 @@ export const getOffers = async (setData) => {
     const filteredData = data.docs.map((doc) => ({
       ...doc.data(),
     }));
-    console.log(filteredData);
 
     setData(filteredData);
   } catch (error) {
