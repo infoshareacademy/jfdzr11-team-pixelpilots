@@ -1,56 +1,58 @@
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 :root {
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 16px;
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 16px;
+	color: hsl(213, 14%, 25%);
 
-  --clr-primary-white: rgb(255, 255, 255);
-  --clr-primary-dark: rgb(56, 63, 73);
-  --clr-primary-blue: rgb(51, 187, 255);
+	--clr-primary-white: rgb(255, 255, 255);
+	--clr-primary-black: rgb(55, 63, 73);
 
-  /*grey*/
-  --clr-very-light-grey-100: rgb(248, 249, 252);
-  --clr-light-grey-200: rgb(236, 241, 248);
-  --clr-medium-grey-300: rgb(125, 135, 148);
-  --clr-dark-grey-400: rgb(102, 112, 133);
-  --clr-ver-dark-grey-500: rgb(55, 63, 73);
+	/*grey*/
+	--clr-very-light-grey-100: rgb(248, 249, 252);
+	--clr-light-grey-200: rgb(236, 241, 248);
+	--clr-medium-grey-300: rgb(124, 134, 147);
+	--clr-dark-grey-400: rgb(102, 112, 133);
+	--clr-very-dark-grey-500: rgb(55, 63, 73);
 
-  /*error-red*/
-  --clr-error-red: rgb(244, 72, 62);
+	/*violet*/
+	--clr-light-violet: rgb(227, 218, 249);
+	--clr-base-violet: rgb(110, 65, 226);
+	--clr-violet-hover: rgb(88, 53, 176);
+	--clr-violet-active: rgb(71, 44, 138);
 
-  /*warning-orange*/
-  --clr-warning-orange: rgb(244, 128, 62);
+	/*error-red*/
+	--clr-error-red: rgb(244, 72, 62);
 
-  /*success - green*/
-  --clr-ver-light-green-100: rgb(206, 243, 288);
-  --clr-light-green-300: rgb(108, 220, 175);
-  --clr-base-green-500: rgb(10, 196, 122);
-  --clr-dark-green-700: rgb(6, 118, 73);
-  --clr-ver-dark-green-800: rgb(4, 78, 49);
+	/*warning-orange*/
+	--clr-warning-orange: rgb(244, 128, 62);
 
-  /*info -blue*/
-  --clr-info-very-light-blue-100: rgb(204, 229, 243);
-  --clr-info-light-blue-300: rgb(102, 177, 220);
-  --clr-info-base-blue-500: rgb(0, 125, 196);
-  --clr-info-dark-blue-700: rgb(0, 75, 118);
-  --clr-info-very-dark-blue-800: rgb(0, 50, 78);
+	/*success - green*/
+	--clr-base-green-500: rgb(10, 194, 120);
 
-  /*brand-colors-blue*/
-  --clr-very-light-blue: rgb(204, 238, 255);
-  --clr-light-blue: rgb(128, 212, 255);
-  --clr-base-lighter-blue: rgb(77, 195, 255);
-  --clr-base-darker-blue: rgb(26, 178, 255);
-  --clr-dark-blue: rgb(0, 153, 230);
-  --clr-very-dark-blue: rgb(0, 102, 153);
+	/*info -blue*/
+	--clr-info-very-light-blue-100: rgb(204, 229, 243);
+	--clr-info-light-blue-300: rgb(102, 177, 220);
+	--clr-info-base-blue-500: rgb(0, 125, 196);
+	--clr-info-dark-blue-700: rgb(0, 75, 118);
+	--clr-info-very-dark-blue-800: rgb(0, 50, 78);
+
+	/*brand-colors-blue*/
+	--clr-very-light-blue: rgb(204, 238, 255);
+	--clr-light-blue: hsl(200, 100%, 75%);
+	--clr-base-lighter-blue: rgb(77, 195, 255);
+	--clr-base-darker-blue: rgb(26, 178, 255);
+	--clr-dark-blue: rgb(0, 153, 230);
+	--clr-very-dark-blue: rgb(0, 102, 153);
 }
 
 body {
-  max-width: 1280px;
-  margin: 0 auto;
+	max-width: 1280px;
+	margin: 0 auto;
 }
