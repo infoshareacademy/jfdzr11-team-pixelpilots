@@ -2,11 +2,14 @@ import OpcjaPremium from './OpcjaPremium/OpcjaPremium';
 import Data from '../DodajOferte/OpcjaPremium/OpcjaPremiumDane.json';
 import Podsumowanie from './Podsumowanie/Podsumowanie';
 import styles from './DodajOferte.module.css';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import useAuth from '../Context/AuthContext';
 
 const DodajOferte = () => {
-  const offersDocRef = collection(db, 'offers');
+  const { currentUser } = useAuth();
+
+  const userRef = doc(db, 'users', currentUser.uid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +28,13 @@ const DodajOferte = () => {
       },
     };
 
-    addDoc(offersDocRef, offerData);
+    setDoc(
+      userRef,
+      {
+        offers: arrayUnion(offerData),
+      },
+      { merge: true }
+    );
   };
 
   return (
