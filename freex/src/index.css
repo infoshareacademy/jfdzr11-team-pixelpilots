@@ -9,11 +9,10 @@
 :root {
 	font-family: 'Nunito Sans', sans-serif;
 	font-size: 16px;
+	color: hsl(213, 14%, 25%);
 
 	--clr-primary-white: rgb(255, 255, 255);
-	--clr-primary-black: #373f49;
-	/* --clr-primary-dark: #383f49; */
-	/* --clr-primary-blue: rgb(51, 187, 255); */
+	--clr-primary-black: rgb(55, 63, 73);
 
 	/*grey*/
 	--clr-very-light-grey-100: rgb(248, 249, 252);
@@ -23,10 +22,10 @@
 	--clr-very-dark-grey-500: rgb(55, 63, 73);
 
 	/*violet*/
-	--clr-light-violet: #e3daf9;
-	--clr-base-violet: #6e41e2;
-	--clr-violet-hover: #5835b0;
-	--clr-violet-active: #472c8a;
+	--clr-light-violet: rgb(227, 218, 249);
+	--clr-base-violet: rgb(110, 65, 226);
+	--clr-violet-hover: rgb(88, 53, 176);
+	--clr-violet-active: rgb(71, 44, 138);
 
 	/*error-red*/
 	--clr-error-red: rgb(244, 72, 62);
@@ -35,11 +34,7 @@
 	--clr-warning-orange: rgb(244, 128, 62);
 
 	/*success - green*/
-	/* --clr-very-light-green-100: rgb(206, 243, 288); */
-	/* --clr-light-green-300: rgb(108, 220, 175); */
 	--clr-base-green-500: rgb(10, 194, 120);
-	/* --clr-dark-green-700: rgb(6, 118, 73); */
-	/* --clr-very-dark-green-800: rgb(4, 78, 49); */
 
 	/*info -blue*/
 	--clr-info-very-light-blue-100: rgb(204, 229, 243);
@@ -49,7 +44,7 @@
 	--clr-info-very-dark-blue-800: rgb(0, 50, 78);
 
 	/*brand-colors-blue*/
-	--clr-very-light-blue: #cceeff;
+	--clr-very-light-blue: rgb(204, 238, 255);
 	--clr-light-blue: hsl(200, 100%, 75%);
 	--clr-base-lighter-blue: rgb(77, 195, 255);
 	--clr-base-darker-blue: rgb(26, 178, 255);
