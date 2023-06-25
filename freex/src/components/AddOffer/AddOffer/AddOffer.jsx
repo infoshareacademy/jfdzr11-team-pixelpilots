@@ -5,13 +5,9 @@ import styles from './AddOffer.module.css';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import useAuth from '../../Context/AuthContext';
-import { getOffers } from '../../../utils/getOffers';
-import { useState, useEffect } from 'react';
 
 const AddOffer = () => {
   const { currentUser } = useAuth();
-
-  const [offers, setOffers] = useState();
 
   const offersCollectionRef = collection(db, 'offers');
 
@@ -19,7 +15,6 @@ const AddOffer = () => {
     e.preventDefault();
 
     const offerData = {
-      ...offers,
       userId: currentUser.uid,
       title: e.target.title.value,
       description: e.target.description.value,
@@ -35,12 +30,7 @@ const AddOffer = () => {
     };
 
     addDoc(offersCollectionRef, offerData);
-    console.log(offers);
   };
-
-  useEffect(() => {
-    getOffers(setOffers);
-  }, []);
 
   return (
     <div className={styles.add_offer_wrapper}>
