@@ -1,0 +1,54 @@
+.user_profile {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 20px;
+  grid-template-areas: "left right";
+}
+
+.container_left {
+  grid-area: left;
+  /* background-color: lightpink; */
+}
+
+.container_right {
+  grid-area: right;
+  background-color: rgb(46, 99, 117);
+}
+
+.card {
+  /* border: 2px solid var(--clr-dark-blue); */
+  padding: 10px;
+  border-radius: 20px;
+  margin: 30px 0px;
+  background-color: white;
+}
+
+.general_info {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-areas: "left right";
+}
+
+.general_info_left {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.general_info_right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.user_img {
+  width: 188px;
+  height: 188px;
+  border-radius: 50%;
+}
+
+.rate {
+}
+
+.joiningDate {
+}

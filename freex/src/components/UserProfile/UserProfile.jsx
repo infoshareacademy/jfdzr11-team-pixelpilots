@@ -1,7 +1,9 @@
+import styles from "./UserProfile.module.css";
+
 const UserProfile = () => {
   const user = {
     name: "Ewa Kosicka",
-    imgUrl: "",
+    imgUrl: "../../../UserProfile/user_img.png",
     role: "Projektant UX",
     rating: 5.0,
     opinionsNumber: 33,
@@ -61,19 +63,23 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
-      <div className="container_left">
-        <div className="general_info">
-          <img src={user.imgUrl}></img>
-          <span>{user.hourlyRate}</span>
-          <div className="underline"></div>
-          <span>{user.joiningDate}</span>
-          <h4>{user.name}</h4>
-          <h5>{user.role}</h5>
-          <div>{user.rating}</div>
-          <div>{user.opinionsNumber}</div>
-          <p>{user.description}</p>
-          <button type="button">Edit</button>
+    <div className={styles.user_profile}>
+      <div className={styles.container_left}>
+        <div className={`${styles.general_info} ${styles.card}`}>
+          <div className={styles.general_info_left}>
+            <img className={styles.user_img} src={user.imgUrl}></img>
+            <span className={styles.rate}>{user.hourlyRate}</span>
+            <div className="underline"></div>
+            <span className={styles.joiningDate}>{user.joiningDate}</span>
+          </div>
+          <div className={styles.general_info_right}>
+            <h4>{user.name}</h4>
+            <h5>{user.role}</h5>
+            <div>{user.rating}</div>
+            <div>{user.opinionsNumber}</div>
+            <p>{user.description}</p>
+            <button type="button">Edit</button>
+          </div>
         </div>
         <div className="skills">
           <h4>Umiejętności</h4>
@@ -116,7 +122,7 @@ const UserProfile = () => {
           </ul>
         </div>
       </div>
-      <div className="container_right">
+      <div className={styles.container_right}>
         <div className="contact">contact</div>
         <button>Przeglądaj innych freelancerów</button>
       </div>
