@@ -11,9 +11,10 @@ const Register = () => {
 	const handleSubmit = async (formEvent) => {
 		formEvent.preventDefault();
 
-		const email = formEvent.target?.email.value;
-		const password = formEvent.target?.password.value;
-		const password_confirm = formEvent.target?.password_confirm.value;
+		const email = formEvent.target?.email.value.trim(' ');
+		const password = formEvent.target?.password.value.trim(' ');
+		const password_confirm =
+			formEvent.target?.password_confirm.value.trim(' ');
 
 		if (password !== password_confirm) {
 			toast.error('Hasła nie są jednakowe');
