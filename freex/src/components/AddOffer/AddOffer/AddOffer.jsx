@@ -3,8 +3,9 @@ import Data from '../PremiumOption/PremiumOptionData.json';
 import Summary from '../Summary/Summary';
 import styles from './AddOffer.module.css';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../../config/firebase';
+import { db, storage } from '../../../config/firebase';
 import useAuth from '../../Context/AuthContext';
+import { ref, uploadBytesResumable } from 'firebase/storage';
 
 const AddOffer = () => {
   const { currentUser } = useAuth();
@@ -13,6 +14,9 @@ const AddOffer = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const file = e.target.add_file.files[0];
+    const storageRef = ref(storage, `files/${file.name}`);
 
     const offerData = {
       userId: currentUser.uid,
@@ -29,12 +33,18 @@ const AddOffer = () => {
       },
     };
 
+    if (file) uploadBytesResumable(storageRef, file);
+
     addDoc(offersCollectionRef, offerData);
   };
 
   return (
     <div className={styles.add_offer_wrapper}>
-      <form onSubmit={handleSubmit} className={styles.add_offer_form}>
+      <form
+        onSubmit={handleSubmit}
+        className={styles.add_offer_form}
+        id="add_offer"
+      >
         <h2 className={styles.title}>Wpisz tytuł projektu</h2>
         <input
           placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
@@ -57,8 +67,16 @@ const AddOffer = () => {
           <p>Helper text</p>
           <p>0/100</p>
         </div>
-        <div className={styles.add_file}>
-          <button>Załącz plik</button>
+        <div>
+          <label className={styles.add_file} htmlFor="add_file">
+            Upload file
+          </label>
+          <input
+            className={styles.add_file_input}
+            id="add_file"
+            name="add_file"
+            type="file"
+          />
         </div>
         <h2 className={styles.title}>Jakie umiejętności są potrzebne?</h2>
         <textarea
@@ -122,7 +140,11 @@ const AddOffer = () => {
         <Summary />
         <div className={styles.submit_section}>
           <h2 className={styles.total}>Łącznie: 160 PLN</h2>
-          <button className={styles.submit_button} type="submit">
+          <button
+            className={styles.submit_button}
+            type="submit"
+            form="add_offer"
+          >
             Opublikuj
           </button>
         </div>
