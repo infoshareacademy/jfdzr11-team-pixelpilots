@@ -6,9 +6,15 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db, storage } from '../../../config/firebase';
 import useAuth from '../../Context/AuthContext';
 import { ref, uploadBytesResumable } from 'firebase/storage';
+import Skills from '../Skills/Skills';
+import { useState } from 'react';
+import skillsData from '../Skills/skills.json';
 
 const AddOffer = () => {
   const { currentUser } = useAuth();
+
+  const [skills, setSkills] = useState(skillsData);
+  const [chosenSkills, setChosenSkills] = useState([]);
 
   const offersCollectionRef = collection(db, 'offers');
 
@@ -16,13 +22,13 @@ const AddOffer = () => {
     e.preventDefault();
 
     const file = e.target.add_file.files[0];
-    const storageRef = ref(storage, `files/${file.name}`);
+    const storageRef = ref(storage, `files/${file?.name}`);
 
     const offerData = {
       userId: currentUser.uid,
       title: e.target.title.value,
       description: e.target.description.value,
-      skills: [...e.target.skills.value.split(',')],
+      skills: chosenSkills,
       hourly_rate: e.target.rate.value,
       payment_method: e.target.payment_method.value,
       premium_plan: {
@@ -79,16 +85,14 @@ const AddOffer = () => {
           />
         </div>
         <h2 className={styles.title}>Jakie umiejętności są potrzebne?</h2>
-        <textarea
-          placeholder="Wpisz potrzebne umięjetności"
-          className={styles.skills}
-          name="skills"
-          id="skills"
-        ></textarea>
-        <div className={styles.character_counter}>
-          <p>Helper text</p>
-          <p>0/100</p>
-        </div>
+
+        <Skills
+          chosenSkills={chosenSkills}
+          setChosenSkills={setChosenSkills}
+          skills={skills}
+          setSkills={setSkills}
+        />
+
         <h2 className={styles.title}>Jak chcesz zapłacić?</h2>
         <div className={styles.radio}>
           <input
