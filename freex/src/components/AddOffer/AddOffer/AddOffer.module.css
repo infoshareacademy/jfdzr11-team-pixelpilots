@@ -15,10 +15,6 @@
 }
 
 .add_offer_form {
-  width: 60%;
-}
-
-.add_offer_form {
   width: 100%;
 }
 
@@ -73,31 +69,6 @@
 
 .skills {
   height: 4rem;
-}
-
-.radio label {
-  padding: 0.5rem;
-  font-size: 0.875rem;
-}
-
-.radio input {
-  transform: scale(1.2);
-}
-
-.dropdown {
-  margin-top: 2rem;
-}
-
-.dropdown select {
-  height: 42px;
-  width: 188px;
-  border-radius: 5px;
-  padding: 12px 21px 12px 12px;
-  background-color: var(--clr-light-blue);
-  border: none;
-  font-size: 0.75rem;
-  color: #373f49;
-  margin: 0.5rem 0 2rem 0;
 }
 
 .premium_plan_section {

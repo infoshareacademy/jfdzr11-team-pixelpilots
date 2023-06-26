@@ -9,6 +9,7 @@ import { ref, uploadBytesResumable } from 'firebase/storage';
 import Skills from '../Skills/Skills';
 import { useState } from 'react';
 import skillsData from '../Skills/skills.json';
+import PaymentMethod from '../PaymentMethod/PaymentMethod';
 
 const AddOffer = () => {
   const { currentUser } = useAuth();
@@ -29,8 +30,10 @@ const AddOffer = () => {
       title: e.target.title.value,
       description: e.target.description.value,
       skills: chosenSkills,
-      hourly_rate: e.target.rate.value,
       payment_method: e.target.payment_method.value,
+      hourly_rate: `${e.target.hourly_rate?.value} zł/godz.`,
+      milestone_rate: `${e.target.milestone_rate?.value} zł/kamień milowy`,
+      total_payment: `${e.target.total_payment?.value} zł`,
       premium_plan: {
         highlight: e.target.highlight.checked,
         analysis: e.target.analysis.checked,
@@ -92,43 +95,7 @@ const AddOffer = () => {
           skills={skills}
           setSkills={setSkills}
         />
-
-        <h2 className={styles.title}>Jak chcesz zapłacić?</h2>
-        <div className={styles.radio}>
-          <input
-            value="Płatność za godziny"
-            name="payment_method"
-            id="hourly_rate"
-            type="radio"
-          />
-          <label htmlFor="hourly_rate">Płatność za godziny</label>
-        </div>
-        <div className={styles.radio}>
-          <input
-            value="Płatność za kamienie milowe"
-            name="payment_method"
-            id="milestones"
-            type="radio"
-          />
-          <label htmlFor="milestones">Płatność za kamienie milowe</label>
-        </div>
-        <div className={styles.radio}>
-          <input
-            value="Jednorazowa płatność"
-            name="payment_method"
-            id="one_time_payment"
-            type="radio"
-          />
-          <label htmlFor="one_time_payment">Jednorazowa płatność</label>
-        </div>
-        <div className={styles.dropdown}>
-          <p>Stawka godzinowa</p>
-          <select name="rate" id="rate">
-            <option value="'Regularna (55-90zł/h)">
-              Regularna (55-90zł/h)
-            </option>
-          </select>
-        </div>
+        <PaymentMethod />
         <div className={styles.premium_plan_section}>
           {Data.map((option, idx) => (
             <PremiumOption
@@ -144,11 +111,7 @@ const AddOffer = () => {
         <Summary />
         <div className={styles.submit_section}>
           <h2 className={styles.total}>Łącznie: 160 PLN</h2>
-          <button
-            className={styles.submit_button}
-            type="submit"
-            form="add_offer"
-          >
+          <button className={styles.submit_button} type="submit">
             Opublikuj
           </button>
         </div>
