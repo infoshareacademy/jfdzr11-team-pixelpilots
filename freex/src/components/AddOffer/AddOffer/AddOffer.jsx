@@ -10,12 +10,15 @@ import Skills from '../Skills/Skills';
 import { useState } from 'react';
 import skillsData from '../Skills/skills.json';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
+import CharacterCounter from '../CharacterCounter/CharacterCounter';
 
 const AddOffer = () => {
   const { currentUser } = useAuth();
 
   const [skills, setSkills] = useState(skillsData);
   const [chosenSkills, setChosenSkills] = useState([]);
+  const [titleLength, setTitleLength] = useState('0');
+  const [descriptionLength, setDescriptionLength] = useState('0');
 
   const offersCollectionRef = collection(db, 'offers');
 
@@ -47,6 +50,11 @@ const AddOffer = () => {
     addDoc(offersCollectionRef, offerData);
   };
 
+  const handleChange = (e, setLength) => {
+    const length = e.target.value.length;
+    setLength(length);
+  };
+
   return (
     <div className={styles.add_offer_wrapper}>
       <form
@@ -56,26 +64,23 @@ const AddOffer = () => {
       >
         <h2 className={styles.title}>Wpisz tytuł projektu</h2>
         <input
+          onChange={(e) => handleChange(e, setTitleLength)}
           placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
           className={styles.project_title}
           name="title"
           type="text"
         />
-        <div className={styles.character_counter}>
-          <p>Helper text</p>
-          <p>0/100</p>
-        </div>
+        <CharacterCounter length={titleLength} />
         <h2 className={styles.title}>Opisz swój projekt</h2>
         <textarea
+          onChange={(e) => handleChange(e, setDescriptionLength)}
           className={styles.description}
           placeholder="Opisz swój projekt tutaj"
           name="description"
           id="description"
         ></textarea>
-        <div className={styles.character_counter}>
-          <p>Helper text</p>
-          <p>0/100</p>
-        </div>
+        <CharacterCounter length={descriptionLength} />
+
         <div>
           <label className={styles.add_file} htmlFor="add_file">
             Upload file
