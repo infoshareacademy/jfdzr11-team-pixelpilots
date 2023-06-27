@@ -1,6 +1,7 @@
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProfileCard from "./ProfileCard/ProfileCard";
+import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
 
 const UserProfile = () => {
@@ -94,21 +95,9 @@ const UserProfile = () => {
         joiningDate={user.joingDate}
       ></GeneralInfo>
 
-      <ProfileCard className={styles.skills}>
-        <h4>Umiejętności</h4>
-        <div className="underline"></div>
-        <ul className={styles.skill_list}>
-          {user.skills.map((item) => (
-            <li className={styles.chip} key="toDoLater">
-              {item}
-            </li>
-          ))}
-        </ul>
-        <div className={styles.button_wrapper}>
-          {/* <PrimaryButton>Edit</PrimaryButton> */}
-        </div>
-      </ProfileCard>
       {/* <div className="opinions">opinions</div> -tego na razie nie robię - zbyt skomplikowane */}
+
+      <Skills skills={user.skills}></Skills>
 
       <ProfileCard className={`${styles.experience} ${styles.card}`}>
         <h4 className={styles.experience_header}>Doświadczenie</h4>
