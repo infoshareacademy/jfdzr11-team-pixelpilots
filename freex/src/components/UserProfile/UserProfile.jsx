@@ -114,7 +114,7 @@ const UserProfile = () => {
         </div>
       </ProfileCard>
 
-      <div className={`${styles.skills} ${styles.card}`}>
+      <ProfileCard className={styles.skills}>
         <h4>Umiejętności</h4>
         <div className="underline"></div>
         <ul className={styles.skill_list}>
@@ -127,9 +127,10 @@ const UserProfile = () => {
         <div className={styles.button_wrapper}>
           {/* <PrimaryButton>Edit</PrimaryButton> */}
         </div>
-      </div>
+      </ProfileCard>
       {/* <div className="opinions">opinions</div> -tego na razie nie robię - zbyt skomplikowane */}
-      <div className={`${styles.experience} ${styles.card}`}>
+
+      <ProfileCard className={`${styles.experience} ${styles.card}`}>
         <h4 className={styles.experience_header}>Doświadczenie</h4>
         <ul>
           {user.experience.map((item) => (
@@ -148,8 +149,8 @@ const UserProfile = () => {
         <div className={styles.button_wrapper}>
           {/* <PrimaryButton>Edit</PrimaryButton> */}
         </div>
-      </div>
-      <div className={`${styles.education} ${styles.card}`}>
+      </ProfileCard>
+      <ProfileCard className={`${styles.education} ${styles.card}`}>
         <h4>Education</h4>
         <div className="underline"></div>
         <ul>
@@ -167,7 +168,7 @@ const UserProfile = () => {
         <div className={styles.button_wrapper}>
           {/* <PrimaryButton>Edit</PrimaryButton> */}
         </div>
-      </div>
+      </ProfileCard>
 
       <div className={`${styles.contact}`}>
         <h5 className={styles.contact_header}>
