@@ -1,6 +1,7 @@
 import styles from "./ProfileList.module.css";
 import ProfileCard from "../ProfileCard/ProfileCard";
 import ProfileListItem from "../ProfileListItem/ProfileListItem";
+import { v4 as uuid } from "uuid";
 
 const ProfileList = ({ className, header, listData }) => {
   return (
@@ -9,7 +10,7 @@ const ProfileList = ({ className, header, listData }) => {
       <ul>
         {listData.map((item) => (
           <ProfileListItem
-            key="sfdsaf"
+            key={uuid()}
             logoURL={item.logoURL}
             title={item.title}
             subtitle={item.subtitle}

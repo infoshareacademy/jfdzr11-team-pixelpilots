@@ -1,5 +1,6 @@
 import ProfileCard from "../ProfileCard/ProfileCard";
 import styles from "./Skills.module.css";
+import { v4 as uuid } from "uuid";
 
 const Skills = ({ skills }) => {
   return (
@@ -8,7 +9,7 @@ const Skills = ({ skills }) => {
       <div className="underline"></div>
       <ul className={styles.skill_list}>
         {skills.map((item) => (
-          <li className={styles.chip} key="toDoLater">
+          <li className={styles.chip} key={uuid()}>
             {item}
           </li>
         ))}

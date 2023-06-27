@@ -1,0 +1,24 @@
+.wrapper {
+  margin: 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 2rem 0;
+}
+
+.button {
+  margin-top: 1rem;
+  cursor: pointer;
+}

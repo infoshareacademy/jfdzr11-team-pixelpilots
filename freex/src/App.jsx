@@ -14,6 +14,7 @@ import {
   InvalidAddress,
   UserProfile,
   Favorites,
+  EditUserProfile,
 } from "./components";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/freelancerzy" element={<Freelancers />} />
           <Route path="/zlecenia" element={<Offers />} />
           <Route path="/profil" element={<UserProfile />} />
+          <Route path="/edytujprofil" element={<EditUserProfile />} />
           <Route path="/ulubione" element={<Favorites />} />
         </Route>
       </Route>

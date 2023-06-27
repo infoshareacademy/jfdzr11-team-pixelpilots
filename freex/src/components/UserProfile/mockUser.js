@@ -1,5 +1,5 @@
 export const user = {
-  name: "Ewa Kosicka",
+  name: "Ewa Kosicka", // zmienić na firstname lastname
   imgURL: "../../../UserProfile/user_img.png",
   role: "Projektant UX",
   rating: 4.9,
