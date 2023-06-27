@@ -1,0 +1,28 @@
+.list_item {
+  display: flex;
+  margin: 20px 0;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Zmienić logo na background image */
+.list_item_logo {
+  max-height: 80px;
+  width: 44px;
+  margin-right: 20px;
+}
+
+.list_item_title {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.list_item_subtitle {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.list_item_timespan {
+  font-size: 14px;
+}

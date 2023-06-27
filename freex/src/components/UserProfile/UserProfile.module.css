@@ -10,50 +10,9 @@
   margin: 2rem 0;
 }
 
-/* Experience */
-
 .experience {
   grid-area: experience;
 }
-
-.experience_header {
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-.experience_item {
-  display: flex;
-  margin: 20px 0;
-  align-items: flex-start;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Zmienić logo na background image */
-.experience_logo {
-  max-height: 80px;
-  width: 44px;
-  margin-right: 20px;
-}
-
-.experience_description {
-}
-
-.role {
-  margin-bottom: 8px;
-  font-size: 20px;
-}
-
-.companyName {
-  margin-bottom: 4px;
-  font-size: 14px;
-}
-
-.timespan {
-  font-size: 14px;
-}
-
-/* Skills */
 
 .education {
   grid-area: education;
