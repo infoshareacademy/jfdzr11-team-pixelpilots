@@ -1,6 +1,5 @@
-import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
+import ContactUser from "./ContactUser/ContactUser";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
-import ProfileCard from "./ProfileCard/ProfileCard";
 import ProfileList from "./ProfileList/ProfileList";
 import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
@@ -20,8 +19,6 @@ const UserProfile = () => {
         joiningDate={user.joingDate}
       ></GeneralInfo>
 
-      {/* <div className="opinions">opinions</div> -tego na razie nie robię - zbyt skomplikowane */}
-
       <Skills skills={user.skills}></Skills>
 
       <ProfileList
@@ -36,17 +33,7 @@ const UserProfile = () => {
         header="Edukacja"
       />
 
-      <div className={`${styles.contact}`}>
-        <h5 className={styles.contact_header}>
-          Skontaktuj się z freelancerem w sprawie swojego projektu
-        </h5>
-        <PrimaryButton>Informacje kontaktowe</PrimaryButton>
-      </div>
-      {/* <div className={styles.look}>
-        <button className={styles.look_button}>
-          Przeglądaj innych freelancerów
-        </button>
-      </div> */}
+      <ContactUser />
     </div>
   );
 };
