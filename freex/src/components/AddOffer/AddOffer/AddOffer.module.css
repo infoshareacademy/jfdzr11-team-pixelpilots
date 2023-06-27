@@ -96,6 +96,11 @@
   padding: 12px;
   border: 1px solid #0099e6;
   background-color: #80d4ff;
-  color: #0099e6;
+  color: #006699;
   margin: 2rem 0;
+}
+
+.submit_button:hover {
+  background-color: #bce7fd;
+  cursor: pointer;
 }

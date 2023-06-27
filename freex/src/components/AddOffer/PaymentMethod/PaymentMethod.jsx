@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import styles from './PaymentMethod.module.css';
+import { updateSummary } from '../../../utils/updateSummary';
 
-const PaymentMethod = () => {
+const PaymentMethod = ({ data, setData }) => {
   const [payment_method, setPaymentMethod] = useState('');
 
   const handleChange = (e) => {
     setPaymentMethod(e.target.value);
+    updateSummary(e, data, setData);
   };
 
   return (
@@ -20,7 +22,13 @@ const PaymentMethod = () => {
             id="h_rate"
             type="radio"
           />
-          <label htmlFor="h_rate">Płatność za godziny</label>
+          <label
+            name="payment_method"
+            value="Płatność za godziny"
+            htmlFor="h_rate"
+          >
+            Płatność za godziny
+          </label>
         </div>
         <div className={styles.radio}>
           <input
@@ -53,8 +61,11 @@ const PaymentMethod = () => {
                 key="1"
                 className={styles.rate_input}
                 placeholder="Podaj stawkę pln za godzinę"
-                type="text"
+                type="number"
                 name={'hourly_rate'}
+                onChange={(e) =>
+                  updateSummary(e, data, setData, e.target.value)
+                }
               />
             </>
           ) : payment_method === 'Płatność za kamienie milowe' ? (
@@ -65,11 +76,14 @@ const PaymentMethod = () => {
                 key="2"
                 className={styles.rate_input}
                 placeholder="Podaj stawkę pln za kamień milowy"
-                type="text"
+                type="number"
                 name="milestone_rate"
+                onChange={(e) =>
+                  updateSummary(e, data, setData, e.target.value)
+                }
               />
             </>
-          ) : (
+          ) : payment_method === 'Jednorazowa płatność' ? (
             <>
               <p>Jednorazowa płatność</p>
 
@@ -77,11 +91,14 @@ const PaymentMethod = () => {
                 key="3"
                 className={styles.rate_input}
                 placeholder="Podaj stawkę pln za całość"
-                type="text"
+                type="number"
                 name="total_payment"
+                onChange={(e) =>
+                  updateSummary(e, data, setData, e.target.value)
+                }
               />
             </>
-          )}
+          ) : null}
         </div>
       </>
     </>

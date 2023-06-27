@@ -8,7 +8,7 @@
 .top_summary {
   display: flex;
   align-items: center;
-  margin-top: 0;
+  margin: 10px 0;
   justify-content: space-between;
 }
 
@@ -28,4 +28,28 @@
   border-radius: 4px;
   font-family: 'Nunito Sans', sans-serif;
   padding-left: 0.5rem;
+}
+
+.skills {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.summary_skill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  border: 1px solid rgb(128, 212, 255);
+  border-radius: 8px;
+  font-size: 0.7rem;
+  padding: 0 10px;
+  background-color: transparent;
+  transition: border 0.1s linear;
+}
+
+.payment_method {
+  font-weight: 300;
 }

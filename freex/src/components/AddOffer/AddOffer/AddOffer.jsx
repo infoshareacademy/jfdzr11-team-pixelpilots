@@ -11,14 +11,19 @@ import { useState } from 'react';
 import skillsData from '../Skills/skills.json';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import CharacterCounter from '../CharacterCounter/CharacterCounter';
+import { updateSummary } from '../../../utils/updateSummary';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const AddOffer = () => {
   const { currentUser } = useAuth();
-
   const [skills, setSkills] = useState(skillsData);
   const [chosenSkills, setChosenSkills] = useState([]);
   const [titleLength, setTitleLength] = useState('0');
   const [descriptionLength, setDescriptionLength] = useState('0');
+  const [summary, setSummary] = useState({});
+
+  const navigate = useNavigate();
 
   const offersCollectionRef = collection(db, 'offers');
 
@@ -27,6 +32,7 @@ const AddOffer = () => {
 
     const file = e.target.add_file.files[0];
     const storageRef = ref(storage, `files/${file?.name}`);
+    if (file) uploadBytesResumable(storageRef, file);
 
     const offerData = {
       userId: currentUser.uid,
@@ -45,9 +51,13 @@ const AddOffer = () => {
       },
     };
 
-    if (file) uploadBytesResumable(storageRef, file);
-
-    addDoc(offersCollectionRef, offerData);
+    try {
+      addDoc(offersCollectionRef, offerData);
+      navigate('/mojeoferty');
+      toast.success('Dodano ofertę');
+    } catch (error) {
+      toast.error('something went wrong');
+    }
   };
 
   const handleChange = (e, setLength) => {
@@ -63,22 +73,34 @@ const AddOffer = () => {
         id="add_offer"
       >
         <h2 className={styles.title}>Wpisz tytuł projektu</h2>
+
         <input
-          onChange={(e) => handleChange(e, setTitleLength)}
-          placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
+          maxLength="100"
+          onChange={(e) => {
+            handleChange(e, setTitleLength);
+            updateSummary(e, summary, setSummary);
+          }}
           className={styles.project_title}
+          placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
           name="title"
           type="text"
         />
+
         <CharacterCounter length={titleLength} />
+
         <h2 className={styles.title}>Opisz swój projekt</h2>
         <textarea
-          onChange={(e) => handleChange(e, setDescriptionLength)}
+          maxLength="100"
+          onChange={(e) => {
+            handleChange(e, setDescriptionLength);
+            updateSummary(e, summary, setSummary);
+          }}
           className={styles.description}
           placeholder="Opisz swój projekt tutaj"
           name="description"
           id="description"
         ></textarea>
+
         <CharacterCounter length={descriptionLength} />
 
         <div>
@@ -92,6 +114,7 @@ const AddOffer = () => {
             type="file"
           />
         </div>
+
         <h2 className={styles.title}>Jakie umiejętności są potrzebne?</h2>
 
         <Skills
@@ -100,7 +123,9 @@ const AddOffer = () => {
           skills={skills}
           setSkills={setSkills}
         />
-        <PaymentMethod />
+
+        <PaymentMethod data={summary} setData={setSummary} />
+
         <div className={styles.premium_plan_section}>
           {Data.map((option, idx) => (
             <PremiumOption
@@ -112,10 +137,17 @@ const AddOffer = () => {
             />
           ))}
         </div>
+
         <h2 className={styles.title}>Podsumowanie</h2>
-        <Summary />
+
+        <Summary
+          title={summary.title}
+          skills={chosenSkills}
+          paymentMethod={summary.payment_method}
+          description={summary.description}
+        />
         <div className={styles.submit_section}>
-          <h2 className={styles.total}>Łącznie: 160 PLN</h2>
+          <h2 className={styles.total}>Łącznie: {summary.payment} pln</h2>
           <button className={styles.submit_button} type="submit">
             Opublikuj
           </button>
