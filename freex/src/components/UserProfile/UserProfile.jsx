@@ -1,11 +1,12 @@
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
+import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProfileCard from "./ProfileCard/ProfileCard";
 import styles from "./UserProfile.module.css";
 
 const UserProfile = () => {
   const user = {
     name: "Ewa Kosicka",
-    imgUrl: "../../../UserProfile/user_img.png",
+    imgURL: "../../../UserProfile/user_img.png",
     role: "Projektant UX",
     rating: 4.9,
     opinionsNumber: 33,
@@ -82,37 +83,16 @@ const UserProfile = () => {
 
   return (
     <div className={styles.user_profile}>
-      <ProfileCard className={styles.general_info}>
-        <div className={styles.general_info_left}>
-          <img className={styles.user_img} src={user.imgUrl}></img>
-          <div className={styles.elems_under_img}>
-            <span className={styles.rate}>{user.hourlyRate} PLN/h</span>
-            <div className={styles.underline}></div>
-            <span className={styles.joiningDate}>
-              Dołączył: {user.joiningDate}
-            </span>
-          </div>
-        </div>
-        <div className={styles.general_info_right}>
-          <h4 className={styles.user_name}>{user.name}</h4>
-          <h5 className={styles.user_role}>{user.role}</h5>
-          <div className={styles.rating}>
-            <div className={styles.rating_stars}>
-              <img src="../../../UserProfile/rating_star.svg" />
-              <img src="../../../UserProfile/rating_star.svg" />
-              <img src="../../../UserProfile/rating_star.svg" />
-              <img src="../../../UserProfile/rating_star.svg" />
-              <img src="../../../UserProfile/rating_star_no.svg" />
-            </div>
-            <span className={styles.rating_number}>{user.rating}</span>
-            <span>({user.opinionsNumber} opinii)</span>
-          </div>
-          <p className={styles.description}>{user.description}</p>
-          <div className={styles.button_wrapper}>
-            {/* <PrimaryButton>Edit</PrimaryButton> */}
-          </div>
-        </div>
-      </ProfileCard>
+      <GeneralInfo
+        name={user.name}
+        role={user.role}
+        imgURL={user.imgURL}
+        rating={user.rating}
+        opinionsNumber={user.opinionsNumber}
+        description={user.description}
+        hourlyRate={user.hourlyRate}
+        joiningDate={user.joingDate}
+      ></GeneralInfo>
 
       <ProfileCard className={styles.skills}>
         <h4>Umiejętności</h4>
