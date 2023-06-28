@@ -1,3 +1,4 @@
+import ChosenSkills from '../Skills/ChosenSkills';
 import styles from './Summary.module.css';
 
 const Summary = ({ title, skills, payment, paymentMethod, description }) => {
@@ -5,13 +6,11 @@ const Summary = ({ title, skills, payment, paymentMethod, description }) => {
     <div className={styles.summary_wrapper}>
       <div className={styles.top_summary}>
         <h2 className={styles.title}>{title}</h2>
-        <div className={styles.skills}>
-          {skills.map((skill, idx) => (
-            <div className={styles.summary_skill} key={idx}>
-              {skill}
-            </div>
-          ))}
-        </div>
+        <ChosenSkills
+          chosenSkills={skills}
+          skillClassName={styles.summary_skill}
+          skillsClassName={styles.summary_skills}
+        />
         <div>{payment}</div>
       </div>
       <textarea
@@ -24,7 +23,6 @@ const Summary = ({ title, skills, payment, paymentMethod, description }) => {
         Preferowana forma płatności:{' '}
         <span className={styles.payment_method}>{paymentMethod}</span>
       </p>
-      <p className={styles.summary_data}>Załączniki: </p>
     </div>
   );
 };

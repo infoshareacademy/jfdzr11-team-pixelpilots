@@ -27,7 +27,7 @@ const AddOffer = () => {
 
   const offersCollectionRef = collection(db, 'offers');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const file = e.target.add_file.files[0];
@@ -52,9 +52,9 @@ const AddOffer = () => {
     };
 
     try {
-      addDoc(offersCollectionRef, offerData);
+      await addDoc(offersCollectionRef, offerData);
+      toast.success('Offer added');
       navigate('/mojeoferty');
-      toast.success('Dodano ofertę');
     } catch (error) {
       toast.error('something went wrong');
     }
