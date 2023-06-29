@@ -1,0 +1,47 @@
+.card {
+	padding: 2rem 3rem;
+	border: 3px solid var(--clr-medium-grey-300);
+	border-radius: 4px;
+	margin-top: 4rem;
+	transition: all 0.3s ease;
+}
+
+.card div {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.card div h4 {
+	font-size: 1.5rem;
+	color: var(--clr-very-dark-blue);
+}
+
+.card span {
+	font-size: 0.9rem;
+	display: inline-block;
+	margin-bottom: 0.6rem;
+}
+
+.card ul {
+	display: flex;
+	gap: 0.6rem;
+	flex-wrap: wrap;
+	margin-bottom: 1rem;
+}
+
+.card ul li {
+	padding: 0.25rem 1rem;
+	list-style: none;
+	border: 1px solid var(--clr-light-blue);
+	border-radius: 4px;
+	text-align: center;
+	font-size: 0.75rem;
+	background-color: var(--clr-very-light-blue);
+}
+
+.card p {
+	margin-bottom: 1.5rem;
+	line-height: 1.25rem;
+	font-size: 0.9rem;
+}
