@@ -31,23 +31,28 @@ const Offer = () => {
 
 	return (
 		<div className={styles.card}>
-			<div>
+			<div className={styles.heading}>
 				<h4>{offer.title}</h4>
-				<strong>{offer.hourly_rate}</strong>
+				<div className={styles.priceWrapper}>
+					<strong>{offer.hourly_rate}</strong>
+					<span>{offer.payment_method}</span>
+				</div>
 			</div>
 			<span>
 				Data publikacji:{' '}
 				<span>{offer.date?.toDate().toLocaleDateString()}</span>
 			</span>
 
-			<ul>
+			<ul className={styles.chips}>
 				{offer.skills?.map((skill) => (
 					<li key={skill}>{skill}</li>
 				))}
 			</ul>
 			<p>{offer.description}</p>
 
-			<span>{offer.payment_method}</span>
+			<div>
+				<span>Nr oferty: {offer?.offer_number}</span>
+			</div>
 		</div>
 	);
 };

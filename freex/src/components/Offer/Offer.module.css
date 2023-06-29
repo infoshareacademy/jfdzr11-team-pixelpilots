@@ -6,28 +6,34 @@
 	transition: all 0.3s ease;
 }
 
-.card div {
+.heading {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 1rem;
+	align-items: center;
+	margin-bottom: 0.5rem;
 }
 
-.card div h4 {
+.heading h4 {
 	font-size: 1.5rem;
 	color: var(--clr-very-dark-blue);
 }
 
-.card span {
+.heading div {
 	font-size: 0.9rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.card span {
 	display: inline-block;
-	margin-bottom: 0.6rem;
+	font-size: 0.9rem;
 }
 
 .card ul {
 	display: flex;
 	gap: 0.6rem;
 	flex-wrap: wrap;
-	margin-bottom: 1rem;
+	margin: 0.5rem 0 1rem;
 }
 
 .card ul li {
@@ -41,7 +47,6 @@
 }
 
 .card p {
-	margin-bottom: 1.5rem;
+	margin-bottom: 1rem;
 	line-height: 1.25rem;
-	font-size: 0.9rem;
 }
