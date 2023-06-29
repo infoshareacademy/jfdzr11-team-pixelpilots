@@ -8,8 +8,9 @@ import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
 import { user } from "../mockUser";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import useAuth from "../../Context/AuthContext";
-import { db } from "../../../config/firebase";
+import { db, storage } from "../../../config/firebase";
 import { useState } from "react";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const EditUserProfile = () => {
   const { currentUser } = useAuth();
@@ -21,14 +22,29 @@ const EditUserProfile = () => {
   const [chosenSkills, setChosenSkills] = useState([]);
   const [experienceInputFields, setExperienceInputFields] = useState([]);
   const [educationInputFields, setEducationInputFields] = useState([]);
+  const [profileImgUrl, setProfileImgUrl] = useState("");
+
+  const uploadFile = (e) => {
+    const file = e.target.profileImg.files[0];
+
+    if (file) {
+      const fileRef = ref(storage, `profileimgs/${currentUserID}`);
+      uploadBytesResumable(fileRef, file)
+        .then(() => getDownloadURL(fileRef))
+        .then((imageURL) => setProfileImgUrl(imageURL));
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    uploadFile(e);
+
     const updatedUser = {
       userName: e.target.userName.value,
       email: e.target.email.value,
-      imgUrl: "not ready yet",
       role: e.target.role.value,
+      imgURL: profileImgUrl,
       rating: 0,
       opinionsNumber: 0,
       hourlyRate: e.target.hourlyRate.value,
@@ -38,7 +54,6 @@ const EditUserProfile = () => {
       experience: experienceInputFields,
       education: educationInputFields,
     };
-    console.log(updatedUser);
 
     const docRef = doc(db, "users", currentUserID);
     getDoc(docRef).then((docSnap) => {
@@ -153,12 +168,13 @@ const EditUserProfile = () => {
           <div className={styles.custom_file_input}>
             <input
               type="file"
-              id="file-input"
-              className={styles.hidden_input}
+              id="profileImg"
+              name="profileImg"
+              // className={styles.hidden_input}
             />
-            <label htmlFor="file_input" className={styles.custom_button}>
+            {/* <label htmlFor="profileImg" className={styles.custom_button}>
               Dodaj zdjęcie profilowe
-            </label>
+            </label> */}
           </div>
 
           <legend className={styles.input_label}>Opis</legend>
