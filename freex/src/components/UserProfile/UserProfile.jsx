@@ -68,7 +68,7 @@ const UserProfile = () => {
 
       <div className={styles.user_profile}>
         <GeneralInfo
-          name={user.name}
+          name={user.userName}
           role={user.role}
           imgURL={user.imgURL}
           rating={user.rating}
