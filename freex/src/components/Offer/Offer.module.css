@@ -1,7 +1,8 @@
 .card {
+	color: #000000;
 	padding: 2rem 3rem;
 	border: 3px solid var(--clr-medium-grey-300);
-	border-radius: 4px;
+	border-radius: 20px;
 	margin-top: 4rem;
 	transition: all 0.3s ease;
 }
@@ -10,40 +11,44 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 0.5rem;
 }
 
 .heading h4 {
 	font-size: 1.5rem;
-	color: var(--clr-very-dark-blue);
+	color: #000000;
+	font-weight: 700;
 }
 
-.heading div {
+.priceWrapper {
 	font-size: 0.9rem;
 	display: flex;
 	flex-direction: column;
 }
 
+.priceWrapper strong {
+	font-size: 1.5rem;
+}
+
 .card span {
 	display: inline-block;
-	font-size: 0.9rem;
+	font-size: 0.75rem;
 }
 
 .card ul {
 	display: flex;
 	gap: 0.6rem;
 	flex-wrap: wrap;
-	margin: 0.5rem 0 1rem;
+	margin: 1rem 0 1.5rem;
 }
 
 .card ul li {
 	padding: 0.25rem 1rem;
 	list-style: none;
-	border: 1px solid var(--clr-light-blue);
+	border: 1px solid #4b525b;
 	border-radius: 4px;
 	text-align: center;
 	font-size: 0.75rem;
-	background-color: var(--clr-very-light-blue);
+	background-color: #f2f3f3;
 }
 
 .card p {

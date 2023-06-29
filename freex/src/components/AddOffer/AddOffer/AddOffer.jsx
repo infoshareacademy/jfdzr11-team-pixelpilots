@@ -15,7 +15,7 @@ import { updateSummary } from '../../../utils/updateSummary';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { serverTimestamp } from 'firebase/firestore';
-import { nanoid, customAlphabet } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
 const AddOffer = () => {
 	const { currentUser } = useAuth();
