@@ -8,11 +8,41 @@
 	margin-bottom: 2rem;
 }
 
+.form {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.form input[type='radio'] {
+	visibility: hidden;
+	height: 0;
+	width: 0;
+}
+
+.form label {
+	cursor: pointer;
+	background-color: var(--clr-very-light-blue);
+	padding: 0.25rem 1rem;
+	border: 1px solid var(--clr-light-blue);
+	border-radius: 4px;
+	display: table-cell;
+	margin: 1rem 1rem 0 0;
+}
+
+.form input[type='radio']:checked + label {
+	background-color: var(--clr-base-darker-blue);
+}
+
+.form input[type='radio']:hover + label {
+	background-color: var(--clr-base-lighter-blue);
+}
+
 .card {
-	/* border: 1px solid black; */
-	padding: 2rem 16rem 2rem 2rem;
+	padding: 2rem 18rem 2rem 4rem;
 	position: relative;
-	border-bottom: 1px solid var(--clr-light-grey-200);
+	border: 1px solid var(--clr-light-blue);
+	border-radius: 4px;
+	margin-top: 1rem;
 }
 
 .card h4 {
@@ -24,7 +54,7 @@
 .card strong {
 	position: absolute;
 	top: 2rem;
-	right: 2rem;
+	right: 4rem;
 }
 
 .card p {
@@ -32,19 +62,19 @@
 	line-height: 1.25rem;
 	font-size: 0.9rem;
 	display: -webkit-box;
-	-webkit-line-clamp: 4;
+	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
 
 .card ul {
 	display: flex;
-	gap: 1rem;
+	gap: 0.6rem;
 	flex-wrap: wrap;
 }
 
 .card ul li {
-	padding: 0.5rem 1rem;
+	padding: 0.25rem 1rem;
 	list-style: none;
 	border: 1px solid var(--clr-light-blue);
 	border-radius: 4px;
@@ -55,5 +85,28 @@
 
 .card:hover {
 	background-color: var(--clr-light-grey-200);
+}
+
+.card a {
+	text-decoration: none;
+	padding: 0.5rem 1.5rem;
+	border-radius: 4px;
+	font-size: 0.75rem;
+	background-color: var(--clr-base-violet);
+	border: none;
+	color: var(--clr-very-light-grey-100);
+	font-family: inherit;
+	position: absolute;
+	bottom: 2rem;
+	right: 4rem;
+	transition: all 0.2s ease;
+}
+
+.card a:hover {
+	background-color: var(--clr-violet-hover);
 	cursor: pointer;
+}
+
+.card a:active {
+	background-color: var(--clr-violet-active);
 }
