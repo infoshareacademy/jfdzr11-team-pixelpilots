@@ -5,7 +5,7 @@
 }
 
 .wrapper h2 {
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 
 .form {
@@ -26,7 +26,7 @@
 	border: 1px solid var(--clr-light-blue);
 	border-radius: 4px;
 	display: table-cell;
-	margin: 1rem 1rem 0 0;
+	margin: 0 0.6rem 0.6rem 0;
 }
 
 .form input[type='radio']:checked + label {

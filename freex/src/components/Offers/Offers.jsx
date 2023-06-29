@@ -63,6 +63,7 @@ const Offers = () => {
 					name="skill"
 					id="all"
 					value=""
+					defaultChecked
 					onChange={(e) => filteredOffers(e.target.value)}
 				/>
 				<label htmlFor="all">Wyświetl wszystkie</label>
@@ -84,7 +85,7 @@ const Offers = () => {
 						<div key={offer.id} className={styles.card}>
 							<h4>{offer.title}</h4>
 							<p>{offer.description}</p>
-							<strong>{offer.hourly_rate}</strong>
+							<strong>{offer.total_payment}</strong>
 							<ul>
 								{offer.skills.map((skill) => (
 									<li key={skill}>{skill}</li>
