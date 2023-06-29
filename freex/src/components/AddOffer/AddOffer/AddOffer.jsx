@@ -30,6 +30,8 @@ const AddOffer = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
 		const file = e.target.add_file.files[0];
 		const storageRef = ref(storage, `files/${file?.name}`);
@@ -52,14 +54,14 @@ const AddOffer = () => {
 			},
 		};
 
-		try {
-			addDoc(offersCollectionRef, offerData);
-			navigate('/mojeoferty');
-			toast.success('Dodano ofertę');
-		} catch (error) {
-			toast.error('something went wrong');
-		}
-	};
+    try {
+      await addDoc(offersCollectionRef, offerData);
+      toast.success('Offer added');
+      navigate('/mojeoferty');
+    } catch (error) {
+      toast.error('something went wrong');
+    }
+  };
 
 	const handleChange = (e, setLength) => {
 		const length = e.target.value.length;

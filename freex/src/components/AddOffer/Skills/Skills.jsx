@@ -1,5 +1,5 @@
+import ChosenSkills from './ChosenSkills';
 import styles from './skills.module.css';
-import { nanoid } from 'nanoid';
 
 const Skills = ({ skills, setSkills, chosenSkills, setChosenSkills }) => {
   const handleAdd = (e) => {
@@ -29,18 +29,13 @@ const Skills = ({ skills, setSkills, chosenSkills, setChosenSkills }) => {
           </button>
         ))}
       </div>
-      <div className={styles.chosen_skills}>
-        {chosenSkills.map((skill) => (
-          <button
-            type="button"
-            onClick={handleRemove}
-            key={nanoid()}
-            className={styles.skill}
-          >
-            {skill}
-          </button>
-        ))}
-      </div>
+
+      <ChosenSkills
+        chosenSkills={chosenSkills}
+        handleRemove={handleRemove}
+        skillClassName={styles.skill}
+        skillsClassName={styles.chosen_skills}
+      />
     </>
   );
 };
