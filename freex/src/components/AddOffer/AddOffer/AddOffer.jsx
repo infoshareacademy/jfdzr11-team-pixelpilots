@@ -15,6 +15,7 @@ import { updateSummary } from '../../../utils/updateSummary';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { serverTimestamp } from 'firebase/firestore';
+import { nanoid, customAlphabet } from 'nanoid';
 
 const AddOffer = () => {
 	const { currentUser } = useAuth();
@@ -26,12 +27,12 @@ const AddOffer = () => {
 
 	const navigate = useNavigate();
 
+	const nanoid = customAlphabet('1234567890', 10);
+
 	const offersCollectionRef = collection(db, 'offers');
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
 		const file = e.target.add_file.files[0];
 		const storageRef = ref(storage, `files/${file?.name}`);
@@ -52,16 +53,18 @@ const AddOffer = () => {
 				support: e.target.support.checked,
 				contracts: e.target.highlight.checked,
 			},
+			date: serverTimestamp(),
+			offer_number: nanoid(),
 		};
 
-    try {
-      await addDoc(offersCollectionRef, offerData);
-      toast.success('Offer added');
-      navigate('/mojeoferty');
-    } catch (error) {
-      toast.error('something went wrong');
-    }
-  };
+		try {
+			await addDoc(offersCollectionRef, offerData);
+			toast.success('Offer added');
+			navigate('/mojeoferty');
+		} catch (error) {
+			toast.error('something went wrong');
+		}
+	};
 
 	const handleChange = (e, setLength) => {
 		const length = e.target.value.length;
