@@ -11,17 +11,15 @@ const ProfileList = ({ className, header, listData }) => {
         {listData.map((item) => (
           <ProfileListItem
             key={uuid()}
-            logoURL={item.logoURL}
+            logoURL={item.logo}
             title={item.title}
             subtitle={item.subtitle}
-            startingTime={item.startingTime}
-            endingTime={item.endingTime}
+            startingTime={item.start}
+            endingTime={item.end}
           />
         ))}
       </ul>
-      <div className={styles.button_wrapper}>
-        {/* <PrimaryButton>Edit</PrimaryButton> */}
-      </div>
+      <div className={styles.button_wrapper}></div>
     </ProfileCard>
   );
 };

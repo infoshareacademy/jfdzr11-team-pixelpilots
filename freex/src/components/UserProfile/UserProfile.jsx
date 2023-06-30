@@ -1,13 +1,13 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import ContactUser from "./ContactUser/ContactUser";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProfileList from "./ProfileList/ProfileList";
 import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
-import { user } from "./mockUser";
+// import { user } from "./mockUser";
 import useAuth from "../Context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
@@ -16,17 +16,20 @@ const UserProfile = () => {
   const currentUserID = currentUser.uid;
   const docRef = doc(db, "users", currentUserID);
 
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
     getDoc(docRef).then((docSnap) => {
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        const userData = docSnap.data();
+        console.log("Document data:", userData);
+        setUser(userData);
       } else {
-        // docSnap.data() will be undefined in this case
         console.log("No such document!");
-        setDoc(docRef, { email: currentUser.email });
+        setUser(null);
       }
     });
-  }, [currentUserID, docRef, currentUser]);
+  }, []);
 
   const editHandler = () => {
     navigate("/edytujprofil");
@@ -36,8 +39,8 @@ const UserProfile = () => {
     navigate("/edytujprofil");
   };
 
-  return (
-    <>
+  if (!user) {
+    return (
       <div className={styles.message_wrapper}>
         <p></p>
         <button
@@ -53,49 +56,54 @@ const UserProfile = () => {
           Dane, które dodasz, będą widoczne dla innych użytkowników.
         </p>
       </div>
-      <div className={styles.message_wrapper}>
-        <button
-          className={styles.message_button}
-          type="button"
-          onClick={editHandler}
-        >
-          Edytuj swoje dane
-        </button>
-        <p className={styles.message_caption}>
-          Dane, które dodasz do profilu, będą widoczne dla innych użytkowników
-        </p>
-      </div>
+    );
+  } else {
+    return (
+      <>
+        <div className={styles.message_wrapper}>
+          <button
+            className={styles.message_button}
+            type="button"
+            onClick={editHandler}
+          >
+            Edytuj swoje dane
+          </button>
+          <p className={styles.message_caption}>
+            Dane, które dodasz do profilu, będą widoczne dla innych użytkowników
+          </p>
+        </div>
 
-      <div className={styles.user_profile}>
-        <GeneralInfo
-          name={user.userName}
-          role={user.role}
-          imgURL={user.imgURL}
-          rating={user.rating}
-          opinionsNumber={user.opinionsNumber}
-          description={user.description}
-          hourlyRate={user.hourlyRate}
-          joiningDate={user.joingDate}
-        ></GeneralInfo>
+        <div className={styles.user_profile}>
+          <GeneralInfo
+            name={user.userName}
+            role={user.role}
+            imgURL={user.imgURL}
+            rating={user.rating}
+            opinionsNumber={user.opinionsNumber}
+            description={user.description}
+            hourlyRate={user.hourlyRate}
+            joiningDate={user.joingDate}
+          ></GeneralInfo>
 
-        <Skills skills={user.skills}></Skills>
+          <Skills skills={user.skills}></Skills>
 
-        <ProfileList
-          className={styles.experience}
-          listData={user.experience}
-          header="Doświadczenie"
-        />
+          <ProfileList
+            className={styles.experience}
+            listData={user.experience}
+            header="Doświadczenie"
+          />
 
-        <ProfileList
-          className={styles.education}
-          listData={user.education}
-          header="Edukacja / Kwalifikacje"
-        />
+          <ProfileList
+            className={styles.education}
+            listData={user.education}
+            header="Edukacja / Kwalifikacje"
+          />
 
-        <ContactUser />
-      </div>
-    </>
-  );
+          <ContactUser />
+        </div>
+      </>
+    );
+  }
 };
 
 export default UserProfile;

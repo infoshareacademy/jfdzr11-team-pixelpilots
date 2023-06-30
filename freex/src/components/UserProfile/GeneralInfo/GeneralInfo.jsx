@@ -26,19 +26,17 @@ const GeneralInfo = ({
         <h5 className={styles.user_role}>{role}</h5>
         <div className={styles.rating}>
           <div className={styles.rating_stars}>
-            <img src="../../../../UserProfile/rating_star.svg" />
-            <img src="../../../UserProfile/rating_star.svg" />
-            <img src="../../../UserProfile/rating_star.svg" />
-            <img src="../../../UserProfile/rating_star.svg" />
+            <img src="../../../../UserProfile/rating_star_no.svg" />
+            <img src="../../../UserProfile/rating_star_no.svg" />
+            <img src="../../../UserProfile/rating_star_no.svg" />
+            <img src="../../../UserProfile/rating_star_no.svg" />
             <img src="../../../UserProfile/rating_star_no.svg" />
           </div>
           <span className={styles.rating_number}>{rating}</span>
           <span>({opinionsNumber} opinii)</span>
         </div>
         <p className={styles.description}>{description}</p>
-        <div className={styles.button_wrapper}>
-          {/* <PrimaryButton>Edit</PrimaryButton> */}
-        </div>
+        <div className={styles.button_wrapper}></div>
       </div>
     </ProfileCard>
   );

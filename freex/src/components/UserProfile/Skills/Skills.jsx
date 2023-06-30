@@ -14,9 +14,7 @@ const Skills = ({ skills }) => {
           </li>
         ))}
       </ul>
-      <div className={styles.button_wrapper}>
-        {/* <PrimaryButton>Edit</PrimaryButton> */}
-      </div>
+      <div className={styles.button_wrapper}></div>
     </ProfileCard>
   );
 };
