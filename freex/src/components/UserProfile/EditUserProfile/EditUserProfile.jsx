@@ -27,7 +27,7 @@ const EditUserProfile = () => {
     const file = e.target.profileImg.files[0];
     console.log(file);
     if (file) {
-      const fileRef = ref(storage, `users/${currentUserID}`);
+      const fileRef = ref(storage, `users/${currentUserID}/profileImg`);
       await uploadBytesResumable(fileRef, file);
       const imageURL = await getDownloadURL(fileRef);
       return imageURL;
@@ -41,10 +41,7 @@ const EditUserProfile = () => {
       const file = item.logo;
       console.log(file);
       if (file) {
-        const fileRef = ref(
-          storage,
-          `users/${currentUserID}/${category}/${item.id}`
-        );
+        const fileRef = ref(storage, `users/${currentUserID}/${category}/${i}`);
         await uploadBytesResumable(fileRef, file);
         const imageURL = await getDownloadURL(fileRef);
         console.log(imageURL);
