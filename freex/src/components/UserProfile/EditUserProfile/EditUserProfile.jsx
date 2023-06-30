@@ -22,16 +22,15 @@ const EditUserProfile = () => {
   const [chosenSkills, setChosenSkills] = useState([]);
   const [experienceInputFields, setExperienceInputFields] = useState([]);
   const [educationInputFields, setEducationInputFields] = useState([]);
-  const [profileImgUrl, setProfileImgUrl] = useState("");
 
   const uploadFile = async (e) => {
     const file = e.target.profileImg.files[0];
     console.log(file);
     if (file) {
-      const fileRef = ref(storage, `profileimgs/${currentUserID}`);
+      const fileRef = ref(storage, `users/${currentUserID}`);
       await uploadBytesResumable(fileRef, file);
       const imageURL = await getDownloadURL(fileRef);
-      setProfileImgUrl(imageURL);
+      return imageURL;
     }
   };
 
@@ -42,33 +41,41 @@ const EditUserProfile = () => {
       const file = item.logo;
       console.log(file);
       if (file) {
-        const fileRef = ref(storage, `${currentUserID}/${item.id}`);
+        const fileRef = ref(
+          storage,
+          `users/${currentUserID}/${category}/${item.id}`
+        );
         await uploadBytesResumable(fileRef, file);
         const imageURL = await getDownloadURL(fileRef);
         console.log(imageURL);
         data[i].logo = imageURL;
-        setFunction(data);
       }
     }
+    setFunction(data);
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    await uploadFile(e);
+    const profileImgUrl = await uploadFile(e);
 
     await uploadLogos(
       experienceInputFields,
       "experience",
       setExperienceInputFields
     );
-    // uploadLogos(educationInputFields, "education", setEducationInputFields);
+
+    await uploadLogos(
+      educationInputFields,
+      "education",
+      setEducationInputFields
+    );
 
     const updatedUser = {
       userName: e.target.userName.value,
       email: e.target.email.value,
       role: e.target.role.value,
-      imgURL: profileImgUrl,
+      imgURL: profileImgUrl ? profileImgUrl : "",
       rating: 0,
       opinionsNumber: 0,
       hourlyRate: e.target.hourlyRate.value,
@@ -107,8 +114,13 @@ const EditUserProfile = () => {
   const handleEducationInputBlur = (e, id) => {
     let data = [...educationInputFields];
     const itemIndex = data.findIndex((item) => item.id === id);
-    data[itemIndex][e.target.name] = e.target.value;
+    if (e.target.name == "logo") {
+      data[itemIndex][e.target.name] = e.target.files[0];
+    } else {
+      data[itemIndex][e.target.name] = e.target.value;
+    }
     setEducationInputFields(data);
+    console.log(data[itemIndex]);
   };
 
   const addExperienceFields = (e) => {
