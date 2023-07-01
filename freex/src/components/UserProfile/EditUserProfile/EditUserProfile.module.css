@@ -96,6 +96,10 @@
   cursor: pointer;
 }
 
+.list {
+  list-style: none;
+}
+
 .listItem {
   border: 1px solid #c2c2c2;
   padding: 1rem;

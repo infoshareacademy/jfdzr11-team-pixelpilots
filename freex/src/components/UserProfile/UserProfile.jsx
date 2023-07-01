@@ -5,7 +5,6 @@ import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProfileList from "./ProfileList/ProfileList";
 import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
-// import { user } from "./mockUser";
 import useAuth from "../Context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,10 +21,8 @@ const UserProfile = () => {
     getDoc(docRef).then((docSnap) => {
       if (docSnap.exists()) {
         const userData = docSnap.data();
-        console.log("Document data:", userData);
         setUser(userData);
       } else {
-        console.log("No such document!");
         setUser(null);
       }
     });

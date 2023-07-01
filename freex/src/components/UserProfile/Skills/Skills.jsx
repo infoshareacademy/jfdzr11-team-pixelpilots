@@ -5,8 +5,7 @@ import { v4 as uuid } from "uuid";
 const Skills = ({ skills }) => {
   return (
     <ProfileCard className={styles.skills}>
-      <h4>Umiejętności</h4>
-      <div className="underline"></div>
+      <h4 className={styles.heading}>Umiejętności</h4>
       <ul className={styles.skill_list}>
         {skills.map((item) => (
           <li className={styles.chip} key={uuid()}>

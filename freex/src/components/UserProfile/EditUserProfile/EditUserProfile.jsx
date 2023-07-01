@@ -32,13 +32,11 @@ const EditUserProfile = () => {
     getDoc(docRef).then((docSnap) => {
       if (docSnap.exists()) {
         const userData = docSnap.data();
-        console.log("Document data:", userData);
         setUser(userData);
         setChosenSkills(userData.skills);
-        setEducationInputFields(userData.experience);
-        setExperienceInputFields(userData.education);
+        setExperienceInputFields(userData.experience);
+        setEducationInputFields(userData.education);
       } else {
-        console.log("No such document!");
         setUser(null);
       }
     });
@@ -46,7 +44,6 @@ const EditUserProfile = () => {
 
   const uploadFile = async (e) => {
     const file = e.target.profileImg.files[0];
-    console.log(file);
     if (file) {
       const fileRef = ref(storage, `users/${currentUserID}/profileImg`);
       await uploadBytesResumable(fileRef, file);
@@ -62,12 +59,13 @@ const EditUserProfile = () => {
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       const file = item.logo;
-      console.log(file);
       if (file && file instanceof File) {
-        const fileRef = ref(storage, `users/${currentUserID}/${category}/${i}`);
+        const fileRef = ref(
+          storage,
+          `users/${currentUserID}/${category}/${item.id}`
+        );
         await uploadBytesResumable(fileRef, file);
         const imageURL = await getDownloadURL(fileRef);
-        console.log(imageURL);
         data[i].logo = imageURL;
       }
     }
@@ -105,15 +103,15 @@ const EditUserProfile = () => {
       experience: experienceInputFields,
       education: educationInputFields,
     };
-    console.log(updatedUser);
 
     const docRef = doc(db, "users", currentUserID);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      await updateDoc(docRef, updatedUser);
+      const docData = docSnap.data();
+      if (docData !== updatedUser) {
+        await updateDoc(docRef, updatedUser);
+      }
     } else {
-      console.log("No such document!");
       await setDoc(docRef, updatedUser);
     }
     navigate("/profil");
@@ -128,7 +126,6 @@ const EditUserProfile = () => {
       data[itemIndex][e.target.name] = e.target.value;
     }
     setExperienceInputFields(data);
-    console.log(data[itemIndex]);
   };
 
   const handleEducationInputBlur = (e, id) => {
@@ -140,7 +137,6 @@ const EditUserProfile = () => {
       data[itemIndex][e.target.name] = e.target.value;
     }
     setEducationInputFields(data);
-    console.log(data[itemIndex]);
   };
 
   const addExperienceFields = (e) => {
@@ -182,7 +178,6 @@ const EditUserProfile = () => {
 
   const removeEducationItem = (e, itemId) => {
     e.preventDefault();
-    console.log(itemId);
     const updatedItems = educationInputFields.filter(
       (item) => item.id !== itemId
     );
@@ -205,6 +200,7 @@ const EditUserProfile = () => {
             name="userName"
             placeholder="Wpisz swoją nazwę użytkownika"
             defaultValue={user ? user.userName : ""}
+            required
           />
           <label className={styles.input_label} htmlFor="role">
             Stanowisko
@@ -277,7 +273,7 @@ const EditUserProfile = () => {
             Add More..
           </PrimaryButton>
 
-          <ul>
+          <ul className={styles.list}>
             {experienceInputFields.map((item) => {
               return (
                 <li key={item.id} className={styles.listItem}>
@@ -291,7 +287,7 @@ const EditUserProfile = () => {
                     name="title"
                     placeholder="Np. Senior UI Designer"
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
-                    defaultValue="Senior UI Designer"
+                    defaultValue={item.title ? item.title : ""}
                   />
                   <label className={styles.input_label} htmlFor="subtitle">
                     Nazwa firmy
@@ -303,7 +299,7 @@ const EditUserProfile = () => {
                     name="subtitle"
                     placeholder="Np. Freex Sp. z o. o."
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
-                    defaultValue="UI firma"
+                    defaultValue={item.subtitle ? item.subtitle : ""}
                   />
                   <label className={styles.input_label} htmlFor="start">
                     Data rozpoczęcia
@@ -314,7 +310,7 @@ const EditUserProfile = () => {
                     id="start"
                     name="start"
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
-                    defaultValue="2021-02-21"
+                    defaultValue={item.start ? item.start : ""}
                   />
                   <label className={styles.input_label} htmlFor="end">
                     Data zakończenia
@@ -325,7 +321,7 @@ const EditUserProfile = () => {
                     id="end"
                     name="end"
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
-                    defaultValue="2023-02-12"
+                    defaultValue={item.end ? item.end : ""}
                   />
                   <input
                     type="file"
@@ -350,7 +346,7 @@ const EditUserProfile = () => {
             Add More..
           </PrimaryButton>
 
-          <ul>
+          <ul className={styles.list}>
             {educationInputFields.map((item) => {
               return (
                 <li key={item.id} className={styles.listItem}>
@@ -364,7 +360,7 @@ const EditUserProfile = () => {
                     name="title"
                     placeholder="Np. Politechnika Gdańska"
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
-                    defaultValue="Politechnika Gdańska"
+                    defaultValue={item.title ? item.title : ""}
                   />
                   <label className={styles.input_label} htmlFor="subtitle">
                     Tytuł
@@ -376,7 +372,7 @@ const EditUserProfile = () => {
                     name="subtitle"
                     placeholder="Np. licencjat"
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
-                    defaultValue="licencjat"
+                    defaultValue={item.subtitle ? item.subtitle : ""}
                   />
                   <label className={styles.input_label} htmlFor="start">
                     Data rozpoczęcia
@@ -387,7 +383,7 @@ const EditUserProfile = () => {
                     id="start"
                     name="start"
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
-                    defaultValue="2019-02-12"
+                    defaultValue={item.start ? item.start : ""}
                   />
                   <label className={styles.input_label} htmlFor="end">
                     Data zakończenia
@@ -398,7 +394,7 @@ const EditUserProfile = () => {
                     id="end"
                     name="end"
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
-                    defaultValue="2021-02-12"
+                    defaultValue={item.end ? item.end : ""}
                   />
                   <input
                     type="file"

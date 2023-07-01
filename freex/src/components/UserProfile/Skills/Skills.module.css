@@ -2,9 +2,14 @@
   grid-area: skills;
 }
 
+.heading {
+  font-size: 24px;
+}
+
 .skill_list {
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
 }
 
 .chip {
