@@ -30,13 +30,13 @@ const Home = () => {
               onClick={() => navigate("/login")}>
               Zaloguj się
             </button>
-            <img src="../Home/searching.png"></img>
+            <img src="../Home/register_find.png"></img>
             <button
               className={styles.homebtn}
               onClick={() => navigate("/register")}>
               Zarejestruj się
             </button>
-            <img src="../Home/designer.png"></img>
+            <img src="../Home/register_in.png"></img>
           </div>
         </>
       )}
