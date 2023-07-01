@@ -5,9 +5,8 @@ const Footer = () => {
     <div className={styles.footer}>
       <div className={styles.left}>
         <img className={styles.logo} src="./Navbar/freex_logo.png" />
-
-        <div>
-          <p>FreeX sp. z o.o. ul. XYZXYZXYZ 1/1, 00-000XXXXXX </p>
+        <div className={styles.adress}>
+          <p>FreeX sp. z o.o. ul. XYZXYZXYZ 1/1, 00-000 XXXXXX</p>
           <p>NIP: 0000000; KRS:0000000</p>
           <p>FreeX © 2023 Wszelkie prawa zastrzeżone</p>
         </div>
@@ -19,7 +18,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <p>Autorzy:</p>
+        <p>Pixel-Pilot develop team:</p>
         <a href="https://github.com/aleksandra-roguszewska">
           Aleskandra Roguszewska
         </a>

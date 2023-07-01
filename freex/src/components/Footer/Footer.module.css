@@ -1,7 +1,15 @@
 .footer {
   display: flex;
   flex-direction: row;
-  max-width: 1240px;
+  justify-content: space-between;
+  /* max-width: 1240px; */
+}
+
+.adress {
+  margin-top: 1rem;
+  font-size: 12px;
+  line-height: 27px;
+  margin-bottom: 1rem;
 }
 
 .left {
@@ -11,15 +19,34 @@
 
 .right {
   display: grid;
-  justify-content: right;
+  align-content: space-between;
+  justify-items: end;
+  margin-bottom: 2rem;
 }
 
 .right a {
   text-decoration: none;
   color: var(--clr-very-dark-grey-500);
+  font-size: 12px;
+  line-height: 36px;
+}
+.right a:hover {
+  text-decoration: underline;
+}
+.right p {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 1rem;
 }
 
 .logo {
   height: 35px;
   margin-right: 20px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  column-gap: 12px;
 }
