@@ -5,12 +5,16 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 import Skills from "../../AddOffer/Skills/Skills";
 import { v4 as uuid } from "uuid";
 import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
-// import { user } from "../mockUser";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import useAuth from "../../Context/AuthContext";
 import { db, storage } from "../../../config/firebase";
 import { useEffect, useState } from "react";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { getUserCreationDate } from "./getUserCreationDate";
 
 const EditUserProfile = () => {
@@ -24,7 +28,12 @@ const EditUserProfile = () => {
   const [chosenSkills, setChosenSkills] = useState([]);
   const [experienceInputFields, setExperienceInputFields] = useState([]);
   const [educationInputFields, setEducationInputFields] = useState([]);
-
+  const [experienceLogosToBeDeleted, setExperienceLogosTobeDeleted] = useState(
+    []
+  );
+  const [educationLogosToBeDeleted, setEducationLogosTobeDeleted] = useState(
+    []
+  );
   const [user, setUser] = useState(null);
 
   const docRef = doc(db, "users", currentUserID);
@@ -158,7 +167,15 @@ const EditUserProfile = () => {
     const updatedItems = experienceInputFields.filter(
       (item) => item.id !== itemId
     );
-    setExperienceInputFields(updatedItems);
+    const fileRef = ref(storage, `users/${currentUserID}/experience/${itemId}`);
+    deleteObject(fileRef)
+      .then(() => {
+        console.log("File deleted successfully.");
+        setExperienceInputFields(updatedItems);
+      })
+      .catch((error) => {
+        console.log("Error deleting file:", error);
+      });
   };
 
   const addEducationFields = (e) => {
