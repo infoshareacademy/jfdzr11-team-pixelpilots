@@ -11,6 +11,7 @@
 .button:hover {
   color: var(--clr-base-darker-blue);
   background-color: var(--clr-very-light-blue);
+  cursor: pointer;
 }
 
 .button:active,
