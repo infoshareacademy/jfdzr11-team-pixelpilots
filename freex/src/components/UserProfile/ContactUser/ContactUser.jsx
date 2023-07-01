@@ -3,7 +3,7 @@ import styles from "./ContactUser.module.css";
 
 const ContactUser = () => {
   return (
-    <div className={`${styles.contact}`}>
+    <div className={styles.contact}>
       <h5 className={styles.contact_header}>
         Skontaktuj się z freelancerem w sprawie swojego projektu
       </h5>
