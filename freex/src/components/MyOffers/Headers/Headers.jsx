@@ -1,13 +1,13 @@
-import styles from './Headers.module.css';
+import styles from '../OfferListItem/OfferListItem.module.css';
 
 const Headers = () => {
   return (
     <div className={styles.headers}>
-      <p>nazwa</p>
-      <p>data zamówienia</p>
-      <p>termin</p>
-      <p>suma</p>
-      <p>status</p>
+      <p className={styles.title}>nazwa</p>
+      <p className={styles.publish_date}>data zamówienia</p>
+      <p className={styles.end_date}>termin</p>
+      <p className={styles.cost}>suma</p>
+      <p className={styles.status}>status</p>
     </div>
   );
 };

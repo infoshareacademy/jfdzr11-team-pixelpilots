@@ -3,6 +3,7 @@ import FilterButtons from './FilterButtons/FilterButtons';
 import Sort from './Sort/Sort';
 import Headers from './Headers/Headers';
 import SearchBar from './SearchBar/SearchBar';
+import OffersList from './OffersList/OffersList';
 
 const MyOffers = () => {
   return (
@@ -13,6 +14,7 @@ const MyOffers = () => {
       </div>
       <SearchBar />
       <Headers />
+      <OffersList />
     </div>
   );
 };
