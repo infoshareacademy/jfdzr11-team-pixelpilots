@@ -82,7 +82,7 @@ const UserProfile = () => {
             opinionsNumber={user.opinionsNumber}
             description={user.description}
             hourlyRate={user.hourlyRate}
-            joiningDate={user.joingDate}
+            joiningDate={user.joiningDate}
           ></GeneralInfo>
 
           <Skills skills={user.skills}></Skills>

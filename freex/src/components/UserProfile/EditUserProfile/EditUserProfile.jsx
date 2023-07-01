@@ -5,16 +5,18 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 import Skills from "../../AddOffer/Skills/Skills";
 import { v4 as uuid } from "uuid";
 import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
-import { user } from "../mockUser";
+// import { user } from "../mockUser";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import useAuth from "../../Context/AuthContext";
 import { db, storage } from "../../../config/firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { getUserCreationDate } from "./getUserCreationDate";
 
 const EditUserProfile = () => {
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
+  const userCreationDate = getUserCreationDate(currentUser);
 
   const navigate = useNavigate();
 
@@ -22,6 +24,25 @@ const EditUserProfile = () => {
   const [chosenSkills, setChosenSkills] = useState([]);
   const [experienceInputFields, setExperienceInputFields] = useState([]);
   const [educationInputFields, setEducationInputFields] = useState([]);
+
+  const [user, setUser] = useState(null);
+
+  const docRef = doc(db, "users", currentUserID);
+  useEffect(() => {
+    getDoc(docRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        console.log("Document data:", userData);
+        setUser(userData);
+        setChosenSkills(userData.skills);
+        setEducationInputFields(userData.experience);
+        setExperienceInputFields(userData.education);
+      } else {
+        console.log("No such document!");
+        setUser(null);
+      }
+    });
+  }, []);
 
   const uploadFile = async (e) => {
     const file = e.target.profileImg.files[0];
@@ -31,6 +52,8 @@ const EditUserProfile = () => {
       await uploadBytesResumable(fileRef, file);
       const imageURL = await getDownloadURL(fileRef);
       return imageURL;
+    } else {
+      return null;
     }
   };
 
@@ -40,7 +63,7 @@ const EditUserProfile = () => {
       const item = data[i];
       const file = item.logo;
       console.log(file);
-      if (file) {
+      if (file && file instanceof File) {
         const fileRef = ref(storage, `users/${currentUserID}/${category}/${i}`);
         await uploadBytesResumable(fileRef, file);
         const imageURL = await getDownloadURL(fileRef);
@@ -72,11 +95,11 @@ const EditUserProfile = () => {
       userName: e.target.userName.value,
       email: e.target.email.value,
       role: e.target.role.value,
-      imgURL: profileImgUrl ? profileImgUrl : "",
+      imgURL: profileImgUrl ? profileImgUrl : user.imgURL,
       rating: 0,
       opinionsNumber: 0,
       hourlyRate: e.target.hourlyRate.value,
-      joiningDate: "not ready yet",
+      joiningDate: userCreationDate,
       description: e.target.description.value,
       skills: chosenSkills,
       experience: experienceInputFields,
@@ -181,7 +204,7 @@ const EditUserProfile = () => {
             id="userName"
             name="userName"
             placeholder="Wpisz swoją nazwę użytkownika"
-            defaultValue={user.userName}
+            defaultValue={user ? user.userName : ""}
           />
           <label className={styles.input_label} htmlFor="role">
             Stanowisko
@@ -192,7 +215,7 @@ const EditUserProfile = () => {
             type="text"
             id="role"
             name="role"
-            defaultValue={user.role}
+            defaultValue={user ? user.role : ""}
           />
           <label className={styles.input_label} htmlFor="houtlyRate">
             Stawka godzinowa
@@ -203,19 +226,11 @@ const EditUserProfile = () => {
             type="text"
             id="hourlyRate"
             name="hourlyRate"
-            defaultValue={user.hourlyRate}
+            defaultValue={user ? user.hourlyRate : ""}
           />
 
           <div className={styles.custom_file_input}>
-            <input
-              type="file"
-              id="profileImg"
-              name="profileImg"
-              // className={styles.hidden_input}
-            />
-            {/* <label htmlFor="profileImg" className={styles.custom_button}>
-              Dodaj zdjęcie profilowe
-            </label> */}
+            <input type="file" id="profileImg" name="profileImg" />
           </div>
 
           <legend className={styles.input_label}>Opis</legend>
@@ -224,7 +239,7 @@ const EditUserProfile = () => {
             className={styles.textarea}
             id="description"
             name="description"
-            defaultValue={user.description}
+            defaultValue={user ? user.description : ""}
           />
         </fieldset>
 
@@ -239,7 +254,7 @@ const EditUserProfile = () => {
             id="email"
             name="email"
             placeholder="Np. jan_kowalski@gmail.com"
-            defaultValue={currentUser.email}
+            defaultValue={user ? user.email : currentUser.email}
           />
         </fieldset>
 
