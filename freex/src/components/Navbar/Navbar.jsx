@@ -16,19 +16,13 @@ const Navbar = () => {
           </NavLink>
           {!currentUser ? null : (
             <>
-              <NavbarLink linkURL="/userID/panelglowny">
-                Panel główny
-              </NavbarLink>
-              <NavbarLink linkURL="/userID/mojeoferty">Moje oferty</NavbarLink>
-              <NavbarLink linkURL="/userID/dodajoferte">
-                Dodaj ofertę
-              </NavbarLink>
-              <NavbarLink linkURL="/userID/freelancerzy">
+              <NavbarLink linkURL="/panelglowny">Panel główny</NavbarLink>
+              <NavbarLink linkURL="/mojeoferty">Moje oferty</NavbarLink>
+              <NavbarLink linkURL="/dodajoferte">Dodaj ofertę</NavbarLink>
+              <NavbarLink linkURL="/freelancerzy">
                 Znajdź freelancera
               </NavbarLink>
-              <NavbarLink linkURL="/userID/zlecenia">
-                Znajdź zlecenie
-              </NavbarLink>
+              <NavbarLink linkURL="/zlecenia">Znajdź zlecenie</NavbarLink>
             </>
           )}
         </div>
@@ -47,7 +41,7 @@ const Navbar = () => {
                 <img
                   className={styles.icon}
                   onClick={() => {
-                    navigate("/userID/ulubione");
+                    navigate("/ulubione");
                   }}
                   src="../../../Navbar/icon_ulubione.png"
                 />
@@ -56,7 +50,7 @@ const Navbar = () => {
                 <img
                   className={styles.icon}
                   onClick={() => {
-                    navigate("/userID/profil");
+                    navigate("/profil");
                   }}
                   src="../../../Navbar/icon_profil.png"
                 />

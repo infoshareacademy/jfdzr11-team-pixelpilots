@@ -1,139 +1,170 @@
-import PremiumOption from "../PremiumOption/PremiumOption";
-import Data from "../PremiumOption/PremiumOptionData.json";
-import Summary from "../Summary/Summary";
-import styles from "./AddOffer.module.css";
-import { doc, setDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../../../config/firebase";
-import useAuth from "../../Context/AuthContext";
+import PremiumOption from '../PremiumOption/PremiumOption';
+import Data from '../PremiumOption/PremiumOptionData.json';
+import Summary from '../Summary/Summary';
+import styles from './AddOffer.module.css';
+import { addDoc, collection } from 'firebase/firestore';
+import { db, storage } from '../../../config/firebase';
+import useAuth from '../../Context/AuthContext';
+import { ref, uploadBytesResumable } from 'firebase/storage';
+import Skills from '../Skills/Skills';
+import { useState } from 'react';
+import skillsData from '../Skills/skills.json';
+import PaymentMethod from '../PaymentMethod/PaymentMethod';
+import CharacterCounter from '../CharacterCounter/CharacterCounter';
+import { updateSummary } from '../../../utils/updateSummary';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { serverTimestamp } from 'firebase/firestore';
+import { customAlphabet } from 'nanoid';
 
 const AddOffer = () => {
-  const { currentUser } = useAuth();
+	const { currentUser } = useAuth();
+	const [skills, setSkills] = useState(skillsData);
+	const [chosenSkills, setChosenSkills] = useState([]);
+	const [titleLength, setTitleLength] = useState('0');
+	const [descriptionLength, setDescriptionLength] = useState('0');
+	const [summary, setSummary] = useState({});
 
-  const userRef = doc(db, "users", currentUser.uid);
+	const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+	const nanoid = customAlphabet('1234567890', 10);
 
-    const offerData = {
-      title: e.target.title.value,
-      description: e.target.description.value,
-      skills: [...e.target.skills.value.split(",")],
-      hourly_rate: e.target.rate.value,
-      payment_method: e.target.payment_method.value,
-      premium_plan: {
-        highlight: e.target.highlight.checked,
-        analysis: e.target.analysis.checked,
-        support: e.target.support.checked,
-        contracts: e.target.highlight.checked,
-      },
-    };
+	const offersCollectionRef = collection(db, 'offers');
 
-    setDoc(
-      userRef,
-      {
-        offers: arrayUnion(offerData),
-      },
-      { merge: true }
-    );
-  };
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
-  return (
-    <div className={styles.add_offer_wrapper}>
-      <form onSubmit={handleSubmit} className={styles.add_offer_form}>
-        <h2 className={styles.title}>Wpisz tytuł projektu</h2>
-        <input
-          placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
-          className={styles.project_title}
-          name="title"
-          type="text"
-        />
-        <div className={styles.character_counter}>
-          <p>Helper text</p>
-          <p>0/100</p>
-        </div>
-        <h2 className={styles.title}>Opisz swój projekt</h2>
-        <textarea
-          className={styles.description}
-          placeholder="Opisz swój projekt tutaj"
-          name="description"
-          id="description"
-        ></textarea>
-        <div className={styles.character_counter}>
-          <p>Helper text</p>
-          <p>0/100</p>
-        </div>
-        <div className={styles.add_file}>
-          <button>Załącz plik</button>
-        </div>
-        <h2 className={styles.title}>Jakie umiejętności są potrzebne?</h2>
-        <textarea
-          placeholder="Wpisz potrzebne umięjetności"
-          className={styles.skills}
-          name="skills"
-          id="skills"
-        ></textarea>
-        <div className={styles.character_counter}>
-          <p>Helper text</p>
-          <p>0/100</p>
-        </div>
-        <h2 className={styles.title}>Jak chcesz zapłacić?</h2>
-        <div className={styles.radio}>
-          <input
-            value="Płatność za godziny"
-            name="payment_method"
-            id="hourly_rate"
-            type="radio"
-          />
-          <label htmlFor="hourly_rate">Płatność za godziny</label>
-        </div>
-        <div className={styles.radio}>
-          <input
-            value="Płatność za kamienie milowe"
-            name="payment_method"
-            id="milestones"
-            type="radio"
-          />
-          <label htmlFor="milestones">Płatność za kamienie milowe</label>
-        </div>
-        <div className={styles.radio}>
-          <input
-            value="Jednorazowa płatność"
-            name="payment_method"
-            id="one_time_payment"
-            type="radio"
-          />
-          <label htmlFor="one_time_payment">Jednorazowa płatność</label>
-        </div>
-        <div className={styles.dropdown}>
-          <p>Stawka godzinowa</p>
-          <select name="rate" id="rate">
-            <option value="'Regularna (55-90zł/h)">
-              Regularna (55-90zł/h)
-            </option>
-          </select>
-        </div>
-        <div className={styles.premium_plan_section}>
-          {Data.map((option, idx) => (
-            <PremiumOption
-              key={idx}
-              plan_name={option.plan_name}
-              plan_title={option.plan_title}
-              plan_description={option.plan_description}
-              img={option.img}
-            />
-          ))}
-        </div>
-        <h2 className={styles.title}>Podsumowanie</h2>
-        <Summary />
-        <div className={styles.submit_section}>
-          <h2 className={styles.total}>Łącznie: 160 PLN</h2>
-          <button className={styles.submit_button} type="submit">
-            Opublikuj
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+		const file = e.target.add_file.files[0];
+		const storageRef = ref(storage, `files/${file?.name}`);
+		if (file) uploadBytesResumable(storageRef, file);
+
+		const offerData = {
+			userId: currentUser.uid,
+			title: e.target.title.value,
+			description: e.target.description.value,
+			skills: chosenSkills,
+			payment_method: e.target.payment_method.value,
+			hourly_rate: `${e.target.hourly_rate?.value} zł/godz.`,
+			milestone_rate: `${e.target.milestone_rate?.value} zł/kamień milowy`,
+			total_payment: `${e.target.total_payment?.value} zł`,
+			premium_plan: {
+				highlight: e.target.highlight.checked,
+				analysis: e.target.analysis.checked,
+				support: e.target.support.checked,
+				contracts: e.target.highlight.checked,
+			},
+			date: serverTimestamp(),
+			offer_number: nanoid(),
+		};
+
+		try {
+			await addDoc(offersCollectionRef, offerData);
+			toast.success('Offer added');
+			navigate('/mojeoferty');
+		} catch (error) {
+			toast.error('something went wrong');
+		}
+	};
+
+	const handleChange = (e, setLength) => {
+		const length = e.target.value.length;
+		setLength(length);
+	};
+
+	return (
+		<div className={styles.add_offer_wrapper}>
+			<form
+				onSubmit={handleSubmit}
+				className={styles.add_offer_form}
+				id="add_offer"
+			>
+				<h2 className={styles.title}>Wpisz tytuł projektu</h2>
+
+				<input
+					maxLength="100"
+					onChange={(e) => {
+						handleChange(e, setTitleLength);
+						updateSummary(e, summary, setSummary);
+					}}
+					className={styles.project_title}
+					placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
+					name="title"
+					type="text"
+				/>
+
+				<CharacterCounter length={titleLength} />
+
+				<h2 className={styles.title}>Opisz swój projekt</h2>
+				<textarea
+					maxLength="100"
+					onChange={(e) => {
+						handleChange(e, setDescriptionLength);
+						updateSummary(e, summary, setSummary);
+					}}
+					className={styles.description}
+					placeholder="Opisz swój projekt tutaj"
+					name="description"
+					id="description"
+				></textarea>
+
+				<CharacterCounter length={descriptionLength} />
+
+				<div>
+					<label className={styles.add_file} htmlFor="add_file">
+						Upload file
+					</label>
+					<input
+						className={styles.add_file_input}
+						id="add_file"
+						name="add_file"
+						type="file"
+					/>
+				</div>
+
+				<h2 className={styles.title}>
+					Jakie umiejętności są potrzebne?
+				</h2>
+
+				<Skills
+					chosenSkills={chosenSkills}
+					setChosenSkills={setChosenSkills}
+					skills={skills}
+					setSkills={setSkills}
+				/>
+
+				<PaymentMethod data={summary} setData={setSummary} />
+
+				<div className={styles.premium_plan_section}>
+					{Data.map((option, idx) => (
+						<PremiumOption
+							key={idx}
+							plan_name={option.plan_name}
+							plan_title={option.plan_title}
+							plan_description={option.plan_description}
+							img={option.img}
+						/>
+					))}
+				</div>
+
+				<h2 className={styles.title}>Podsumowanie</h2>
+
+				<Summary
+					title={summary.title}
+					skills={chosenSkills}
+					paymentMethod={summary.payment_method}
+					description={summary.description}
+				/>
+				<div className={styles.submit_section}>
+					<h2 className={styles.total}>
+						Łącznie: {summary.payment} pln
+					</h2>
+					<button className={styles.submit_button} type="submit">
+						Opublikuj
+					</button>
+				</div>
+			</form>
+		</div>
+	);
 };
 
 export default AddOffer;

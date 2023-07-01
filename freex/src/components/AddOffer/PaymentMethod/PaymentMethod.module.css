@@ -1,0 +1,27 @@
+.title {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.radio input {
+  transform: scale(1.2);
+}
+
+.radio label {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.payment_method {
+  margin-top: 2rem;
+}
+
+.rate_input {
+  width: 50%;
+  height: 30px;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  padding-left: 0.5rem;
+  margin: 1rem 0;
+}

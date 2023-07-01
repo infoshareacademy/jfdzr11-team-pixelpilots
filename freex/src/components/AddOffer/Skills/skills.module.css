@@ -1,0 +1,70 @@
+.skills {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  border: 1px solid rgb(128, 212, 255);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  padding: 0 15px;
+  background-color: transparent;
+  transition: border 0.1s linear;
+}
+
+.chosen_skills {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2rem;
+  border: 0.5px solid black;
+  border-radius: 12px;
+  padding: 0.5rem;
+  min-height: 6rem;
+}
+.skill:nth-child(2n) {
+  background-color: #80d5ff40;
+  border: none;
+}
+
+.skill:nth-child(3n) {
+  background-color: #80d5ffa4;
+  border: none;
+}
+
+.skill:nth-child(4n) {
+  background-color: #80d4ff;
+  border: none;
+}
+
+.chosen_skills .skill:nth-child(2n) {
+  background-color: #80d5ff40;
+  border: none;
+}
+
+.chosen_skills .skill:nth-child(3n) {
+  background-color: #80d5ffa4;
+  border: none;
+}
+
+.chosen_skills .skill:nth-child(4n) {
+  background-color: #80d4ff;
+  border: none;
+}
+
+.chosen_skills .chosen_skills .skill {
+  border: none;
+  background-color: #80d4ff;
+}
+
+.skill:hover,
+.chosen_skills .skill:hover {
+  border: 2px solid #1ab2ff;
+  cursor: pointer;
+}

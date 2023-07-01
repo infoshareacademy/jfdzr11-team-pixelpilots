@@ -69,7 +69,7 @@ const Login = () => {
       ) : location.state ? (
         <Navigate to={location.state.from.pathname} />
       ) : (
-        <Navigate to="/userID/panelglowny" />
+        <Navigate to="/panelglowny" />
       )}
     </>
   );
