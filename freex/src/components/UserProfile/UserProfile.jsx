@@ -8,6 +8,7 @@ import styles from "./UserProfile.module.css";
 import useAuth from "../Context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -40,13 +41,13 @@ const UserProfile = () => {
     return (
       <div className={styles.message_wrapper}>
         <p></p>
-        <button
+        <PrimaryButton
           className={styles.message_button}
           type="button"
           onClick={addHandler}
         >
           Dodaj dane do profilu
-        </button>
+        </PrimaryButton>
         <p className={styles.message_caption}>
           Dodaj dane do profilu, aby zaprezentowac się innym użytkownikom.
           <br />
@@ -58,13 +59,13 @@ const UserProfile = () => {
     return (
       <>
         <div className={styles.message_wrapper}>
-          <button
+          <PrimaryButton
             className={styles.message_button}
             type="button"
             onClick={editHandler}
           >
             Edytuj swoje dane
-          </button>
+          </PrimaryButton>
           <p className={styles.message_caption}>
             Dane, które dodasz do profilu, będą widoczne dla innych użytkowników
           </p>
