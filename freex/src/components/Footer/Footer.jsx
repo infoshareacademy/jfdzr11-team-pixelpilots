@@ -7,10 +7,9 @@ const Footer = () => {
         <img className={styles.logo} src="./Navbar/freex_logo.png" />
 
         <div>
-          <p className={styles.info}>
-            FreeX sp. z o.o. ul. XYZXYZXYZ 1/1, 00-000XXXXXX NIP: 0000000; KRS:
-            0000000 FreeX © 2023 Wszelkie prawa zastrzeżone
-          </p>
+          <p>FreeX sp. z o.o. ul. XYZXYZXYZ 1/1, 00-000XXXXXX </p>
+          <p>NIP: 0000000; KRS:0000000</p>
+          <p>FreeX © 2023 Wszelkie prawa zastrzeżone</p>
         </div>
         <div className={styles.icons}>
           <img src="./Footer/facebook_logo.png"></img>
