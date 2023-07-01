@@ -1,0 +1,14 @@
+.my_offers_wrapper {
+  max-width: 1008px;
+  margin: 0 auto;
+  border: 2px solid var(--clr-base-lighter-blue);
+  border-radius: 12px;
+  padding: 1rem 6rem;
+  margin-top: 4rem;
+  background-color: white;
+}
+
+.top_section {
+  display: flex;
+  margin-top: 2rem;
+}
