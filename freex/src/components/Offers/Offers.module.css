@@ -1,7 +1,7 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	padding: 2rem 0;
+	padding: 2rem;
 }
 
 .wrapper h2 {
@@ -21,26 +21,33 @@
 
 .form label {
 	cursor: pointer;
-	background-color: var(--clr-very-light-blue);
-	padding: 0.25rem 1rem;
-	border: 1px solid var(--clr-light-blue);
+	background-color: var(--clr-background);
+	padding: 0.75rem;
+	border: 1px solid var(--clr-base-darker-blue);
 	border-radius: 4px;
 	display: table-cell;
 	margin: 0 0.6rem 0.6rem 0;
+	color: var(--clr-base-darker-blue);
+	font-size: 0.875rem;
+	transition: all 0.2s ease;
 }
 
 .form input[type='radio']:checked + label {
-	background-color: var(--clr-base-darker-blue);
+	background-color: var(--clr-light-blue);
+	color: var(--clr-very-dark-blue);
+	border: 1px solid var(--clr-base-darker-blue);
 }
 
 .form input[type='radio']:hover + label {
-	background-color: var(--clr-base-lighter-blue);
+	background-color: var(--clr-very-light-blue);
+	color: var(--clr-base-darker-blue);
+	border: 1px solid var(--clr-base-darker-blue);
 }
 
 .card {
 	padding: 2rem 18rem 2rem 4rem;
 	position: relative;
-	border: 1px solid var(--clr-light-blue);
+	border: 2px solid var(--clr-base-lighter-blue);
 	border-radius: 4px;
 	margin-top: 1rem;
 }
@@ -48,10 +55,10 @@
 .card h4 {
 	margin-bottom: 1rem;
 	font-size: 1.5rem;
-	color: var(--clr-very-dark-blue);
 }
 
 .card strong {
+	font-size: 1.5rem;
 	position: absolute;
 	top: 2rem;
 	right: 4rem;
@@ -76,25 +83,25 @@
 .card ul li {
 	padding: 0.25rem 1rem;
 	list-style: none;
-	border: 1px solid var(--clr-light-blue);
+	border: 1px solid #4b525b;
 	border-radius: 4px;
 	text-align: center;
 	font-size: 0.75rem;
-	background-color: var(--clr-very-light-blue);
+	background-color: #f2f3f3;
 }
 
 .card:hover {
-	background-color: var(--clr-light-grey-200);
+	background-color: var(--clr-primary-white);
 }
 
 .card a {
 	text-decoration: none;
-	padding: 0.5rem 1.5rem;
+	padding: 0.75rem 1.5rem;
 	border-radius: 4px;
-	font-size: 0.75rem;
-	background-color: var(--clr-base-violet);
+	font-size: 0.875rem;
+	background-color: var(--clr-base-darker-blue);
 	border: none;
-	color: var(--clr-very-light-grey-100);
+	color: #f3f3f3;
 	font-family: inherit;
 	position: absolute;
 	bottom: 2rem;
@@ -103,10 +110,13 @@
 }
 
 .card a:hover {
-	background-color: var(--clr-violet-hover);
+	color: var(--clr-base-darker-blue);
 	cursor: pointer;
+	background-color: var(--clr-very-light-blue);
+	box-shadow: 0 0.2rem 0.4rem 0 #d9d9d9;
 }
 
 .card a:active {
-	background-color: var(--clr-violet-active);
+	color: var(--clr-light-grey-200);
+	background-color: var(--clr-dark-blue);
 }
