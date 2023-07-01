@@ -40,8 +40,7 @@ const Navbar = () => {
                 onClick={() => {
                   logout();
                   navigate("/");
-                }}
-              >
+                }}>
                 Wyloguj się
               </button>
               <button className={styles.button_icon}>
@@ -69,17 +68,15 @@ const Navbar = () => {
                 className={styles.button_logout}
                 onClick={() => {
                   navigate("/login");
-                }}
-              >
+                }}>
                 Zaloguj się
               </button>
               <button
                 className={styles.button_logout}
                 onClick={() => {
                   navigate("/register");
-                }}
-              >
-                Zarejetruj się
+                }}>
+                Zarejestruj się
               </button>
             </>
           )}
