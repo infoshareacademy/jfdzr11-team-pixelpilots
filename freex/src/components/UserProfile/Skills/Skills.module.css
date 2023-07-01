@@ -1,0 +1,16 @@
+.skills {
+  grid-area: skills;
+}
+
+.skill_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  /* background-color: var(--clr-base-darker-blue); */
+  padding: 0.4rem 1rem;
+  margin: 20px 20px 0px 0;
+  border-radius: 0.5rem;
+  border: 1.5px solid var(--clr-base-darker-blue);
+}

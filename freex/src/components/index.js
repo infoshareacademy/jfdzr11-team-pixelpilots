@@ -15,6 +15,7 @@ import InvalidAddress from "./InvalidAddress/InvalidAddress";
 import Favorites from "./Favorites/Favorites";
 import UserProfile from "./UserProfile/UserProfile";
 import PrimaryButton from "./UI/PrimaryButton/PrimaryButton";
+import EditUserProfile from "./UserProfile/EditUserProfile/EditUserProfile";
 
 export {
   Home,
@@ -34,4 +35,5 @@ export {
   Favorites,
   UserProfile,
   PrimaryButton,
+  EditUserProfile,
 };

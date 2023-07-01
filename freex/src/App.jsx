@@ -14,6 +14,7 @@ import {
 	InvalidAddress,
 	UserProfile,
 	Favorites,
+  EditUserProfile,
 } from './components';
 import Offer from './components/Offer/Offer';
 
@@ -21,12 +22,13 @@ function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Layout />}>
+ 
 				{/* Publiczne ściezki */}
 				<Route path="/" element={<Home />} />
 				<Route path="*" element={<InvalidAddress />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
-
+          
 				{/* Ściezki prywatne */}
 				<Route path="/" element={<PrivateRoute />}>
 					<Route path="/panelglowny" element={<MainPanel />} />
@@ -39,11 +41,13 @@ function App() {
 						element={<Offer />}
 					/>
 					<Route path="/profil" element={<UserProfile />} />
+          <Route path="/edytujprofil" element={<EditUserProfile />} />
 					<Route path="/ulubione" element={<Favorites />} />
 				</Route>
 			</Route>
 		</Routes>
 	);
+
 }
 
 export default App;

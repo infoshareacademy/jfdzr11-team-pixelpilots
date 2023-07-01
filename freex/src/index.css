@@ -54,7 +54,7 @@
 }
 
 body {
-	max-width: 1280px;
-	margin: 0 auto;
-	background-color: var(--clr-background);
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--clr-background);
 }
