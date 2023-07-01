@@ -94,6 +94,7 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
+  display: block;
 }
 
 .list {

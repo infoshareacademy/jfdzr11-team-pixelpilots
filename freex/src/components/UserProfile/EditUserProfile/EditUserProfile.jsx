@@ -81,10 +81,26 @@ const EditUserProfile = () => {
     setFunction(data);
   };
 
+  const removeRedundantLogos = async (itemIDs) => {
+    itemIDs.forEach((item) => {
+      const fileRef = ref(storage, `users/${currentUserID}/experience/${item}`);
+      deleteObject(fileRef)
+        .then(() => {
+          console.log("File deleted successfully.");
+        })
+        .catch((error) => {
+          console.log("Error deleting file:", error);
+        });
+    });
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
     const profileImgUrl = await uploadFile(e);
+
+    await removeRedundantLogos(experienceLogosToBeDeleted);
+    await removeRedundantLogos(educationLogosToBeDeleted);
 
     await uploadLogos(
       experienceInputFields,
@@ -159,7 +175,10 @@ const EditUserProfile = () => {
       end: "",
       logo: "",
     };
-    setExperienceInputFields([...experienceInputFields, newfield]);
+    setExperienceInputFields((previousExperienceInputFields) => [
+      ...previousExperienceInputFields,
+      newfield,
+    ]);
   };
 
   const removeExperienceItem = (e, itemId) => {
@@ -167,15 +186,11 @@ const EditUserProfile = () => {
     const updatedItems = experienceInputFields.filter(
       (item) => item.id !== itemId
     );
-    const fileRef = ref(storage, `users/${currentUserID}/experience/${itemId}`);
-    deleteObject(fileRef)
-      .then(() => {
-        console.log("File deleted successfully.");
-        setExperienceInputFields(updatedItems);
-      })
-      .catch((error) => {
-        console.log("Error deleting file:", error);
-      });
+    setExperienceInputFields(updatedItems);
+    setExperienceLogosTobeDeleted((previousLogosToBeDeleted) => [
+      ...previousLogosToBeDeleted,
+      itemId,
+    ]);
   };
 
   const addEducationFields = (e) => {
@@ -190,7 +205,10 @@ const EditUserProfile = () => {
       logo: "",
     };
 
-    setEducationInputFields([...educationInputFields, newfield]);
+    setEducationInputFields((previousEducationInputFields) => [
+      ...previousEducationInputFields,
+      newfield,
+    ]);
   };
 
   const removeEducationItem = (e, itemId) => {
@@ -199,6 +217,10 @@ const EditUserProfile = () => {
       (item) => item.id !== itemId
     );
     setEducationInputFields(updatedItems);
+    setEducationLogosTobeDeleted((previousLogosToBeDeleted) => [
+      ...previousLogosToBeDeleted,
+      itemId,
+    ]);
   };
 
   return (
@@ -229,6 +251,7 @@ const EditUserProfile = () => {
             id="role"
             name="role"
             defaultValue={user ? user.role : ""}
+            required
           />
           <label className={styles.input_label} htmlFor="houtlyRate">
             Stawka godzinowa
@@ -236,10 +259,11 @@ const EditUserProfile = () => {
           <input
             placeholder="Podaj swoją stawkę godzinową"
             className={styles.input}
-            type="text"
+            type="number"
             id="hourlyRate"
             name="hourlyRate"
             defaultValue={user ? user.hourlyRate : ""}
+            required
           />
 
           <div className={styles.custom_file_input}>
@@ -253,6 +277,8 @@ const EditUserProfile = () => {
             id="description"
             name="description"
             defaultValue={user ? user.description : ""}
+            required
+            minLength={100}
           />
         </fieldset>
 
@@ -347,6 +373,7 @@ const EditUserProfile = () => {
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
                   />
                   <PrimaryButton
+                    className={styles.button}
                     onClick={(event) => removeExperienceItem(event, item.id)}
                   >
                     Usuń
@@ -420,6 +447,7 @@ const EditUserProfile = () => {
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
                   />
                   <PrimaryButton
+                    className={styles.button}
                     onClick={(event) => removeEducationItem(event, item.id)}
                   >
                     Usuń
