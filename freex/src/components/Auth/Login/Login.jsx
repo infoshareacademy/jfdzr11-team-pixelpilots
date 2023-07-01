@@ -1,4 +1,4 @@
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import styles from "./Login.module.css";
 import useAuth from "../../Context/AuthContext";
 import { toast } from "react-hot-toast";
@@ -8,6 +8,7 @@ const Login = () => {
   const { login, currentUser } = useAuth();
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSubmit = async (formEvent) => {
     formEvent.preventDefault();
@@ -31,17 +32,39 @@ const Login = () => {
     <>
       {!currentUser ? (
         <div className={styles.container}>
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" />
-            <label htmlFor="password">Hasło</label>
-            <input type="password" name="password" id="password" />
-            <button type="submit">Zaloguj się</button>
+          <div className={styles.left}>
+            <img src="./Login/welcomeback.png"></img>
+          </div>
+          <div className={styles.right}>
+            <h1>Witaj ponownie!</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <label htmlFor="email">Adres e-mail</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Wpisz adres email..."
+              />
+              <label htmlFor="password">Hasło</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Wpisz hasło..."
+              />
+              <button type="submit">Zaloguj się</button>
+            </form>
             <p>
-              Nie masz jeszcze konta?
-              <Link to="/register">Zarejestruj się</Link>
+              Nie masz konta?
+              <button
+                className={styles.loginbutton}
+                onClick={() => {
+                  navigate("/register");
+                }}>
+                Zarejestruj się
+              </button>
             </p>
-          </form>
+          </div>
         </div>
       ) : location.state ? (
         <Navigate to={location.state.from.pathname} />
