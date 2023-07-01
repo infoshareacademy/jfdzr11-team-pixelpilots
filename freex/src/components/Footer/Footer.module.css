@@ -1,0 +1,24 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.left {
+  display: grid;
+  justify-content: left;
+}
+
+.right {
+  display: grid;
+  justify-content: right;
+}
+
+.right a {
+  text-decoration: none;
+  color: var(--clr-very-dark-grey-500);
+}
+
+.logo {
+  height: 35px;
+  margin-right: 20px;
+}
