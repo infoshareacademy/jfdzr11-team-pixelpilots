@@ -5,10 +5,10 @@ import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProfileList from "./ProfileList/ProfileList";
 import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
-// import { user } from "./mockUser";
 import useAuth from "../Context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -22,10 +22,8 @@ const UserProfile = () => {
     getDoc(docRef).then((docSnap) => {
       if (docSnap.exists()) {
         const userData = docSnap.data();
-        console.log("Document data:", userData);
         setUser(userData);
       } else {
-        console.log("No such document!");
         setUser(null);
       }
     });
@@ -43,13 +41,13 @@ const UserProfile = () => {
     return (
       <div className={styles.message_wrapper}>
         <p></p>
-        <button
+        <PrimaryButton
           className={styles.message_button}
           type="button"
           onClick={addHandler}
         >
           Dodaj dane do profilu
-        </button>
+        </PrimaryButton>
         <p className={styles.message_caption}>
           Dodaj dane do profilu, aby zaprezentowac się innym użytkownikom.
           <br />
@@ -61,13 +59,13 @@ const UserProfile = () => {
     return (
       <>
         <div className={styles.message_wrapper}>
-          <button
+          <PrimaryButton
             className={styles.message_button}
             type="button"
             onClick={editHandler}
           >
             Edytuj swoje dane
-          </button>
+          </PrimaryButton>
           <p className={styles.message_caption}>
             Dane, które dodasz do profilu, będą widoczne dla innych użytkowników
           </p>
@@ -82,7 +80,7 @@ const UserProfile = () => {
             opinionsNumber={user.opinionsNumber}
             description={user.description}
             hourlyRate={user.hourlyRate}
-            joiningDate={user.joingDate}
+            joiningDate={user.joiningDate}
           ></GeneralInfo>
 
           <Skills skills={user.skills}></Skills>
