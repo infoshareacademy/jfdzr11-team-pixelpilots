@@ -253,11 +253,11 @@ const EditUserProfile = () => {
             defaultValue={user ? user.role : ""}
             required
           />
-          <label className={styles.input_label} htmlFor="houtlyRate">
-            Stawka godzinowa
+          <label className={styles.input_label} htmlFor="hourlyRate">
+            Stawka godzinowa (PLN/h)
           </label>
           <input
-            placeholder="Podaj swoją stawkę godzinową"
+            placeholder="Np. 150"
             className={styles.input}
             type="number"
             id="hourlyRate"
