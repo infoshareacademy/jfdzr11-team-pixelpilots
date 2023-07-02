@@ -1,5 +1,6 @@
 .list {
   margin-top: 2rem;
+  list-style: none;
 }
 
 .list_item {
