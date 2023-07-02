@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-areas: 'text form';
 	grid-template-columns: 1fr 1fr;
-	padding: 3rem 2rem 2rem;
+	padding: 3rem 2rem 2rem 0;
 }
 
 .text {
@@ -26,8 +26,7 @@
 }
 
 .image img {
-	width: 80%;
-	margin-left: 2rem;
+	width: 100%;
 	border-radius: 20px;
 	box-shadow: 0 0.2rem 0.4rem 0 #d9d9d9;
 }
@@ -38,7 +37,6 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-end;
-	/* padding: 8rem 4rem 0; */
 }
 
 .form div {
