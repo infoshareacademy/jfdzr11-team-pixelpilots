@@ -1,12 +1,11 @@
 .container {
   display: flex;
   justify-content: space-between;
-  margin-top: 10rem;
-  margin-bottom: 3rem;
+  margin-top: 5rem;
 }
 
 .left {
-  padding-top: 3rem;
+  padding-top: 5rem;
 }
 
 .right {
