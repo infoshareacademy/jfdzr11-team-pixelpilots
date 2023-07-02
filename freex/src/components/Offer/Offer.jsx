@@ -6,57 +6,65 @@ import { toast } from 'react-hot-toast';
 import styles from './Offer.module.css';
 
 const Offer = () => {
-	const { zlecenieId } = useParams();
+  const { zlecenieId } = useParams();
 
-	const [offer, setOffer] = useState([]);
+  const [offer, setOffer] = useState([]);
 
-	const getOffer = async () => {
-		try {
-			const docRef = doc(db, 'offers', zlecenieId);
-			const docSnap = await getDoc(docRef);
-			if (docSnap.exists()) {
-				setOffer(docSnap.data());
-			} else {
-				toast.error('Nie ma takiego zlecenia');
-			}
-		} catch (error) {
-			toast.error('Nie udało się pobrać zlecenia');
-		}
-	};
+  const getOffer = async () => {
+    try {
+      const docRef = doc(db, 'offers', zlecenieId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setOffer(docSnap.data());
+      } else {
+        toast.error('Nie ma takiego zlecenia');
+      }
+    } catch (error) {
+      toast.error('Nie udało się pobrać zlecenia');
+    }
+  };
 
-	useEffect(() => {
-		getOffer();
-	}, []);
+  useEffect(() => {
+    getOffer();
+  }, []);
 
-	return (
-		<div className={styles.card}>
-			<div className={styles.heading}>
-				<div>
-					<h4>{offer.title}</h4>
-					<span>
-						Data publikacji:{' '}
-						<span>{offer.date?.toDate().toLocaleDateString()}</span>
-					</span>
-				</div>
+  let cost = '';
+  if (offer.payment_method === 'Jednorazowa płatność') {
+    cost = offer.total_payment;
+  } else if (offer.payment_method === 'Płatność za godziny') {
+    cost = offer.hourly_rate;
+  } else if (offer.payment_method === 'Płatność za kamienie milowe')
+    cost = offer.milestone_rate;
 
-				<div className={styles.priceWrapper}>
-					<strong>{offer.total_payment}</strong>
-					<span>{offer.payment_method}</span>
-				</div>
-			</div>
+  return (
+    <div className={styles.card}>
+      <div className={styles.heading}>
+        <div>
+          <h4>{offer.title}</h4>
+          <span>
+            Data publikacji:{' '}
+            <span>{offer.date?.toDate().toLocaleDateString()}</span>
+          </span>
+        </div>
 
-			<ul className={styles.chips}>
-				{offer.skills?.map((skill) => (
-					<li key={skill}>{skill}</li>
-				))}
-			</ul>
-			<p>{offer.description}</p>
+        <div className={styles.priceWrapper}>
+          <strong>{cost}</strong>
+          <span>{offer.payment_method}</span>
+        </div>
+      </div>
 
-			<div>
-				<span>Numer zlecenia: {offer?.offer_number}</span>
-			</div>
-		</div>
-	);
+      <ul className={styles.chips}>
+        {offer.skills?.map((skill) => (
+          <li key={skill}>{skill}</li>
+        ))}
+      </ul>
+      <p>{offer.description}</p>
+
+      <div>
+        <span>Numer zlecenia: {offer?.offer_number}</span>
+      </div>
+    </div>
+  );
 };
 
 export default Offer;
