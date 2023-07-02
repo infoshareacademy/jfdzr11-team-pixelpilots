@@ -17,7 +17,7 @@ const Home = () => {
             <h1>Załóż konto już dziś</h1>
             <h1>i dołącz do społeczności</h1>
             <h1>profesjonalistów</h1>
-            <p>
+            <p className={styles.text}>
               Nieważne, czy jesteś doświadczonym freelancerem, który szuka
               nowych możliwości i projektów, czy przedsiębiorcą dążącym do
               rozwoju swojej firmy - tutaj znajdziesz wsparcie, inspirację i
@@ -25,18 +25,22 @@ const Home = () => {
             </p>
           </div>
           <div className={styles.right}>
-            <button
-              className={styles.homebtn}
-              onClick={() => navigate("/login")}>
-              Zaloguj się
-            </button>
-            <img src="../Home/register_find.png"></img>
-            <button
-              className={styles.homebtn}
-              onClick={() => navigate("/register")}>
-              Zarejestruj się
-            </button>
-            <img src="../Home/register_in.png"></img>
+            <div className={styles.relative}>
+              <button
+                className={`${styles.homebtn} ${styles.absolute}`}
+                onClick={() => navigate("/login")}>
+                Zaloguj się
+              </button>
+              <img className={styles.box} src="../Home/register_find.png"></img>
+            </div>
+            <div className={styles.relative}>
+              <button
+                className={`${styles.homebtn} ${styles.absolute}`}
+                onClick={() => navigate("/register")}>
+                Zarejestruj się
+              </button>
+              <img className={styles.box} src="../Home/register_in.png"></img>
+            </div>
           </div>
         </>
       )}
