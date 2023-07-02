@@ -107,7 +107,7 @@ const AddOffer = () => {
           id="description"
         ></textarea>
 
-        <CharacterCounter length={descriptionLength} max="600" />
+        <CharacterCounter length={descriptionLength} max="5000" />
 
         <div>
           <label className={styles.add_file} htmlFor="add_file">

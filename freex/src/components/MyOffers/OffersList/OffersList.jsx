@@ -37,7 +37,6 @@ const OffersList = () => {
         let cost = '';
         if (offer.payment_method === 'Jednorazowa płatność') {
           cost = offer.total_payment;
-          console.log(cost);
         } else if (offer.payment_method === 'Płatność za godziny') {
           cost = offer.hourly_rate;
         } else if (offer.payment_method === 'Płatność za kamienie milowe')

@@ -4,3 +4,19 @@
   align-items: center;
   gap: 20px;
 }
+
+.sort button {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: none;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sort button:hover {
+  cursor: pointer;
+}

@@ -6,11 +6,16 @@ import SearchBar from './SearchBar/SearchBar';
 import OffersList from './OffersList/OffersList';
 
 const MyOffers = () => {
+  const sortByNewest = (data, setData) => {
+    const sorted = data.sort(data.date);
+    setData(sorted);
+  };
+
   return (
     <div className={styles.my_offers_wrapper}>
       <div className={styles.top_section}>
         <FilterButtons />
-        <Sort />
+        <Sort sortByNewest={sortByNewest} />
       </div>
       <SearchBar />
       <Headers />
