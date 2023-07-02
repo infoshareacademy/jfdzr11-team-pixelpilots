@@ -12,7 +12,12 @@
 
 .right {
   grid-area: right;
-  width: 100%;
+  width: 90%;
+  margin-left: 5rem;
+}
+
+.right h1 {
+  text-align: center;
 }
 
 .form {
@@ -71,4 +76,8 @@
 
 .loginbutton:hover {
   cursor: pointer;
+}
+
+.box {
+  border-radius: 1.3rem;
 }
