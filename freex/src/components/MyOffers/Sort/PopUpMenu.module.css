@@ -1,0 +1,12 @@
+.pop_up {
+  border: 1px solid black;
+  position: absolute;
+  width: 120px;
+  right: 260px;
+  top: 220px;
+}
+
+.pop_up button {
+  background-color: transparent;
+  border: none;
+}

@@ -1,19 +1,21 @@
 .container {
-  display: grid;
-  grid-template-areas: "text form";
-  grid-template-columns: 1fr 1fr;
-  padding: 3rem 0 2rem;
+	display: grid;
+	grid-template-areas: 'text form';
+	grid-template-columns: 1fr 1fr;
+	padding: 3rem 2rem 2rem 0;
 }
 
 .text {
-  grid-area: text;
+	grid-area: text;
+	padding-right: 2rem;
 }
 
 .text h2 {
-  font-size: 3rem;
-  color: var(--clr-very-dark-blue);
-  line-height: 3.5rem;
-  margin-bottom: 2rem;
+	font-size: 3rem;
+	color: var(--clr-very-dark-blue);
+	line-height: 3.5rem;
+	margin-bottom: 2rem;
+	font-weight: 400;
 }
 
 .text p {
@@ -24,15 +26,23 @@
 }
 
 .image img {
-  width: 50%;
-  margin-left: 4rem;
+	width: 100%;
+	border-radius: 20px;
+	box-shadow: 0 0.2rem 0.4rem 0 #d9d9d9;
 }
 
 .form {
-  grid-area: form;
-  display: flex;
-  flex-direction: column;
-  padding: 8rem 4rem 0;
+	grid-area: form;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.form div {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
 }
 
 .form input {
@@ -47,8 +57,8 @@
 }
 
 .form input:focus {
-  outline: none;
-  border: 2px solid var(--clr-base-violet);
+	outline: none;
+	border: 2px solid var(--clr-base-darker-blue);
 }
 
 .form input::placeholder {
@@ -56,21 +66,7 @@
 }
 
 .form button {
-  height: 3rem;
-  margin-bottom: 1.5rem;
-  border-radius: 4px;
-  background-color: var(--clr-base-violet);
-  border: none;
-  color: var(--clr-very-light-grey-100);
-  font-family: inherit;
-  font-size: inherit;
-}
-
-.form button:hover {
-  background-color: var(--clr-violet-hover);
-  cursor: pointer;
-}
-
-.form button:active {
-  background-color: var(--clr-violet-active);
+	height: 3rem;
+	font-size: inherit;
+	transition: all.2s ease;
 }

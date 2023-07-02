@@ -38,21 +38,25 @@ const Navbar = () => {
               >
                 Wyloguj się
               </button>
-              <button className={styles.button_icon}>
+              <button
+                className={styles.button_icon}
+                onClick={() => {
+                  navigate("/ulubione");
+                }}
+              >
                 <img
                   className={styles.icon}
-                  onClick={() => {
-                    navigate("/ulubione");
-                  }}
                   src="../../../Navbar/icon_ulubione.png"
                 />
               </button>
-              <button className={styles.button_icon}>
+              <button
+                className={styles.button_icon}
+                onClick={() => {
+                  navigate("/profil");
+                }}
+              >
                 <img
                   className={styles.icon}
-                  onClick={() => {
-                    navigate("/profil");
-                  }}
                   src="../../../Navbar/icon_profil.png"
                 />
               </button>

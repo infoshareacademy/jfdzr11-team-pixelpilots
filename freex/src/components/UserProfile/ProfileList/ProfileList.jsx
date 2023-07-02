@@ -7,7 +7,7 @@ const ProfileList = ({ className, header, listData }) => {
   return (
     <ProfileCard className={className}>
       <h4 className={styles.list_header}>{header}</h4>
-      <ul>
+      <ul className={styles.list}>
         {listData.map((item) => (
           <ProfileListItem
             key={uuid()}

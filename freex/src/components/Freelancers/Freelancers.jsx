@@ -33,7 +33,7 @@ const Freelancers = () => {
             opinionsNumber={user.opinionsNumber}
             description={user.description}
             hourlyRate={user.hourlyRate}
-            joiningDate={user.joingDate}
+            joiningDate={user.joiningDate}
           ></GeneralInfo>
         </li>
       ))}
