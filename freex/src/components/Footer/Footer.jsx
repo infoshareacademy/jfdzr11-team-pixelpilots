@@ -18,7 +18,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <p>Pixel-Pilot develop team:</p>
+        <p className={styles.autor}>Pixel-Pilot develop team:</p>
         <a href="https://github.com/aleksandra-roguszewska">
           Aleskandra Roguszewska
         </a>
