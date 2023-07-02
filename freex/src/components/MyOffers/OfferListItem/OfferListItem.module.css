@@ -1,0 +1,45 @@
+.offer_list_item,
+.headers {
+  display: flex;
+  align-items: center;
+  max-width: 832px;
+  border-bottom: 1px solid black;
+  padding: 1rem 0;
+}
+
+.offer_list_item {
+  border-bottom: 1px solid #e8e9ec;
+}
+
+.headers p {
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+.offer_list_item p {
+  font-size: 0.875rem;
+}
+
+.title {
+  width: 36%;
+}
+
+.publish_date {
+  width: 20%;
+  text-align: center;
+}
+
+.end_date {
+  width: 25%;
+  text-align: center;
+}
+
+.cost {
+  width: 18%;
+  text-align: center;
+}
+
+.status {
+  width: 18%;
+  text-align: center;
+}

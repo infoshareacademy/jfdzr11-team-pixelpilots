@@ -1,0 +1,15 @@
+.filter_button {
+  padding: 0 20px;
+  height: 30px;
+  background-color: #cceeff;
+  border-radius: 4px;
+  border: 1px solid #80d4ff;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.filter_button:hover {
+  background-color: var(--clr-base-lighter-blue);
+  cursor: pointer;
+}

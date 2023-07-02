@@ -1,0 +1,29 @@
+.search_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 347px;
+  height: 37px;
+  background-color: #f2f3f3;
+  border-radius: 3px;
+  border-bottom: 1px solid black;
+  margin: 3rem auto;
+}
+
+.search_bar_input {
+  border: none;
+  background-color: transparent;
+  height: 100%;
+  width: 90%;
+  padding-left: 5px;
+}
+
+.search_bar_button {
+  background-image: url('../../../../public/MyOffers/search_icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+  border: none;
+  margin-right: 5px;
+}
