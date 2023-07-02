@@ -33,7 +33,7 @@ const Login = () => {
       {!currentUser ? (
         <div className={styles.container}>
           <div className={styles.left}>
-            <img src="./Login/welcomeback.png"></img>
+            <img src="./Login/login_photo.png"></img>
           </div>
           <div className={styles.right}>
             <h1>Witaj ponownie!</h1>

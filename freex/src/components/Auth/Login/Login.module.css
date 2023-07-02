@@ -1,7 +1,4 @@
-Marking files as viewed can help keep track of your progress,
-but will not affect your submitted reviewViewed Comment on this file @@ -0,
-0 + 1,
-74 @@ .container {
+.container {
   display: grid;
   margin-top: 6rem;
   grid-template-areas: "left right";
