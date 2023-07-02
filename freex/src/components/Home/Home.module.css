@@ -36,13 +36,11 @@
 }
 
 .homebtn:hover {
-  /* background-color: var(--clr-violet-hover); */
   color: #006699;
   cursor: pointer;
 }
 
 .homebtn:active {
-  background-color: var(--clr-violet-active);
 }
 
 h1 {
