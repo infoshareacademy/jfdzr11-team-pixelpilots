@@ -1,7 +1,7 @@
 .card {
 	color: #000000;
 	padding: 2rem 3rem;
-	border: 3px solid var(--clr-medium-grey-300);
+	border: 3px solid var(--clr-dark-blue);
 	border-radius: 20px;
 	margin-top: 4rem;
 	transition: all 0.3s ease;
@@ -23,6 +23,7 @@
 	font-size: 0.9rem;
 	display: flex;
 	flex-direction: column;
+	align-items: end;
 }
 
 .priceWrapper strong {
@@ -49,6 +50,7 @@
 	text-align: center;
 	font-size: 0.75rem;
 	background-color: #f2f3f3;
+	color: #4b525b;
 }
 
 .card p {

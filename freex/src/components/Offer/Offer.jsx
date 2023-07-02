@@ -10,7 +10,6 @@ const Offer = () => {
 
 	const [offer, setOffer] = useState([]);
 
-	console.log(zlecenieId);
 	const getOffer = async () => {
 		try {
 			const docRef = doc(db, 'offers', zlecenieId);
@@ -21,7 +20,7 @@ const Offer = () => {
 				toast.error('Nie ma takiego zlecenia');
 			}
 		} catch (error) {
-			console.error(error);
+			toast.error('Nie udało się pobrać zlecenia');
 		}
 	};
 
