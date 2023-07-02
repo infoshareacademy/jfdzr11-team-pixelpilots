@@ -14,9 +14,9 @@ const Home = () => {
         //powrót do strony głównej//
         <>
           <div className={styles.left}>
-            <h1>
-              Załóż konto już dziś i dołącz do społeczności profesjonalistów
-            </h1>
+            <h1>Załóż konto już dziś</h1>
+            <h1>i dołącz do społeczności</h1>
+            <h1>profesjonalistów</h1>
             <p>
               Nieważne, czy jesteś doświadczonym freelancerem, który szuka
               nowych możliwości i projektów, czy przedsiębiorcą dążącym do
