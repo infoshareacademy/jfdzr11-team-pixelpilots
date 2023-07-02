@@ -3,6 +3,7 @@ import styles from "./Login.module.css";
 import useAuth from "../../Context/AuthContext";
 import { toast } from "react-hot-toast";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
+import { PrimaryButton } from "../../index";
 
 const Login = () => {
   const { login, currentUser } = useAuth();
@@ -52,10 +53,12 @@ const Login = () => {
                 id="password"
                 placeholder="Wpisz hasło..."
               />
-              <button type="submit">Zaloguj się</button>
-            </form>
-            <p>
-              Nie masz konta?
+              <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
+              <div className={styles.separator}>
+                <div className={styles.line}></div>
+                <p>Nie masz konta?</p>
+                <div className={styles.line}></div>
+              </div>
               <button
                 className={styles.loginbutton}
                 onClick={() => {
@@ -63,7 +66,7 @@ const Login = () => {
                 }}>
                 Zarejestruj się
               </button>
-            </p>
+            </form>
           </div>
         </div>
       ) : location.state ? (
