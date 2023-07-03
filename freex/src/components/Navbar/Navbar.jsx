@@ -7,6 +7,8 @@ const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
+  const currentUserId = currentUser?.uid;
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.wrapper}>
@@ -52,7 +54,7 @@ const Navbar = () => {
               <button
                 className={styles.button_icon}
                 onClick={() => {
-                  navigate("/profil");
+                  navigate(`/profil/${currentUserId}`);
                 }}
               >
                 <img

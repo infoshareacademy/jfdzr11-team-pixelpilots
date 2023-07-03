@@ -115,6 +115,7 @@ const EditUserProfile = () => {
     );
 
     const updatedUser = {
+      id: currentUserID,
       userName: e.target.userName.value,
       email: e.target.email.value,
       role: e.target.role.value,

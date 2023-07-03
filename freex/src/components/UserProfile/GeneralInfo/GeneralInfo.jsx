@@ -1,8 +1,11 @@
 import ProfileCard from "../ProfileCard/ProfileCard";
 import styles from "./GeneralInfo.module.css";
+import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
 const GeneralInfo = ({
   name,
+  userId,
   role,
   imgURL,
   rating,
@@ -10,7 +13,10 @@ const GeneralInfo = ({
   description,
   hourlyRate,
   joiningDate,
+  isButton = false,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <ProfileCard className={styles.general_info}>
       <div className={styles.general_info_left}>
@@ -36,7 +42,18 @@ const GeneralInfo = ({
           <span>({opinionsNumber} opinii)</span>
         </div>
         <p className={styles.description}>{description}</p>
-        <div className={styles.button_wrapper}></div>
+        {isButton ? (
+          <div className={styles.button_wrapper}>
+            <PrimaryButton
+              className={styles.button}
+              onClick={() => {
+                navigate(`/freelancerzy/${userId}`);
+              }}
+            >
+              Szczegóły
+            </PrimaryButton>
+          </div>
+        ) : null}
       </div>
     </ProfileCard>
   );

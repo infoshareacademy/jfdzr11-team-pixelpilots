@@ -7,14 +7,15 @@ import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
 import useAuth from "../Context/AuthContext";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 
 const UserProfile = () => {
+  const { userId } = useParams();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
-  const docRef = doc(db, "users", currentUserID);
+  const docRef = doc(db, "users", userId);
 
   const [user, setUser] = useState(null);
 
@@ -58,18 +59,21 @@ const UserProfile = () => {
   } else {
     return (
       <>
-        <div className={styles.message_wrapper}>
-          <PrimaryButton
-            className={styles.message_button}
-            type="button"
-            onClick={editHandler}
-          >
-            Edytuj swoje dane
-          </PrimaryButton>
-          <p className={styles.message_caption}>
-            Dane, które dodasz do profilu, będą widoczne dla innych użytkowników
-          </p>
-        </div>
+        {currentUserID === userId && (
+          <div className={styles.message_wrapper}>
+            <PrimaryButton
+              className={styles.message_button}
+              type="button"
+              onClick={editHandler}
+            >
+              Edytuj swoje dane
+            </PrimaryButton>
+            <p className={styles.message_caption}>
+              Dane, które dodasz do profilu, będą widoczne dla innych
+              użytkowników
+            </p>
+          </div>
+        )}
 
         <div className={styles.user_profile}>
           <GeneralInfo
@@ -81,6 +85,7 @@ const UserProfile = () => {
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}
+            userId={user.Id}
           ></GeneralInfo>
 
           <Skills skills={user.skills}></Skills>

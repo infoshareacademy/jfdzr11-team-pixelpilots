@@ -26,6 +26,7 @@ const Freelancers = () => {
       {users.map((user) => (
         <li key={uuid()} className={styles.list_item}>
           <GeneralInfo
+            userId={user.id}
             name={user.userName}
             role={user.role}
             imgURL={user.imgURL}
@@ -34,6 +35,7 @@ const Freelancers = () => {
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}
+            isButton={true}
           ></GeneralInfo>
         </li>
       ))}
