@@ -1,0 +1,56 @@
+.heading {
+  font-size: 24px;
+}
+
+.list {
+  list-style: none;
+}
+
+.list_item {
+  margin: 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.rating {
+  margin-bottom: 0.75rem;
+}
+
+.h5 {
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+}
+
+.p {
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+}
+
+.skills {
+  margin-bottom: 9px;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.skill {
+  border: 1.5px solid var(--clr-base-darker-blue);
+  padding: 0.25rem 1rem;
+  border-radius: 8px;
+}
+
+.author_info {
+  display: flex;
+  align-items: center;
+}
+
+.caption {
+  font-size: 0.75rem;
+  margin-left: 16px;
+}
+
+.userImg {
+  height: 32px;
+  width: 32px;
+  margin-left: 16px;
+}

@@ -9,6 +9,7 @@ import useAuth from "../Context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
+import Opinions from "./Opinions/Opinions";
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -89,6 +90,8 @@ const UserProfile = () => {
           ></GeneralInfo>
 
           <Skills skills={user.skills}></Skills>
+
+          <Opinions className={styles.opinions} />
 
           <ProfileList
             className={styles.experience}
