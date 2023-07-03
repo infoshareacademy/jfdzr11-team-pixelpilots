@@ -15,15 +15,24 @@ const MyOffers = () => {
   const [userOffers, setUserOffers] = useState([]);
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState([]);
+  const [filter, setFilter] = useState('all');
 
-  const getFilteredItems = (searchPhrase, items) => {
-    const searched = items.filter((offer) =>
-      offer.title.toLowerCase().includes(search)
+  const getFilteredItems = (searchPhrase, filterClicked, items) => {
+    const searched = items.filter(
+      (offer) =>
+        offer.title.toLowerCase().includes(searchPhrase) &&
+        offer.status === filterClicked
     );
-    return searchPhrase ? searched : items;
+    if (filterClicked === 'all') {
+      return items;
+    } else if (searchPhrase || filterClicked) {
+      return searched;
+    } else {
+      return items;
+    }
   };
 
-  const filteredItems = getFilteredItems(search, userOffers);
+  const filteredItems = getFilteredItems(search, filter, userOffers);
 
   const handleClick = () => {
     setMenu(!menu);
@@ -69,7 +78,7 @@ const MyOffers = () => {
   return (
     <div className={styles.my_offers_wrapper}>
       <div className={styles.top_section}>
-        <FilterButtons />
+        <FilterButtons setFilter={setFilter} />
         <Sort
           sortByNewest={sortByNewest}
           sortByOldest={sortByOldest}
