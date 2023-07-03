@@ -1,9 +1,9 @@
 import OfferListItem from '../OfferListItem/OfferListItem';
 
-const OffersList = ({ userOffers }) => {
+const OffersList = ({ filteredItems }) => {
   return (
     <>
-      {userOffers.map((offer, idx) => {
+      {filteredItems.map((offer, idx) => {
         let cost = '';
         if (offer.payment_method === 'Jednorazowa płatność') {
           cost = offer.total_payment;

@@ -23,7 +23,7 @@ const Sort = ({ sortByNewest, sortByOldest, menu, setMenu, handleClick }) => {
           <img src="../../../../public/MyOffers/sort_icon.png" />
         </button>
       </div>
-      <div>
+      <div className={styles.manu_parent}>
         {menu ? (
           <PopUpMenu
             sortByNewest={sortByNewest}

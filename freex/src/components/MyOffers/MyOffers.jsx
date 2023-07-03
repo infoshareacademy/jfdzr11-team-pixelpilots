@@ -14,6 +14,16 @@ const MyOffers = () => {
   const { currentUser } = useAuth();
   const [userOffers, setUserOffers] = useState([]);
   const [menu, setMenu] = useState(false);
+  const [search, setSearch] = useState([]);
+
+  const getFilteredItems = (searchPhrase, items) => {
+    const searched = items.filter((offer) =>
+      offer.title.toLowerCase().includes(search)
+    );
+    return searchPhrase ? searched : items;
+  };
+
+  const filteredItems = getFilteredItems(search, userOffers);
 
   const handleClick = () => {
     setMenu(!menu);
@@ -68,9 +78,9 @@ const MyOffers = () => {
           handleClick={handleClick}
         />
       </div>
-      <SearchBar />
+      <SearchBar setSearch={setSearch} />
       <Headers />
-      <OffersList userOffers={userOffers} />
+      <OffersList filteredItems={filteredItems} />
     </div>
   );
 };
