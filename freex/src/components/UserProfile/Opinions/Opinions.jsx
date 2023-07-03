@@ -4,7 +4,7 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 import styles from "./Opinions.module.css";
 import { v4 as uuid } from "uuid";
 import Rating from "../../UI/Rating/Rating";
-import NewOpinion from "./NewOpinion/NewOpinion";
+import AddOpinion from "./AddOpinion/AddOpinion";
 
 const Opinions = ({ className }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -67,7 +67,7 @@ const Opinions = ({ className }) => {
           Dodaj swoją opinię
         </PrimaryButton>
       ) : (
-        <NewOpinion setVisibility={setIsAdding} />
+        <AddOpinion setVisibility={setIsAdding} />
       )}
     </ProfileCard>
   );

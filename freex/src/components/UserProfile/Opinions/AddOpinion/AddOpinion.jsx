@@ -1,8 +1,14 @@
 import PrimaryButton from "../../../UI/PrimaryButton/PrimaryButton";
 import SecondaryButton from "../../../UI/SecondaryButton/SecondaryButton";
-import styles from "./NewOpinion.module.css";
+import styles from "./AddOpinion.module.css";
+import Skills from "../../../AddOffer/Skills/Skills";
+import { useState } from "react";
+import skillsData from "../../../AddOffer/Skills/skills.json";
 
-const NewOpinion = ({ setVisibility }) => {
+const AddOpinion = ({ setVisibility }) => {
+  const [skills, setSkills] = useState(skillsData);
+  const [chosenSkills, setChosenSkills] = useState([]);
+
   return (
     <div className={styles.wrapper}>
       <h4 className={styles.heading}>Dodaj opinię</h4>
@@ -16,9 +22,14 @@ const NewOpinion = ({ setVisibility }) => {
           className={styles.textarea}
           placeholder="Twoja opinia"
         ></textarea>
-        <input
-          className={styles.input}
-          placeholder="Umiejętności wykorzystane przy zrealizowaniu zadania"
+        <p className={styles.legend}>
+          Wybierz umiejętności wykorzystane podczas realizacji zadania
+        </p>
+        <Skills
+          chosenSkills={chosenSkills}
+          setChosenSkills={setChosenSkills}
+          skills={skills}
+          setSkills={setSkills}
         />
         <div className={styles.buttons_container}>
           <PrimaryButton className={styles.button}>Dodaj opinię</PrimaryButton>
@@ -37,4 +48,4 @@ const NewOpinion = ({ setVisibility }) => {
   );
 };
 
-export default NewOpinion;
+export default AddOpinion;
