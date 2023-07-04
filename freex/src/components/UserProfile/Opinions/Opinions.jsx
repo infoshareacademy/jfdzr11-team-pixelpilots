@@ -6,37 +6,15 @@ import { v4 as uuid } from "uuid";
 import Rating from "../../UI/Rating/Rating";
 import AddOpinion from "./AddOpinion/AddOpinion";
 
-const Opinions = ({ className }) => {
+const Opinions = ({ className, currentUser }) => {
   const [isAdding, setIsAdding] = useState(false);
 
-  const opinions = [
-    {
-      title: "Audyt UX i przeprojektowanie strony",
-      rating: 3.5,
-      description:
-        "Ewa zapewnia dobrą jakość pracy i bardzo dobry kontakt. Koszt jest trochę wyższy, ale Ewa rekompensuje to jakością. Dziękuję.",
-      skills: ["Audyt UX", "Badania UX", "Badania UX"],
-      author: "Janusz Przedsiębiorczy",
-      dateAdded: "10.10.2022",
-      imgUrl: "../../../../UserProfile/user_img.jpg",
-    },
-    {
-      title: "Audyt UX i przeprojektowanie strony",
-      rating: 5.0,
-      description:
-        "Ewa zapewnia dobrą jakość pracy i bardzo dobry kontakt. Koszt jest trochę wyższy, ale Ewa rekompensuje to jakością. Dziękuję. Ewa zapewnia dobrą jakość pracy i bardzo dobry kontakt. Koszt jest trochę wyższy, ale Ewa rekompensuje to jakością. Dziękuję.",
-      skills: ["Audyt UX", "Badania UX", "Badania UX"],
-      author: "Janusz Przedsiębiorczy",
-      dateAdded: "10.10.2022",
-      imgUrl: "../../../../UserProfile/user_img.jpg",
-    },
-  ];
-
+  const opinions = currentUser.opinions;
   return (
     <ProfileCard className={className}>
       <h4 className={styles.heading}>Opinie</h4>
       <ul className={styles.list}>
-        {opinions.map((item) => {
+        {opinions?.map((item) => {
           return (
             <li key={uuid()} className={styles.list_item}>
               <Rating

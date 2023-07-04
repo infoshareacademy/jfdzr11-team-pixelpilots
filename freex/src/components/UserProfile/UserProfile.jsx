@@ -91,7 +91,7 @@ const UserProfile = () => {
 
           <Skills skills={user.skills}></Skills>
 
-          <Opinions className={styles.opinions} />
+          <Opinions className={styles.opinions} currentUser={user} />
 
           <ProfileList
             className={styles.experience}
