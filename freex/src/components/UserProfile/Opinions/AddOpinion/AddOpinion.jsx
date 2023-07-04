@@ -53,6 +53,7 @@ const AddOpinion = ({ setVisibility }) => {
       dateAdded: formattedDate,
       imgUrl: userData.imgURL,
       id: uuid(),
+      authorId: userData.id,
     };
 
     const docSnap = await getDoc(userProfileDocRef);

@@ -92,7 +92,11 @@ const UserProfile = () => {
 
           <Skills skills={user.skills}></Skills>
 
-          <Opinions className={styles.opinions} currentUser={user} />
+          <Opinions
+            className={styles.opinions}
+            currentUserData={user}
+            setUser={setUser}
+          />
 
           <ProfileList
             className={styles.experience}

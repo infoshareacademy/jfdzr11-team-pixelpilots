@@ -23,11 +23,11 @@
 
 .p {
   font-size: 0.875rem;
-  margin-bottom: 20px;
+  margin-bottom: 0.5rem;
 }
 
 .skills {
-  margin-bottom: 9px;
+  margin-bottom: 0.75rem;
   list-style: none;
   display: flex;
   gap: 1rem;
@@ -53,4 +53,13 @@
   height: 32px;
   width: 32px;
   margin-left: 16px;
+  border-radius: 16px;
+}
+
+.button {
+  margin-top: 1rem;
+}
+
+.secondary_button {
+  margin: 1rem 0 0.5rem;
 }
