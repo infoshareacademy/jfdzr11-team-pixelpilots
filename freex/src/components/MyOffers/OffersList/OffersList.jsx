@@ -19,6 +19,7 @@ const OffersList = ({ filteredItems }) => {
 
         return (
           <OfferListItem
+            offerId={offer.offer_number}
             key={idx}
             projectTitle={offer.title}
             publishDate={dateFormat}
