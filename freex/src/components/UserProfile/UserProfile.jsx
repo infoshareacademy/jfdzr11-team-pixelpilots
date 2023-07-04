@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import ContactUser from "./ContactUser/ContactUser";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
@@ -21,7 +21,7 @@ const UserProfile = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    getDoc(docRef).then((docSnap) => {
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
         const userData = docSnap.data();
         setUser(userData);
@@ -29,6 +29,7 @@ const UserProfile = () => {
         setUser(null);
       }
     });
+    return () => unsubscribe();
   }, []);
 
   const editHandler = () => {
