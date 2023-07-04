@@ -22,7 +22,7 @@
 .form label {
 	cursor: pointer;
 	background-color: var(--clr-primary-white);
-	padding: 0.75rem;
+	padding: 0.5rem 1rem;
 	border: 1px solid var(--clr-base-darker-blue);
 	border-radius: 4px;
 	display: table-cell;
@@ -45,7 +45,7 @@
 }
 
 .card {
-	padding: 2rem 18rem 2rem 4rem;
+	padding: 2rem 20rem 2rem 4rem;
 	position: relative;
 	border-radius: 20px;
 	margin-top: 2rem;
@@ -59,7 +59,7 @@
 }
 
 .card strong {
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	position: absolute;
 	top: 2rem;
 	right: 4rem;
