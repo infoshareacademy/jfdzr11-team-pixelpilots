@@ -18,18 +18,11 @@ const MyOffers = () => {
   const [filter, setFilter] = useState('all');
 
   const getFilteredItems = (searchPhrase, filterClicked, items) => {
-    const searched = items.filter(
-      (offer) =>
-        offer.title.toLowerCase().includes(searchPhrase) &&
-        offer.status === filterClicked
+    const searched = items.filter((offer) =>
+      offer.title.toLowerCase().includes(searchPhrase)
     );
-    if (filterClicked === 'all') {
-      return items;
-    } else if (searchPhrase || filterClicked) {
-      return searched;
-    } else {
-      return items;
-    }
+    const filtered = searched.filter((offer) => offer.status === filterClicked);
+    return filterClicked !== 'all' ? filtered : searched;
   };
 
   const filteredItems = getFilteredItems(search, filter, userOffers);
