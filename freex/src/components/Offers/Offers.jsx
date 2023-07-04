@@ -11,22 +11,7 @@ import {
 import styles from './Offers.module.css';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-
-const skills = [
-	'Projektowanie graficzne',
-	'UI / User Interface',
-	'UX / User Experience',
-	'UX research',
-	'UX writing',
-	'Tworzenie logo',
-	'Responsywne projektowanie',
-	'Tworzenie stron internetowych',
-	'Aplikacja mobilna',
-	'Aplikacja webowa',
-	'Photoshop',
-	'Figma',
-	'Adobe XD',
-];
+import { skillBase } from '../../utils/skillBase';
 
 const Offers = () => {
 	const [offers, setOffers] = useState([]);
@@ -84,7 +69,7 @@ const Offers = () => {
 					onChange={(e) => filteredOffers(e.target.value)}
 				/>
 				<label htmlFor="all">Wyświetl wszystkie</label>
-				{skills.map((skill) => (
+				{skillBase.map((skill) => (
 					<Fragment key={skill}>
 						<input
 							type="radio"
