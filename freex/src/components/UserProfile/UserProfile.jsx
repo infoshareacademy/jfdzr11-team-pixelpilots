@@ -1,4 +1,4 @@
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import ContactUser from "./ContactUser/ContactUser";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
@@ -19,6 +19,14 @@ const UserProfile = () => {
   const docRef = doc(db, "users", userId);
 
   const [user, setUser] = useState(null);
+
+  const opinionsNumber = Number(user?.opinions?.length);
+  const ratingSum = user?.opinions?.reduce(
+    (accumulator, currentObject) =>
+      Number(accumulator) + Number(currentObject.rating),
+    0
+  );
+  const averageRating = (ratingSum / opinionsNumber).toFixed(2);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
@@ -82,8 +90,10 @@ const UserProfile = () => {
             name={user.userName}
             role={user.role}
             imgURL={user.imgURL}
-            rating={user.rating}
-            opinionsNumber={user.opinionsNumber}
+            rating={
+              averageRating && !isNaN(averageRating) ? averageRating : "0.00"
+            }
+            opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}

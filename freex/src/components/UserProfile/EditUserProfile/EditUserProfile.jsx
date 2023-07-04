@@ -120,8 +120,6 @@ const EditUserProfile = () => {
       email: e.target.email.value,
       role: e.target.role.value,
       imgURL: profileImgUrl ? profileImgUrl : user.imgURL,
-      rating: 0,
-      opinionsNumber: 0,
       hourlyRate: e.target.hourlyRate.value,
       joiningDate: userCreationDate,
       description: e.target.description.value,
