@@ -58,23 +58,6 @@
   font-size: 0.875rem;
 }
 
-.hidden_input {
-  display: none;
-}
-
-.custom_button {
-  display: inline-block;
-  color: var(--clr-light-grey-200);
-  background-color: var(--clr-base-darker-blue);
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  font-family: "Nunito Sans", sans-serif;
-  cursor: pointer;
-  margin: 1rem 0;
-  font-size: 0.875rem;
-}
-
 .textarea {
   width: 100%;
   height: 120px;
@@ -91,14 +74,14 @@
 }
 
 .button {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   cursor: pointer;
   display: block;
 }
 
 .list {
   list-style: none;
+  width: 100%;
 }
 
 .listItem {
@@ -106,4 +89,21 @@
   padding: 1rem;
   margin-bottom: 2rem;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.remove_button {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  display: block;
+  align-self: flex-end;
+}
+
+.button_wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
 }

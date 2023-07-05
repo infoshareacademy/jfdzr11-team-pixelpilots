@@ -17,11 +17,13 @@ import {
 } from "firebase/storage";
 import { getUserCreationDate } from "./getUserCreationDate";
 import SecondaryButton from "../../UI/SecondaryButton/SecondaryButton";
+import Loader from "../../UI/Loader/Loader";
 
 const EditUserProfile = () => {
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
   const userCreationDate = getUserCreationDate(currentUser);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -49,6 +51,7 @@ const EditUserProfile = () => {
       } else {
         setUser(null);
       }
+      setIsLoading(false);
     });
   }, []);
 
@@ -223,6 +226,9 @@ const EditUserProfile = () => {
     ]);
   };
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
   return (
     <ProfileCard className={styles.wrapper}>
       <h4 className={styles.heading}>Edytuj profil użytkownika</h4>
@@ -313,7 +319,7 @@ const EditUserProfile = () => {
             className={styles.button}
             onClick={addExperienceFields}
           >
-            Add More..
+            Dodaj kolejną pozycję
           </PrimaryButton>
 
           <ul className={styles.list}>
@@ -372,12 +378,12 @@ const EditUserProfile = () => {
                     name="logo"
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
                   />
-                  <PrimaryButton
-                    className={styles.button}
+                  <SecondaryButton
+                    className={styles.remove_button}
                     onClick={(event) => removeExperienceItem(event, item.id)}
                   >
                     Usuń
-                  </PrimaryButton>
+                  </SecondaryButton>
                 </li>
               );
             })}
@@ -387,7 +393,7 @@ const EditUserProfile = () => {
         <fieldset className={styles.form_fieldset}>
           <legend className={styles.legend}>Edukacja / Kwalifikacje</legend>
           <PrimaryButton className={styles.button} onClick={addEducationFields}>
-            Add More..
+            Dodaj kolejną pozycję
           </PrimaryButton>
 
           <ul className={styles.list}>
@@ -446,26 +452,27 @@ const EditUserProfile = () => {
                     name="logo"
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
                   />
-                  <PrimaryButton
-                    className={styles.button}
+                  <SecondaryButton
+                    className={styles.remove_button}
                     onClick={(event) => removeEducationItem(event, item.id)}
                   >
                     Usuń
-                  </PrimaryButton>
+                  </SecondaryButton>
                 </li>
               );
             })}
           </ul>
         </fieldset>
-
-        <PrimaryButton className={styles.button}>Zapisz zmiany</PrimaryButton>
-        <SecondaryButton
-          className={styles.button}
-          type="button"
-          onClick={() => navigate(`/profil/${currentUserID}`)}
-        >
-          Cofnij
-        </SecondaryButton>
+        <div className={styles.button_wrapper}>
+          <PrimaryButton className={styles.button}>Zapisz zmiany</PrimaryButton>
+          <SecondaryButton
+            className={styles.button}
+            type="button"
+            onClick={() => navigate(`/profil/${currentUserID}`)}
+          >
+            Cofnij
+          </SecondaryButton>
+        </div>
       </form>
     </ProfileCard>
   );
