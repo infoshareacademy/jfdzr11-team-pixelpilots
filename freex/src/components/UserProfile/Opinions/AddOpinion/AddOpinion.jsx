@@ -9,6 +9,7 @@ import useAuth from "../../../Context/AuthContext";
 import { db } from "../../../../config/firebase";
 import { v4 as uuid } from "uuid";
 import { useParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const AddOpinion = ({ setVisibility }) => {
   const [skills, setSkills] = useState(skillsData);
@@ -56,15 +57,20 @@ const AddOpinion = ({ setVisibility }) => {
       authorId: userData.id,
     };
 
-    const docSnap = await getDoc(userProfileDocRef);
-    const docData = docSnap.data();
+    try {
+      const docSnap = await getDoc(userProfileDocRef);
+      const docData = docSnap.data();
 
-    const updatedOpinions = docData.opinions
-      ? [...docData.opinions, newOpinion]
-      : [newOpinion];
+      const updatedOpinions = docData.opinions
+        ? [...docData.opinions, newOpinion]
+        : [newOpinion];
 
-    await updateDoc(userProfileDocRef, { opinions: updatedOpinions });
-    setVisibility(false);
+      await updateDoc(userProfileDocRef, { opinions: updatedOpinions });
+      setVisibility(false);
+      toast.success("Dodano opinie o użytkowniku");
+    } catch (error) {
+      toast.error("Pojawił się błąd:", error);
+    }
   };
 
   return (

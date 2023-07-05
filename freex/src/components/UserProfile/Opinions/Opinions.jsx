@@ -70,16 +70,17 @@ const Opinions = ({ className, currentUserData, setUser }) => {
           );
         })}
       </ul>
-      {!isAdding ? (
-        <PrimaryButton
-          className={styles.button}
-          onClick={() => setIsAdding(true)}
-        >
-          Dodaj swoją opinię
-        </PrimaryButton>
-      ) : (
-        <AddOpinion setVisibility={setIsAdding} />
-      )}
+      {currentUserId !== userId &&
+        (!isAdding ? (
+          <PrimaryButton
+            className={styles.button}
+            onClick={() => setIsAdding(true)}
+          >
+            Dodaj swoją opinię
+          </PrimaryButton>
+        ) : (
+          <AddOpinion setVisibility={setIsAdding} />
+        ))}
     </ProfileCard>
   );
 };
