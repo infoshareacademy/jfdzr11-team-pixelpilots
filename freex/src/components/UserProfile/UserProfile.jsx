@@ -47,7 +47,7 @@ const UserProfile = () => {
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
-  if (!user) {
+  if (!user && currentUserID === userId) {
     return (
       <div className={styles.message_wrapper}>
         <p></p>
@@ -96,7 +96,7 @@ const UserProfile = () => {
             userId={user.Id}
           ></GeneralInfo>
 
-          <Skills skills={user.skills}></Skills>
+          {user.skills?.length !== 0 && <Skills skills={user.skills}></Skills>}
 
           <Opinions
             className={styles.opinions}
@@ -104,18 +104,21 @@ const UserProfile = () => {
             setUser={setUser}
           />
 
-          <ProfileList
-            className={styles.experience}
-            listData={user.experience}
-            header="Doświadczenie"
-          />
+          {user.experience?.length !== 0 && (
+            <ProfileList
+              className={styles.experience}
+              listData={user.experience}
+              header="Doświadczenie"
+            />
+          )}
 
-          <ProfileList
-            className={styles.education}
-            listData={user.education}
-            header="Edukacja / Kwalifikacje"
-          />
-
+          {user.education?.length !== 0 && (
+            <ProfileList
+              className={styles.education}
+              listData={user.education}
+              header="Edukacja / Kwalifikacje"
+            />
+          )}
           <ContactUser />
         </div>
       </>
