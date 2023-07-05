@@ -271,6 +271,9 @@ const EditUserProfile = () => {
             defaultValue={user ? user.hourlyRate : ""}
             required
           />
+          <label className={styles.input_label} htmlFor="logo">
+            Dodaj zdjęcie profilowe
+          </label>
           <input
             className={styles.file_input}
             type="file"
@@ -374,6 +377,9 @@ const EditUserProfile = () => {
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
                     defaultValue={item.end ? item.end : ""}
                   />
+                  <label className={styles.input_label} htmlFor="logo">
+                    Dodaj logo
+                  </label>
                   <input
                     className={styles.file_input}
                     type="file"
@@ -449,6 +455,9 @@ const EditUserProfile = () => {
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
                     defaultValue={item.end ? item.end : ""}
                   />
+                  <label className={styles.input_label} htmlFor="logo">
+                    Dodaj logo
+                  </label>
                   <input
                     className={styles.file_input}
                     type="file"
