@@ -4,9 +4,11 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { v4 as uuid } from "uuid";
 import styles from "./Freelancers.module.css";
+import Loader from "../UI/Loader/Loader";
 
 const Freelancers = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const collectionRef = collection(db, "users");
 
   useEffect(() => {
@@ -18,9 +20,13 @@ const Freelancers = () => {
       )
       .then((data) => {
         setUsers(data);
+        setIsLoading(false);
       });
   }, []);
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
   return (
     <ul className={styles.list}>
       {users.map((user) => (

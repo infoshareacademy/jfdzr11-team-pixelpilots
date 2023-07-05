@@ -17,8 +17,6 @@ const GeneralInfo = ({
 }) => {
   const navigate = useNavigate();
 
-  console.log(opinions);
-
   const opinionsNumber = Number(opinions?.length);
   const ratingSum = opinions?.reduce(
     (accumulator, currentObject) =>

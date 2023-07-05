@@ -14,11 +14,12 @@ import Loader from "../UI/Loader/Loader";
 
 const UserProfile = () => {
   const { userId } = useParams();
-  const navigate = useNavigate();
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
-  const [isLoading, setIsLoading] = useState(true);
 
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
