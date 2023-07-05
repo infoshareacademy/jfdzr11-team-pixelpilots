@@ -5,6 +5,7 @@ import { db } from "../../config/firebase";
 import { v4 as uuid } from "uuid";
 import styles from "./Freelancers.module.css";
 import Loader from "../UI/Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const Freelancers = () => {
   const [users, setUsers] = useState([]);
@@ -21,6 +22,10 @@ const Freelancers = () => {
       .then((data) => {
         setUsers(data);
         setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        toast.error("Pojawił się błąd. Spróbuj później. Eror " + e);
       });
   }, []);
 
