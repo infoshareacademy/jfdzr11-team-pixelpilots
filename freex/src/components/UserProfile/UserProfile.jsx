@@ -10,13 +10,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 import Opinions from "./Opinions/Opinions";
+import Loader from "../UI/Loader/Loader";
 
 const UserProfile = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
-  const docRef = doc(db, "users", userId);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [user, setUser] = useState(null);
 
@@ -29,6 +30,7 @@ const UserProfile = () => {
   const averageRating = (ratingSum / opinionsNumber).toFixed(2);
 
   useEffect(() => {
+    const docRef = doc(db, "users", userId);
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
         const userData = docSnap.data();
@@ -36,9 +38,11 @@ const UserProfile = () => {
       } else {
         setUser(null);
       }
+      setIsLoading(false);
     });
+
     return () => unsubscribe();
-  }, []);
+  }, [userId]);
 
   const editHandler = () => {
     navigate("/edytujprofil");
@@ -48,6 +52,9 @@ const UserProfile = () => {
     navigate("/edytujprofil");
   };
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
   if (!user) {
     return (
       <div className={styles.message_wrapper}>
