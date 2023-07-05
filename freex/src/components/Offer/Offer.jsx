@@ -18,7 +18,6 @@ const Offer = () => {
 			const docRef = doc(db, 'offers', zlecenieId);
 			const docSnap = await getDoc(docRef);
 			if (docSnap.exists()) {
-				setOffer(docSnap.data());
 				const offerData = docSnap.data();
 				setOffer(offerData);
 				setUserId(offerData.userId);
@@ -89,7 +88,7 @@ const Offer = () => {
 				</ul>
 				<p>{offer.description}</p>
 
-				<div>
+				<div className={styles.number}>
 					<span>Numer zlecenia: {offer?.offer_number}</span>
 				</div>
 			</div>
