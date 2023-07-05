@@ -16,6 +16,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { getUserCreationDate } from "./getUserCreationDate";
+import SecondaryButton from "../../UI/SecondaryButton/SecondaryButton";
 
 const EditUserProfile = () => {
   const { currentUser } = useAuth();
@@ -138,7 +139,7 @@ const EditUserProfile = () => {
     } else {
       await setDoc(docRef, updatedUser);
     }
-    navigate("/profil");
+    navigate(`/profil/${currentUserID}`);
   };
 
   const handleExperienceInputBlur = (e, id) => {
@@ -458,13 +459,13 @@ const EditUserProfile = () => {
         </fieldset>
 
         <PrimaryButton className={styles.button}>Zapisz zmiany</PrimaryButton>
-        <PrimaryButton
+        <SecondaryButton
           className={styles.button}
           type="button"
-          onClick={() => navigate("/profil")}
+          onClick={() => navigate(`/profil/${currentUserID}`)}
         >
           Cofnij
-        </PrimaryButton>
+        </SecondaryButton>
       </form>
     </ProfileCard>
   );
