@@ -5,12 +5,12 @@
 }
 
 .card {
-	min-width: 77%;
-	color: #000000;
-	padding: 2rem 3rem;
-	border: 3px solid var(--clr-dark-blue);
-	border-radius: 20px;
-	transition: all 0.3s ease;
+	width: 75%;
+	padding: 2rem 3rem 4rem;
+	border: 2px solid var(--clr-base-lighter-blue);
+	border-radius: 12px;
+	background-color: var(--clr-primary-white);
+	position: relative;
 }
 
 .heading {
@@ -23,6 +23,7 @@
 	font-size: 1.5rem;
 	color: #000000;
 	font-weight: 700;
+	color: #000000;
 }
 
 .priceWrapper {
@@ -35,6 +36,7 @@
 .priceWrapper strong {
 	font-size: 1.25rem;
 	justify-content: end;
+	color: #000000;
 }
 
 .card span {
@@ -63,4 +65,10 @@
 .card p {
 	margin-bottom: 1rem;
 	line-height: 1.25rem;
+}
+
+.number {
+	position: absolute;
+	bottom: 2rem;
+	left: 3rem;
 }
