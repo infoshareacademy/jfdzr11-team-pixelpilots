@@ -29,6 +29,7 @@
   justify-content: flex-start;
   border: none;
   margin: 1rem 0;
+  gap: 0.3rem;
 }
 
 .legend {
@@ -58,9 +59,31 @@
   font-size: 0.875rem;
 }
 
+.file_input {
+  margin-top: 0.3rem;
+}
+
+.file_input::file-selector-button {
+  color: var(--clr-light-grey-200);
+  background-color: var(--clr-base-darker-blue);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-family: "Nunito Sans", sans-serif;
+  transition: all 0.2s ease;
+  margin-right: 1rem;
+}
+
+.file_input::file-selector-button:hover {
+  color: var(--clr-base-darker-blue);
+  background-color: var(--clr-very-light-blue);
+  box-shadow: 0 0.2rem 0.4rem 0 #d9d9d9;
+  cursor: pointer;
+}
+
 .textarea {
   width: 100%;
-  height: 120px;
+  min-height: 120px;
   border: 1px solid #c2c2c2;
   border-radius: 4px;
   padding: 0.5rem;
@@ -71,6 +94,10 @@
 
 .textarea::placeholder {
   color: hsla(213, 14%, 25%, 0.8);
+}
+
+.description_label {
+  margin-top: 0.5rem;
 }
 
 .button {
@@ -92,7 +119,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .remove_button {

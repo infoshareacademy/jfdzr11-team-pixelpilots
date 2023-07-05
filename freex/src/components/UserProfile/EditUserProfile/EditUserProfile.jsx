@@ -271,12 +271,14 @@ const EditUserProfile = () => {
             defaultValue={user ? user.hourlyRate : ""}
             required
           />
+          <input
+            className={styles.file_input}
+            type="file"
+            id="profileImg"
+            name="profileImg"
+          />
 
-          <div className={styles.custom_file_input}>
-            <input type="file" id="profileImg" name="profileImg" />
-          </div>
-
-          <legend className={styles.input_label}>Opis</legend>
+          <legend className={styles.description_label}>Opis</legend>
           <textarea
             placeholder="Napisz coś o sobie. Możesz opisać lata doświadczenia, branżę lub umiejętności. Inni użytkownicy opisują też ich osiągnięcia lub doświadczenie z poprzednich miejsc pracy."
             className={styles.textarea}
@@ -373,6 +375,7 @@ const EditUserProfile = () => {
                     defaultValue={item.end ? item.end : ""}
                   />
                   <input
+                    className={styles.file_input}
                     type="file"
                     id="logo"
                     name="logo"
@@ -447,6 +450,7 @@ const EditUserProfile = () => {
                     defaultValue={item.end ? item.end : ""}
                   />
                   <input
+                    className={styles.file_input}
                     type="file"
                     id="logo"
                     name="logo"
