@@ -21,14 +21,6 @@ const UserProfile = () => {
 
   const [user, setUser] = useState(null);
 
-  const opinionsNumber = Number(user?.opinions?.length);
-  const ratingSum = user?.opinions?.reduce(
-    (accumulator, currentObject) =>
-      Number(accumulator) + Number(currentObject.rating),
-    0
-  );
-  const averageRating = (ratingSum / opinionsNumber).toFixed(2);
-
   useEffect(() => {
     const docRef = doc(db, "users", userId);
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
@@ -97,10 +89,7 @@ const UserProfile = () => {
             name={user.userName}
             role={user.role}
             imgURL={user.imgURL}
-            rating={
-              averageRating && !isNaN(averageRating) ? averageRating : "0.00"
-            }
-            opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
+            opinions={user.opinions}
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}

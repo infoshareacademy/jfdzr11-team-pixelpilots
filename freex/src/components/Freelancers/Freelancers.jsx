@@ -30,8 +30,7 @@ const Freelancers = () => {
             name={user.userName}
             role={user.role}
             imgURL={user.imgURL}
-            rating={user.rating}
-            opinionsNumber={user.opinionsNumber}
+            opinions={user.opinions}
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}

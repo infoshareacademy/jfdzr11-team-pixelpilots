@@ -58,16 +58,7 @@
 }
 
 .rating {
-  display: flex;
-  padding-bottom: 16px;
-}
-
-.rating_stars {
-  padding-right: 5px;
-}
-
-.rating_number {
-  padding-right: 5px;
+  margin-bottom: 1rem;
 }
 
 .description {
