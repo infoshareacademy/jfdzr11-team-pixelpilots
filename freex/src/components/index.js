@@ -16,26 +16,28 @@ import Favorites from './Favorites/Favorites';
 import UserProfile from './UserProfile/UserProfile';
 import PrimaryButton from './UI/PrimaryButton/PrimaryButton';
 import EditUserProfile from './UserProfile/EditUserProfile/EditUserProfile';
+import MyOfferDetails from './MyOfferDetails/MyOfferDetails.jsx';
 import Chips from './UI/Chips/Chips';
 
 export {
-	Home,
-	Navbar,
-	Footer,
-	Layout,
-	Login,
-	Register,
-	MainPanel,
-	MyOffers,
-	AddOffer,
-	Freelancers,
-	Offers,
-	PrivateRoute,
-	Cards,
-	InvalidAddress,
-	Favorites,
-	UserProfile,
-	PrimaryButton,
-	EditUserProfile,
-	Chips,
+  Home,
+  Navbar,
+  Footer,
+  Layout,
+  Login,
+  Register,
+  MainPanel,
+  MyOffers,
+  AddOffer,
+  Freelancers,
+  Offers,
+  PrivateRoute,
+  Cards,
+  InvalidAddress,
+  Favorites,
+  UserProfile,
+  PrimaryButton,
+  EditUserProfile,
+  MyOfferDetails,
+  Chips,
 };

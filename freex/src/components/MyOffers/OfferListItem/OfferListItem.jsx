@@ -1,8 +1,21 @@
 import styles from './OfferListItem.module.css';
+import { useNavigate } from 'react-router-dom';
 
-const OferListItem = ({ projectTitle, publishDate, endDate, cost, status }) => {
+const OferListItem = ({
+  projectTitle,
+  publishDate,
+  endDate,
+  cost,
+  status,
+  offerId,
+}) => {
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.offer_list_item}>
+    <div
+      onClick={() => navigate(`/mojeoferty/${offerId}`)}
+      className={styles.offer_list_item}
+    >
       <p className={styles.title}>{projectTitle}</p>
       <p className={styles.publish_date}>{publishDate}</p>
       <p className={styles.end_date}>{endDate}</p>
