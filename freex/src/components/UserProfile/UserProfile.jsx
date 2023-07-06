@@ -1,16 +1,17 @@
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ContactUser from "./ContactUser/ContactUser";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProfileList from "./ProfileList/ProfileList";
 import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
 import useAuth from "../Context/AuthContext";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 import Opinions from "./Opinions/Opinions";
 import Loader from "../UI/Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -24,17 +25,21 @@ const UserProfile = () => {
 
   useEffect(() => {
     const docRef = doc(db, "users", userId);
-    const unsubscribe = onSnapshot(docRef, (docSnap) => {
-      if (docSnap.exists()) {
-        const userData = docSnap.data();
-        setUser(userData);
-      } else {
-        setUser(null);
-      }
-      setIsLoading(false);
-    });
+    try {
+      const unsubscribe = onSnapshot(docRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setUser(userData);
+        } else {
+          setUser(null);
+        }
+        setIsLoading(false);
+      });
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    } catch (e) {
+      toast.error("Pojawił się błąd. Spróbuj później. Error: " + e);
+    }
   }, [userId]);
 
   const editHandler = () => {

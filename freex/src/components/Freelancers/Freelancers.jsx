@@ -25,7 +25,7 @@ const Freelancers = () => {
       })
       .catch((e) => {
         setIsLoading(false);
-        toast.error("Pojawił się błąd. Spróbuj później. Eror " + e);
+        toast.error("Pojawił się błąd. Spróbuj później. Error " + e);
       });
   }, []);
 

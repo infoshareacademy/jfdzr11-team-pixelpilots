@@ -27,7 +27,6 @@ const Opinions = ({ className, currentUserData, setUser }) => {
     e.preventDefault();
     const filteredOpinions = opinions.filter((item) => item.id !== itemId);
     setUser({ ...currentUserData, opinions: filteredOpinions });
-    console.log(filteredOpinions);
     await updateDoc(userProfileDocRef, { opinions: filteredOpinions });
   };
 
