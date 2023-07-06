@@ -11,7 +11,7 @@ import {
 import styles from './Offers.module.css';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { skillBase } from '../../utils/skillBase';
+import { skills } from '../../utils/skills';
 
 const Offers = () => {
 	const [offers, setOffers] = useState([]);
@@ -69,7 +69,7 @@ const Offers = () => {
 					onChange={(e) => filteredOffers(e.target.value)}
 				/>
 				<label htmlFor="all">Wyświetl wszystkie</label>
-				{skillBase.map((skill) => (
+				{skills.map((skill) => (
 					<Fragment key={skill}>
 						<input
 							type="radio"
