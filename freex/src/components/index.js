@@ -17,6 +17,7 @@ import UserProfile from './UserProfile/UserProfile';
 import PrimaryButton from './UI/PrimaryButton/PrimaryButton';
 import EditUserProfile from './UserProfile/EditUserProfile/EditUserProfile';
 import MyOfferDetails from './MyOfferDetails/MyOfferDetails.jsx';
+import Chips from './UI/Chips/Chips';
 
 export {
   Home,
@@ -38,4 +39,5 @@ export {
   PrimaryButton,
   EditUserProfile,
   MyOfferDetails,
+  Chips,
 };

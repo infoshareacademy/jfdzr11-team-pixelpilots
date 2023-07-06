@@ -1,0 +1,30 @@
+.button {
+	background-color: var(--clr-primary-white);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--clr-base-darker-blue);
+	border-radius: 4px;
+	color: var(--clr-base-darker-blue);
+	font-size: 0.875rem;
+	font-family: inherit;
+	transition: all 0.2s ease;
+}
+
+.button:hover {
+	cursor: pointer;
+	background-color: var(--clr-very-light-blue);
+	color: var(--clr-base-darker-blue);
+	border: 1px solid var(--clr-base-darker-blue);
+}
+
+.button:active,
+.button:focus {
+	background-color: var(--clr-light-blue);
+	color: var(--clr-very-dark-blue);
+	border: 1px solid var(--clr-base-darker-blue);
+}
+
+.button:disabled {
+	color: #4b525b;
+	border: 1px solid #4b525b;
+	background-color: #f2f3f3;
+}
