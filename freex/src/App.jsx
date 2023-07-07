@@ -36,10 +36,10 @@ function App() {
           <Route path="/mojeoferty/:ofertaid" element={<MyOfferDetails />} />
           <Route path="/dodajoferte" element={<AddOffer />} />
           <Route path="/freelancerzy" element={<Freelancers />} />
-          <Route path="/zlecenia/zlecenie/:zlecenieId" element={<Offer />} />
+          <Route path="/freelancerzy/:userId" element={<UserProfile />} />
           <Route path="/zlecenia" element={<Offers />} />
           <Route path="/zlecenia/zlecenie/:zlecenieId" element={<Offer />} />
-          <Route path="/profil" element={<UserProfile />} />
+          <Route path="/profil/:userId" element={<UserProfile />} />
           <Route path="/edytujprofil" element={<EditUserProfile />} />
           <Route path="/ulubione" element={<Favorites />} />
         </Route>
