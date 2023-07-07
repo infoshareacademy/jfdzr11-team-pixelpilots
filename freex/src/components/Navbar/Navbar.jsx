@@ -18,7 +18,6 @@ const Navbar = () => {
           </NavLink>
           {!currentUser ? null : (
             <>
-              <NavbarLink linkURL="/panelglowny">Panel główny</NavbarLink>
               <NavbarLink linkURL="/mojeoferty">Moje oferty</NavbarLink>
               <NavbarLink linkURL="/dodajoferte">Dodaj ofertę</NavbarLink>
               <NavbarLink linkURL="/freelancerzy">
@@ -79,7 +78,7 @@ const Navbar = () => {
                   navigate("/register");
                 }}
               >
-                Zarejetruj się
+                Zarejestruj się
               </button>
             </>
           )}

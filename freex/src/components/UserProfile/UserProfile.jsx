@@ -24,6 +24,7 @@ const UserProfile = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const docRef = doc(db, "users", userId);
     try {
       const unsubscribe = onSnapshot(docRef, (docSnap) => {

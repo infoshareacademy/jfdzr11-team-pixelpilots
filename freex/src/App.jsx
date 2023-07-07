@@ -31,7 +31,6 @@ function App() {
 
         {/* Ściezki prywatne */}
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/panelglowny" element={<MainPanel />} />
           <Route path="/mojeoferty" element={<MyOffers />} />
           <Route path="/mojeoferty/:ofertaid" element={<MyOfferDetails />} />
           <Route path="/dodajoferte" element={<AddOffer />} />
