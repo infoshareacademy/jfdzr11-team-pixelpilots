@@ -1,8 +1,8 @@
 .button {
-  color: var(--clr-light-grey-200);
-  background-color: var(--clr-base-darker-blue);
+  color: var(--clr-base-darker-blue);
+  background-color: transparent;
   padding: 0.75rem 1.5rem;
-  border: none;
+  border: 1.5px solid var(--clr-base-darker-blue);
   border-radius: 4px;
   font-family: "Nunito Sans", sans-serif;
   transition: all 0.2s ease;

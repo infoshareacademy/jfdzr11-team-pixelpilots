@@ -1,12 +1,6 @@
 import skillsData from "../../AddOffer/Skills/skills.json";
 import { useNavigate } from "react-router-dom";
-import styles from "./EditUserProfile.module.css";
-import ProfileCard from "../ProfileCard/ProfileCard";
-import Skills from "../../AddOffer/Skills/Skills";
 import { v4 as uuid } from "uuid";
-import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import useAuth from "../../Context/AuthContext";
 import { db, storage } from "../../../config/firebase";
 import { useEffect, useState } from "react";
 import {
@@ -15,7 +9,17 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { getUserCreationDate } from "./getUserCreationDate";
+import styles from "./EditUserProfile.module.css";
+import ProfileCard from "../ProfileCard/ProfileCard";
+import Skills from "../../AddOffer/Skills/Skills";
+import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
+import useAuth from "../../Context/AuthContext";
+import SecondaryButton from "../../UI/SecondaryButton/SecondaryButton";
+import Loader from "../../UI/Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const EditUserProfile = () => {
   const { currentUser } = useAuth();
@@ -24,6 +28,8 @@ const EditUserProfile = () => {
 
   const navigate = useNavigate();
 
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [skills, setSkills] = useState(skillsData);
   const [chosenSkills, setChosenSkills] = useState([]);
   const [experienceInputFields, setExperienceInputFields] = useState([]);
@@ -34,9 +40,9 @@ const EditUserProfile = () => {
   const [educationLogosToBeDeleted, setEducationLogosTobeDeleted] = useState(
     []
   );
-  const [user, setUser] = useState(null);
 
   const docRef = doc(db, "users", currentUserID);
+
   useEffect(() => {
     getDoc(docRef).then((docSnap) => {
       if (docSnap.exists()) {
@@ -48,6 +54,7 @@ const EditUserProfile = () => {
       } else {
         setUser(null);
       }
+      setIsLoading(false);
     });
   }, []);
 
@@ -97,49 +104,56 @@ const EditUserProfile = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const profileImgUrl = await uploadFile(e);
+    try {
+      const profileImgUrl = await uploadFile(e);
 
-    await removeRedundantLogos(experienceLogosToBeDeleted);
-    await removeRedundantLogos(educationLogosToBeDeleted);
+      await removeRedundantLogos(experienceLogosToBeDeleted);
+      await removeRedundantLogos(educationLogosToBeDeleted);
 
-    await uploadLogos(
-      experienceInputFields,
-      "experience",
-      setExperienceInputFields
-    );
+      await uploadLogos(
+        experienceInputFields,
+        "experience",
+        setExperienceInputFields
+      );
 
-    await uploadLogos(
-      educationInputFields,
-      "education",
-      setEducationInputFields
-    );
+      await uploadLogos(
+        educationInputFields,
+        "education",
+        setEducationInputFields
+      );
 
-    const updatedUser = {
-      userName: e.target.userName.value,
-      email: e.target.email.value,
-      role: e.target.role.value,
-      imgURL: profileImgUrl ? profileImgUrl : user.imgURL,
-      rating: 0,
-      opinionsNumber: 0,
-      hourlyRate: e.target.hourlyRate.value,
-      joiningDate: userCreationDate,
-      description: e.target.description.value,
-      skills: chosenSkills,
-      experience: experienceInputFields,
-      education: educationInputFields,
-    };
+      const updatedUser = {
+        id: currentUserID,
+        userName: e.target.userName.value,
+        email: e.target.email.value,
+        role: e.target.role.value,
+        imgURL: profileImgUrl ? profileImgUrl : user.imgURL,
+        hourlyRate: e.target.hourlyRate.value,
+        joiningDate: userCreationDate,
+        description: e.target.description.value,
+        skills: chosenSkills,
+        experience: experienceInputFields,
+        education: educationInputFields,
+      };
 
-    const docRef = doc(db, "users", currentUserID);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const docData = docSnap.data();
-      if (docData !== updatedUser) {
-        await updateDoc(docRef, updatedUser);
+      const docRef = doc(db, "users", currentUserID);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const docData = docSnap.data();
+        if (docData !== updatedUser) {
+          await updateDoc(docRef, updatedUser);
+          toast.success("Wprowadzono zmiany w profilu użytkownika");
+        } else {
+          toast("Profil użytkownika pozostal bez zmian");
+        }
+      } else {
+        await setDoc(docRef, updatedUser);
+        toast.success("Wprowadzono zmiany w profilu użytkownika");
       }
-    } else {
-      await setDoc(docRef, updatedUser);
+      navigate(`/profil/${currentUserID}`);
+    } catch (e) {
+      toast.error("Wystąpił błąd. Error " + e);
     }
-    navigate("/profil");
   };
 
   const handleExperienceInputBlur = (e, id) => {
@@ -223,6 +237,9 @@ const EditUserProfile = () => {
     ]);
   };
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
   return (
     <ProfileCard className={styles.wrapper}>
       <h4 className={styles.heading}>Edytuj profil użytkownika</h4>
@@ -265,12 +282,17 @@ const EditUserProfile = () => {
             defaultValue={user ? user.hourlyRate : ""}
             required
           />
+          <label className={styles.input_label} htmlFor="logo">
+            Dodaj zdjęcie profilowe
+          </label>
+          <input
+            className={styles.file_input}
+            type="file"
+            id="profileImg"
+            name="profileImg"
+          />
 
-          <div className={styles.custom_file_input}>
-            <input type="file" id="profileImg" name="profileImg" />
-          </div>
-
-          <legend className={styles.input_label}>Opis</legend>
+          <legend className={styles.description_label}>Opis</legend>
           <textarea
             placeholder="Napisz coś o sobie. Możesz opisać lata doświadczenia, branżę lub umiejętności. Inni użytkownicy opisują też ich osiągnięcia lub doświadczenie z poprzednich miejsc pracy."
             className={styles.textarea}
@@ -313,7 +335,7 @@ const EditUserProfile = () => {
             className={styles.button}
             onClick={addExperienceFields}
           >
-            Add More..
+            Dodaj kolejną pozycję
           </PrimaryButton>
 
           <ul className={styles.list}>
@@ -366,18 +388,22 @@ const EditUserProfile = () => {
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
                     defaultValue={item.end ? item.end : ""}
                   />
+                  <label className={styles.input_label} htmlFor="logo">
+                    Dodaj logo
+                  </label>
                   <input
+                    className={styles.file_input}
                     type="file"
                     id="logo"
                     name="logo"
                     onBlur={(e) => handleExperienceInputBlur(e, item.id)}
                   />
-                  <PrimaryButton
-                    className={styles.button}
+                  <SecondaryButton
+                    className={styles.remove_button}
                     onClick={(event) => removeExperienceItem(event, item.id)}
                   >
                     Usuń
-                  </PrimaryButton>
+                  </SecondaryButton>
                 </li>
               );
             })}
@@ -387,7 +413,7 @@ const EditUserProfile = () => {
         <fieldset className={styles.form_fieldset}>
           <legend className={styles.legend}>Edukacja / Kwalifikacje</legend>
           <PrimaryButton className={styles.button} onClick={addEducationFields}>
-            Add More..
+            Dodaj kolejną pozycję
           </PrimaryButton>
 
           <ul className={styles.list}>
@@ -440,32 +466,37 @@ const EditUserProfile = () => {
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
                     defaultValue={item.end ? item.end : ""}
                   />
+                  <label className={styles.input_label} htmlFor="logo">
+                    Dodaj logo
+                  </label>
                   <input
+                    className={styles.file_input}
                     type="file"
                     id="logo"
                     name="logo"
                     onBlur={(e) => handleEducationInputBlur(e, item.id)}
                   />
-                  <PrimaryButton
-                    className={styles.button}
+                  <SecondaryButton
+                    className={styles.remove_button}
                     onClick={(event) => removeEducationItem(event, item.id)}
                   >
                     Usuń
-                  </PrimaryButton>
+                  </SecondaryButton>
                 </li>
               );
             })}
           </ul>
         </fieldset>
-
-        <PrimaryButton className={styles.button}>Zapisz zmiany</PrimaryButton>
-        <PrimaryButton
-          className={styles.button}
-          type="button"
-          onClick={() => navigate("/profil")}
-        >
-          Cofnij
-        </PrimaryButton>
+        <div className={styles.button_wrapper}>
+          <PrimaryButton className={styles.button}>Zapisz zmiany</PrimaryButton>
+          <SecondaryButton
+            className={styles.button}
+            type="button"
+            onClick={() => navigate(`/profil/${currentUserID}`)}
+          >
+            Cofnij
+          </SecondaryButton>
+        </div>
       </form>
     </ProfileCard>
   );

@@ -60,7 +60,8 @@ const Login = () => {
                 className={styles.loginbutton}
                 onClick={() => {
                   navigate("/register");
-                }}>
+                }}
+              >
                 Zarejestruj się
               </button>
             </p>
@@ -69,7 +70,7 @@ const Login = () => {
       ) : location.state ? (
         <Navigate to={location.state.from.pathname} />
       ) : (
-        <Navigate to="/panelglowny" />
+        <Navigate to="/" />
       )}
     </>
   );

@@ -4,9 +4,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { v4 as uuid } from "uuid";
 import styles from "./Freelancers.module.css";
+import Loader from "../UI/Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const Freelancers = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const collectionRef = collection(db, "users");
 
   useEffect(() => {
@@ -18,22 +21,31 @@ const Freelancers = () => {
       )
       .then((data) => {
         setUsers(data);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        toast.error("Pojawił się błąd. Spróbuj później. Error " + e);
       });
   }, []);
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
   return (
     <ul className={styles.list}>
       {users.map((user) => (
         <li key={uuid()} className={styles.list_item}>
           <GeneralInfo
+            userId={user.id}
             name={user.userName}
             role={user.role}
             imgURL={user.imgURL}
-            rating={user.rating}
-            opinionsNumber={user.opinionsNumber}
+            opinions={user.opinions}
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}
+            isButton={true}
           ></GeneralInfo>
         </li>
       ))}

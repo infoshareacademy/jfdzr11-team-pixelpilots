@@ -1,0 +1,19 @@
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating_number {
+  margin: 0 8px;
+  font-size: 1em;
+}
+
+.opinions_number {
+  font-size: 1em;
+}
+
+.icon {
+  height: 15px;
+  width: 15px;
+  margin-right: 3px;
+}

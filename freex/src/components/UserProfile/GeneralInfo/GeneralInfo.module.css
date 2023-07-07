@@ -1,6 +1,8 @@
 .general_info {
   grid-area: general_info;
   display: flex;
+  height: 100%;
+  position: relative;
 }
 
 .general_info_left {
@@ -56,16 +58,7 @@
 }
 
 .rating {
-  display: flex;
-  padding-bottom: 16px;
-}
-
-.rating_stars {
-  padding-right: 5px;
-}
-
-.rating_number {
-  padding-right: 5px;
+  margin-bottom: 1rem;
 }
 
 .description {
@@ -77,4 +70,8 @@
 .button_wrapper {
   display: flex;
   justify-content: end;
+}
+
+.button {
+  width: 150px;
 }
