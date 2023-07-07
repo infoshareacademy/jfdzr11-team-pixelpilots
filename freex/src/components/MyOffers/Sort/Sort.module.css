@@ -18,5 +18,9 @@
 }
 
 .sort button:hover {
-  cursor: pointer;
+  cursor: poiner;
+}
+
+.menu_parent {
+  position: relative;
 }

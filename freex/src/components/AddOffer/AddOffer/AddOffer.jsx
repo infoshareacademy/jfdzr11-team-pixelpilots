@@ -44,8 +44,8 @@ const AddOffer = () => {
       description: e.target.description.value,
       skills: chosenSkills,
       payment_method: e.target.payment_method.value,
-      hourly_rate: `${e.target.hourly_rate?.value} zł/godz.`,
-      milestone_rate: `${e.target.milestone_rate?.value} zł/kamień milowy`,
+      hourly_rate: `${e.target.hourly_rate?.value} zł / godz.`,
+      milestone_rate: `${e.target.milestone_rate?.value} zł / kamień milowy`,
       total_payment: `${e.target.total_payment?.value} zł`,
       premium_plan: {
         highlight: e.target.highlight.checked,

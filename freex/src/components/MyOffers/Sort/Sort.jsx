@@ -1,19 +1,37 @@
 import PopUpMenu from './PopUpMenu';
 import styles from './Sort.module.css';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
-const Sort = ({ sortByNewest }) => {
-  const [menu, setMenu] = useState(false);
+const Sort = ({ sortByNewest, sortByOldest, menu, setMenu, handleClick }) => {
+  const popUpMenu = useRef();
+
+  useEffect(() => {
+    const clickOutsideHandler = (e) => {
+      if (!popUpMenu?.current?.contains(e.target)) {
+        setMenu(false);
+      }
+    };
+    addEventListener('mousedown', clickOutsideHandler);
+    return () => removeEventListener('mousedown', clickOutsideHandler);
+  });
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.sort}>
         <p>Sortuj</p>
-        <button onClick={() => setMenu(!menu)} onBlur={() => setMenu(false)}>
+        <button onClick={handleClick}>
           <img src="../../../../public/MyOffers/sort_icon.png" />
         </button>
       </div>
-      <div>{menu ? <PopUpMenu sortByNewest={sortByNewest} /> : null}</div>
+      <div className={styles.manu_parent}>
+        {menu ? (
+          <PopUpMenu
+            sortByNewest={sortByNewest}
+            sortByOldest={sortByOldest}
+            PopUpMenuRef={popUpMenu}
+          />
+        ) : null}
+      </div>
     </div>
   );
 };
