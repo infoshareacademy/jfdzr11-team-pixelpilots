@@ -31,8 +31,10 @@ const UserProfile = () => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           setUser(userData);
-        } else {
+        } else if (currentUserID === userId) {
           setUser(null);
+        } else {
+          navigate("*");
         }
         setIsLoading(false);
       });

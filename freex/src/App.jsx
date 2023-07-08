@@ -5,7 +5,6 @@ import {
   Home,
   Login,
   Register,
-  MainPanel,
   MyOffers,
   AddOffer,
   Freelancers,
