@@ -1,5 +1,5 @@
-import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { db, storage } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ContactUser from "./ContactUser/ContactUser";
@@ -12,6 +12,8 @@ import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 import Opinions from "./Opinions/Opinions";
 import Loader from "../UI/Loader/Loader";
 import { toast } from "react-hot-toast";
+import SecondaryButton from "../UI/SecondaryButton/SecondaryButton";
+import { deleteObject, ref } from "firebase/storage";
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -53,6 +55,59 @@ const UserProfile = () => {
     navigate("/edytujprofil");
   };
 
+  const removeLogos = async (itemArray, category) => {
+    if (itemArray && itemArray !== []) {
+      itemArray.forEach((item) => {
+        const fileRef = ref(
+          storage,
+          `users/${currentUserID}/${category}/${item.id}`
+        );
+        deleteObject(fileRef)
+          .then(() => {
+            console.log("File deleted successfully.");
+          })
+          .catch((error) => {
+            console.log("Error deleting file:", error);
+          });
+      });
+    }
+  };
+
+  const removeProfilePicture = async () => {
+    const fileRef = ref(storage, `users/${currentUserID}/profileImg`);
+    deleteObject(fileRef)
+      .then(() => {
+        console.log("File deleted successfully.");
+      })
+      .catch((error) => {
+        console.log("Error deleting file:", error);
+      });
+  };
+
+  const deleteAccountHandler = async () => {
+    try {
+      await removeLogos(user.experience, "experience");
+      await removeLogos(user.education, "education");
+      await removeProfilePicture();
+    } catch (error) {
+      console.log("Problems deleting user files" + error);
+    }
+    try {
+      const docRef = doc(db, "users", currentUserID);
+      await deleteDoc(docRef);
+    } catch (error) {
+      console.log("Problems deleting user data" + error);
+    }
+    try {
+      await currentUser.delete();
+      toast.success("Usunięto użytkownika");
+      navigate("/register");
+    } catch (error) {
+      console.log(error);
+      toast.error("Nie udało sie usunąc użytkownika. Spróbuj później");
+    }
+  };
+
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
@@ -72,6 +127,13 @@ const UserProfile = () => {
           <br />
           Dane, które dodasz, będą widoczne dla innych użytkowników.
         </p>
+        <SecondaryButton
+          className={styles.message_button}
+          type="button"
+          onClick={() => deleteAccountHandler()}
+        >
+          Usuń swoje konto
+        </SecondaryButton>
       </div>
     );
   } else {
@@ -90,6 +152,13 @@ const UserProfile = () => {
               Dane, które dodasz do profilu, będą widoczne dla innych
               użytkowników
             </p>
+            <SecondaryButton
+              className={styles.message_button}
+              type="button"
+              onClick={() => deleteAccountHandler()}
+            >
+              Usuń swoje konto
+            </SecondaryButton>
           </div>
         )}
 
