@@ -45,3 +45,21 @@
 	line-height: 1.7rem;
 	font-size: 0.875rem;
 }
+
+.rating {
+	flex-wrap: wrap;
+}
+
+.rating div {
+	display: flex;
+	margin-right: 8px;
+}
+
+.rating img {
+	margin: unset;
+}
+
+.rating span {
+	margin: unset;
+	margin-right: 8px;
+}
