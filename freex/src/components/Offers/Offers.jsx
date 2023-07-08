@@ -12,6 +12,7 @@ import styles from './Offers.module.css';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { skills } from '../../utils/skills';
+import Skill from './Skill/Skill';
 
 const Offers = () => {
 	const [offers, setOffers] = useState([]);
@@ -60,26 +61,29 @@ const Offers = () => {
 		<div className={styles.wrapper}>
 			<h2>Oferty:</h2>
 			<form className={styles.form}>
-				<input
+				<Skill
 					type="radio"
 					name="skill"
 					id="all"
 					value=""
 					defaultChecked
 					onChange={(e) => filteredOffers(e.target.value)}
-				/>
-				<label htmlFor="all">Wyświetl wszystkie</label>
+					htmlFor="all"
+				>
+					Wyświetl wszystkie
+				</Skill>
 				{skills.map((skill) => (
-					<Fragment key={skill}>
-						<input
-							type="radio"
-							name="skill"
-							id={skill}
-							value={skill}
-							onChange={(e) => filteredOffers(e.target.value)}
-						/>
-						<label htmlFor={skill}>{skill}</label>
-					</Fragment>
+					<Skill
+						key={skill}
+						type="radio"
+						name="skill"
+						id={skill}
+						value={skill}
+						onChange={(e) => filteredOffers(e.target.value)}
+						htmlFor={skill}
+					>
+						{skill}
+					</Skill>
 				))}
 			</form>
 			{offers
