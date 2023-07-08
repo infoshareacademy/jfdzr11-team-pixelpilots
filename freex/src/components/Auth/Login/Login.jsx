@@ -54,6 +54,9 @@ const Login = () => {
                   id="password"
                   placeholder="Wpisz hasło..."
                 />
+                <p className={styles.forgotpass}>
+                  <a href="/forgotpassword">Zapomniałeś hasła?</a>
+                </p>
                 <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
                 <div className={styles.separator}>
                   <div className={styles.line}></div>

@@ -16,6 +16,7 @@ import Favorites from "./Favorites/Favorites";
 import UserProfile from "./UserProfile/UserProfile";
 import PrimaryButton from "./UI/PrimaryButton/PrimaryButton";
 import EditUserProfile from "./UserProfile/EditUserProfile/EditUserProfile";
+import { ForgotPassword } from "./Auth/ForgotPassword/ForgotPassword";
 
 export {
   Home,
@@ -36,4 +37,5 @@ export {
   UserProfile,
   PrimaryButton,
   EditUserProfile,
+  ForgotPassword,
 };
