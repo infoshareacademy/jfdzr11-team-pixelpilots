@@ -15,6 +15,7 @@ const ProfileListItem = ({
   return (
     <li key="todolater" className={styles.list_item}>
       <img className={styles.list_item_logo} src={logoURL}></img>
+
       <div>
         <h5 className={styles.list_item_title}>{title}</h5>
         <p className={styles.list_item_subtitle}>{subtitle}</p>

@@ -94,13 +94,7 @@ const EditUserProfile = () => {
         storage,
         `users/${currentUserID}/${category}/${item}`
       );
-      deleteObject(fileRef)
-        .then(() => {
-          console.log("File deleted successfully.");
-        })
-        .catch((error) => {
-          console.log("Error deleting file:", error);
-        });
+      deleteObject(fileRef);
     });
   };
 

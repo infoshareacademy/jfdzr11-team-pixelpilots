@@ -58,40 +58,45 @@ const UserProfile = () => {
   const removeLogos = async (itemArray, category) => {
     if (itemArray && itemArray !== []) {
       itemArray.forEach((item) => {
-        const fileRef = ref(
-          storage,
-          `users/${currentUserID}/${category}/${item.id}`
-        );
-        deleteObject(fileRef)
-          .then(() => {
-            console.log("File deleted successfully.");
-          })
-          .catch((error) => {
-            console.log("Error deleting file:", error);
-          });
+        if (item.logo) {
+          const fileRef = ref(
+            storage,
+            `users/${currentUserID}/${category}/${item.id}`
+          );
+          deleteObject(fileRef);
+        }
       });
     }
   };
 
   const removeProfilePicture = async () => {
     const fileRef = ref(storage, `users/${currentUserID}/profileImg`);
-    deleteObject(fileRef)
-      .then(() => {
-        console.log("File deleted successfully.");
-      })
-      .catch((error) => {
-        console.log("Error deleting file:", error);
-      });
+    deleteObject(fileRef);
   };
 
   const deleteAccountHandler = async () => {
     try {
-      await removeLogos(user.experience, "experience");
-      await removeLogos(user.education, "education");
-      await removeProfilePicture();
+      if (user?.experience?.[0]) {
+        await removeLogos(user.experience, "experience");
+      }
     } catch (error) {
       console.log("Problems deleting user files" + error);
     }
+    try {
+      if (user?.education?.[0]) {
+        await removeLogos(user.education, "education");
+      }
+    } catch (error) {
+      console.log("Problems deleting user files" + error);
+    }
+    try {
+      if (user?.imgURL) {
+        await removeProfilePicture();
+      }
+    } catch (error) {
+      console.log("Problems deleting user files" + error);
+    }
+
     try {
       const docRef = doc(db, "users", currentUserID);
       await deleteDoc(docRef);
@@ -103,8 +108,13 @@ const UserProfile = () => {
       toast.success("Usunięto użytkownika");
       navigate("/register");
     } catch (error) {
-      console.log(error);
-      toast.error("Nie udało sie usunąc użytkownika. Spróbuj później");
+      if (error.code === "auth/requires-recent-login") {
+        toast.error(
+          "Przed usunięciem konta musisz się wylogować i ponownie zalogować"
+        );
+      } else {
+        toast.error("Nie udało sie usunąc użytkownika. Spróbuj później");
+      }
     }
   };
 
