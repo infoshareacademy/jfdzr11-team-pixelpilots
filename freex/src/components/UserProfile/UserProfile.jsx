@@ -14,6 +14,7 @@ import Loader from "../UI/Loader/Loader";
 import { toast } from "react-hot-toast";
 import SecondaryButton from "../UI/SecondaryButton/SecondaryButton";
 import { deleteObject, ref } from "firebase/storage";
+import DeleteAccountConfirm from "./DeleteAccountConfirm/DeleteAccountConfirm";
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -23,6 +24,8 @@ const UserProfile = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isConfirmDeleteAccountVisible, setIsConfirmAccountVisible] =
+    useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -140,10 +143,15 @@ const UserProfile = () => {
         <SecondaryButton
           className={styles.message_button}
           type="button"
-          onClick={() => deleteAccountHandler()}
+          onClick={() => setIsConfirmAccountVisible(true)}
         >
           Usuń swoje konto
         </SecondaryButton>
+        <DeleteAccountConfirm
+          isVisible={isConfirmDeleteAccountVisible}
+          setIsVisible={setIsConfirmAccountVisible}
+          deleteAccount={deleteAccountHandler}
+        />
       </div>
     );
   } else {
@@ -165,10 +173,15 @@ const UserProfile = () => {
             <SecondaryButton
               className={styles.message_button}
               type="button"
-              onClick={() => deleteAccountHandler()}
+              onClick={() => setIsConfirmAccountVisible(true)}
             >
               Usuń swoje konto
             </SecondaryButton>
+            <DeleteAccountConfirm
+              isVisible={isConfirmDeleteAccountVisible}
+              setIsVisible={setIsConfirmAccountVisible}
+              deleteAccount={deleteAccountHandler}
+            />
           </div>
         )}
 
@@ -207,7 +220,7 @@ const UserProfile = () => {
               header="Edukacja / Kwalifikacje"
             />
           )}
-          <ContactUser />
+          <ContactUser email={user.email} userName={user.userName} />
         </div>
       </>
     );

@@ -16,3 +16,23 @@
   margin-bottom: 24px;
   font-size: 20px;
 }
+
+.modal_header {
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.modal_subheading {
+  display: inline-block;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.email_wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.close_button {
+  margin-top: 2rem;
+}
