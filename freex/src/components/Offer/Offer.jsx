@@ -98,6 +98,7 @@ const Offer = () => {
 				email={user.email}
 				src={user.imgURL}
 				name={user.userName}
+				opinions={user.opinions}
 			/>
 		</div>
 	);
