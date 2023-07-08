@@ -2,6 +2,7 @@ import { sendPasswordResetEmail } from "@firebase/auth";
 import { auth } from "../../../config/firebase";
 import { Form } from "../../Form/Form";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
+import styles from "../ForgotPassword/ForgotPassword.module.css";
 
 export const ForgotPassword = () => {
   const handlePasswordReset = (e) => {
