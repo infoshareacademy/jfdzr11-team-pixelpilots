@@ -9,14 +9,14 @@ const Home = () => {
   return (
     <div className={styles.container}>
       {currentUser ? (
-        <>{/* <h1>Witaj ponownie!</h1> */}</>
+        <>{/* <h2>Witaj ponownie!</h2> */}</>
       ) : (
         //powrót do strony głównej//
         <>
           <div className={styles.left}>
-            <h1>Załóż konto już dziś</h1>
-            <h1>i dołącz do społeczności</h1>
-            <h1>profesjonalistów</h1>
+            <h2>Załóż konto już dziś</h2>
+            <h2>i dołącz do społeczności</h2>
+            <h2>profesjonalistów</h2>
             <p className={styles.text}>
               Nieważne, czy jesteś doświadczonym freelancerem, który szuka
               nowych możliwości i projektów, czy przedsiębiorcą dążącym do
