@@ -88,9 +88,12 @@ const EditUserProfile = () => {
     setFunction(data);
   };
 
-  const removeRedundantLogos = async (itemIDs) => {
+  const removeRedundantLogos = async (itemIDs, category) => {
     itemIDs.forEach((item) => {
-      const fileRef = ref(storage, `users/${currentUserID}/experience/${item}`);
+      const fileRef = ref(
+        storage,
+        `users/${currentUserID}/${category}/${item}`
+      );
       deleteObject(fileRef)
         .then(() => {
           console.log("File deleted successfully.");
@@ -107,8 +110,8 @@ const EditUserProfile = () => {
     try {
       const profileImgUrl = await uploadFile(e);
 
-      await removeRedundantLogos(experienceLogosToBeDeleted);
-      await removeRedundantLogos(educationLogosToBeDeleted);
+      await removeRedundantLogos(experienceLogosToBeDeleted, "experience");
+      await removeRedundantLogos(educationLogosToBeDeleted, "education");
 
       await uploadLogos(
         experienceInputFields,
@@ -156,29 +159,18 @@ const EditUserProfile = () => {
     }
   };
 
-  const handleExperienceInputBlur = (e, id) => {
-    let data = [...experienceInputFields];
+  const handleBlur = (e, id, inputsValues, setInputsValues) => {
+    let data = [...inputsValues];
     const itemIndex = data.findIndex((item) => item.id === id);
     if (e.target.name == "logo") {
       data[itemIndex][e.target.name] = e.target.files[0];
     } else {
       data[itemIndex][e.target.name] = e.target.value;
     }
-    setExperienceInputFields(data);
+    setInputsValues(data);
   };
 
-  const handleEducationInputBlur = (e, id) => {
-    let data = [...educationInputFields];
-    const itemIndex = data.findIndex((item) => item.id === id);
-    if (e.target.name == "logo") {
-      data[itemIndex][e.target.name] = e.target.files[0];
-    } else {
-      data[itemIndex][e.target.name] = e.target.value;
-    }
-    setEducationInputFields(data);
-  };
-
-  const addExperienceFields = (e) => {
+  const addField = (e, setState) => {
     e.preventDefault();
     const newElementId = uuid();
     let newfield = {
@@ -189,49 +181,20 @@ const EditUserProfile = () => {
       end: "",
       logo: "",
     };
-    setExperienceInputFields((previousExperienceInputFields) => [
-      ...previousExperienceInputFields,
-      newfield,
-    ]);
+    setState((previousState) => [...previousState, newfield]);
   };
 
-  const removeExperienceItem = (e, itemId) => {
+  const removeItem = (
+    e,
+    itemId,
+    inputsValues,
+    setInputsValues,
+    setLogosToBeDeleted
+  ) => {
     e.preventDefault();
-    const updatedItems = experienceInputFields.filter(
-      (item) => item.id !== itemId
-    );
-    setExperienceInputFields(updatedItems);
-    setExperienceLogosTobeDeleted((previousLogosToBeDeleted) => [
-      ...previousLogosToBeDeleted,
-      itemId,
-    ]);
-  };
-
-  const addEducationFields = (e) => {
-    e.preventDefault();
-    const newElementId = uuid();
-    let newfield = {
-      id: newElementId,
-      title: "",
-      subtitle: "",
-      start: "",
-      end: "",
-      logo: "",
-    };
-
-    setEducationInputFields((previousEducationInputFields) => [
-      ...previousEducationInputFields,
-      newfield,
-    ]);
-  };
-
-  const removeEducationItem = (e, itemId) => {
-    e.preventDefault();
-    const updatedItems = educationInputFields.filter(
-      (item) => item.id !== itemId
-    );
-    setEducationInputFields(updatedItems);
-    setEducationLogosTobeDeleted((previousLogosToBeDeleted) => [
+    const updatedItems = inputsValues.filter((item) => item.id !== itemId);
+    setInputsValues(updatedItems);
+    setLogosToBeDeleted((previousLogosToBeDeleted) => [
       ...previousLogosToBeDeleted,
       itemId,
     ]);
@@ -333,7 +296,7 @@ const EditUserProfile = () => {
           <legend className={styles.legend}>Doświadczenie</legend>
           <PrimaryButton
             className={styles.button}
-            onClick={addExperienceFields}
+            onClick={(e) => addField(e, setExperienceInputFields)}
           >
             Dodaj kolejną pozycję
           </PrimaryButton>
@@ -351,7 +314,14 @@ const EditUserProfile = () => {
                     id="title"
                     name="title"
                     placeholder="Np. Senior UI Designer"
-                    onBlur={(e) => handleExperienceInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        experienceInputFields,
+                        setExperienceInputFields
+                      )
+                    }
                     defaultValue={item.title ? item.title : ""}
                   />
                   <label className={styles.input_label} htmlFor="subtitle">
@@ -363,7 +333,14 @@ const EditUserProfile = () => {
                     id="subtitle"
                     name="subtitle"
                     placeholder="Np. Freex Sp. z o. o."
-                    onBlur={(e) => handleExperienceInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        experienceInputFields,
+                        setExperienceInputFields
+                      )
+                    }
                     defaultValue={item.subtitle ? item.subtitle : ""}
                   />
                   <label className={styles.input_label} htmlFor="start">
@@ -374,7 +351,14 @@ const EditUserProfile = () => {
                     type="date"
                     id="start"
                     name="start"
-                    onBlur={(e) => handleExperienceInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        experienceInputFields,
+                        setExperienceInputFields
+                      )
+                    }
                     defaultValue={item.start ? item.start : ""}
                   />
                   <label className={styles.input_label} htmlFor="end">
@@ -385,7 +369,14 @@ const EditUserProfile = () => {
                     type="date"
                     id="end"
                     name="end"
-                    onBlur={(e) => handleExperienceInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        experienceInputFields,
+                        setExperienceInputFields
+                      )
+                    }
                     defaultValue={item.end ? item.end : ""}
                   />
                   <label className={styles.input_label} htmlFor="logo">
@@ -396,11 +387,26 @@ const EditUserProfile = () => {
                     type="file"
                     id="logo"
                     name="logo"
-                    onBlur={(e) => handleExperienceInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        experienceInputFields,
+                        setExperienceInputFields
+                      )
+                    }
                   />
                   <SecondaryButton
                     className={styles.remove_button}
-                    onClick={(event) => removeExperienceItem(event, item.id)}
+                    onClick={(event) =>
+                      removeItem(
+                        event,
+                        item.id,
+                        experienceInputFields,
+                        setExperienceInputFields,
+                        setExperienceLogosTobeDeleted
+                      )
+                    }
                   >
                     Usuń
                   </SecondaryButton>
@@ -412,7 +418,10 @@ const EditUserProfile = () => {
 
         <fieldset className={styles.form_fieldset}>
           <legend className={styles.legend}>Edukacja / Kwalifikacje</legend>
-          <PrimaryButton className={styles.button} onClick={addEducationFields}>
+          <PrimaryButton
+            className={styles.button}
+            onClick={(e) => addField(e, setEducationInputFields)}
+          >
             Dodaj kolejną pozycję
           </PrimaryButton>
 
@@ -429,7 +438,14 @@ const EditUserProfile = () => {
                     id="title"
                     name="title"
                     placeholder="Np. Politechnika Gdańska"
-                    onBlur={(e) => handleEducationInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        educationInputFields,
+                        setEducationInputFields
+                      )
+                    }
                     defaultValue={item.title ? item.title : ""}
                   />
                   <label className={styles.input_label} htmlFor="subtitle">
@@ -441,7 +457,14 @@ const EditUserProfile = () => {
                     id="subtitle"
                     name="subtitle"
                     placeholder="Np. licencjat"
-                    onBlur={(e) => handleEducationInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        educationInputFields,
+                        setEducationInputFields
+                      )
+                    }
                     defaultValue={item.subtitle ? item.subtitle : ""}
                   />
                   <label className={styles.input_label} htmlFor="start">
@@ -452,7 +475,14 @@ const EditUserProfile = () => {
                     type="date"
                     id="start"
                     name="start"
-                    onBlur={(e) => handleEducationInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        educationInputFields,
+                        setEducationInputFields
+                      )
+                    }
                     defaultValue={item.start ? item.start : ""}
                   />
                   <label className={styles.input_label} htmlFor="end">
@@ -463,7 +493,14 @@ const EditUserProfile = () => {
                     type="date"
                     id="end"
                     name="end"
-                    onBlur={(e) => handleEducationInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        educationInputFields,
+                        setEducationInputFields
+                      )
+                    }
                     defaultValue={item.end ? item.end : ""}
                   />
                   <label className={styles.input_label} htmlFor="logo">
@@ -474,11 +511,26 @@ const EditUserProfile = () => {
                     type="file"
                     id="logo"
                     name="logo"
-                    onBlur={(e) => handleEducationInputBlur(e, item.id)}
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        educationInputFields,
+                        setEducationInputFields
+                      )
+                    }
                   />
                   <SecondaryButton
                     className={styles.remove_button}
-                    onClick={(event) => removeEducationItem(event, item.id)}
+                    onClick={(event) =>
+                      removeItem(
+                        event,
+                        item.id,
+                        educationInputFields,
+                        setEducationInputFields,
+                        setEducationLogosTobeDeleted
+                      )
+                    }
                   >
                     Usuń
                   </SecondaryButton>
