@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* max-width: 1240px; */
+  padding: 0rem 0rem 2rem 0;
 }
 
 .adress {
   margin-top: 1rem;
-  font-size: 0.75rem;
-  line-height: 1.68rem;
+  font-size: 1rem;
+  line-height: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -26,13 +26,14 @@
 .right a {
   text-decoration: none;
   color: var(--clr-very-dark-grey-500);
-  font-size: 0.8rem;
-  line-height: 2.25rem;
+  font-size: 1rem;
+  line-height: 2rem;
 }
 .right a:hover {
   text-decoration: underline;
 }
 .right p {
+  color: var(--clr-very-dark-grey-500);
   font-weight: 600;
   font-size: 1rem;
   margin-bottom: 1rem;
