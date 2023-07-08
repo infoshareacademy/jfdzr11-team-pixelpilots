@@ -37,35 +37,37 @@ const Login = () => {
             <img className={styles.box} src="./Login/login_photo.png"></img>
           </div>
           <div className={styles.right}>
-            <h1>Witaj ponownie!</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
-              <label htmlFor="email">Adres e-mail</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Wpisz adres email..."
-              />
-              <label htmlFor="password">Hasło</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Wpisz hasło..."
-              />
-              <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
-              <div className={styles.separator}>
-                <div className={styles.line}></div>
-                <p>Nie masz konta?</p>
-                <div className={styles.line}></div>
+              <div className={styles.forminnerdiv}>
+                <h2>Witaj ponownie!</h2>
+                <label htmlFor="email">Adres e-mail</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Wpisz adres email..."
+                />
+                <label htmlFor="password">Hasło</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Wpisz hasło..."
+                />
+                <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
+                <div className={styles.separator}>
+                  <div className={styles.line}></div>
+                  <p>Nie masz konta?</p>
+                  <div className={styles.line}></div>
+                </div>
+                <button
+                  className={styles.loginbutton}
+                  onClick={() => {
+                    navigate("/register");
+                  }}>
+                  Zarejestruj się
+                </button>
               </div>
-              <button
-                className={styles.loginbutton}
-                onClick={() => {
-                  navigate("/register");
-                }}>
-                Zarejestruj się
-              </button>
             </form>
           </div>
         </div>
