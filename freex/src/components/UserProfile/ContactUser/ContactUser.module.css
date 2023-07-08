@@ -17,6 +17,11 @@
   font-size: 20px;
 }
 
+.modal_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal_header {
   margin-bottom: 6px;
   font-size: 20px;
@@ -35,4 +40,5 @@
 
 .close_button {
   margin-top: 2rem;
+  align-self: flex-end;
 }

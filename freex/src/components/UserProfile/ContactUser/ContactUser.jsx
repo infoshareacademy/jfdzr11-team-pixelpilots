@@ -23,19 +23,21 @@ const ContactUser = ({ email, userName }) => {
         visible={isContactInfoVisible}
         setVisible={() => setIsContactInfoVisible(false)}
       >
-        <h5 className={styles.modal_header}>{userName}</h5>
-        <h4 className={styles.modal_subheading}>Informacje kontaktowe </h4>
+        <div className={styles.modal_wrapper}>
+          <h5 className={styles.modal_header}>{userName}</h5>
+          <h4 className={styles.modal_subheading}>Informacje kontaktowe </h4>
 
-        <div className={styles.email_wrapper}>
-          <h4 className={styles.subheading}>Email: </h4>
-          <span>{email}</span>
+          <div className={styles.email_wrapper}>
+            <h4 className={styles.subheading}>Email: </h4>
+            <span>{email}</span>
+          </div>
+          <PrimaryButton
+            onClick={() => setIsContactInfoVisible(false)}
+            className={styles.close_button}
+          >
+            Zamknij
+          </PrimaryButton>
         </div>
-        <PrimaryButton
-          onClick={() => setIsContactInfoVisible(false)}
-          className={styles.close_button}
-        >
-          Close Modal
-        </PrimaryButton>
       </Modal>
     </div>
   );

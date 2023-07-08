@@ -51,20 +51,22 @@ const Opinions = ({ className, currentUserData, setUser }) => {
                   </li>
                 ))}
               </ul>
-              <div className={styles.author_info}>
-                <img className={styles.userImg} src={item.imgUrl} />
-                <span className={styles.caption}>{item.author}</span>
-                <span className={styles.caption}>{item.dateAdded}</span>
+              <div className={styles.name_button_wrapper}>
+                <div className={styles.author_info}>
+                  <img className={styles.userImg} src={item.imgUrl} />
+                  <span className={styles.caption}>{item.author}</span>
+                  <span className={styles.caption}>{item.dateAdded}</span>
+                </div>
+                {isRemoveButtonVisible(item.authorId) && (
+                  <SecondaryButton
+                    type="button"
+                    className={styles.secondary_button}
+                    onClick={(e) => onRemove(e, item.id)}
+                  >
+                    Usuń opinię
+                  </SecondaryButton>
+                )}
               </div>
-              {isRemoveButtonVisible(item.authorId) && (
-                <SecondaryButton
-                  type="button"
-                  className={styles.secondary_button}
-                  onClick={(e) => onRemove(e, item.id)}
-                >
-                  Usuń opinię
-                </SecondaryButton>
-              )}
             </li>
           );
         })}
