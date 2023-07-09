@@ -13,7 +13,6 @@ const ContactUser = ({ email, userName }) => {
       </h5>
       <PrimaryButton
         onClick={() => {
-          console.log("bum");
           setIsContactInfoVisible(true);
         }}
       >
