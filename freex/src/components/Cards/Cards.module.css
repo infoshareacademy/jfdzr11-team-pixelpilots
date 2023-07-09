@@ -33,3 +33,7 @@
 	text-align: center;
 	padding: 0rem 0.75rem 1rem;
 }
+
+.cardWrapper p {
+	text-align: center;
+}
