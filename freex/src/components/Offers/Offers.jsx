@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { db } from '../../config/firebase';
 import {
 	collection,
@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { skills } from '../../utils/skills';
 import Skill from './Skill/Skill';
+import { nanoid } from 'nanoid';
 
 const Offers = () => {
 	const [offers, setOffers] = useState([]);
@@ -108,7 +109,7 @@ const Offers = () => {
 								<strong>{cost}</strong>
 								<ul>
 									{offer.skills.map((skill) => (
-										<li key={skill}>{skill}</li>
+										<li key={nanoid()}>{skill}</li>
 									))}
 								</ul>
 
