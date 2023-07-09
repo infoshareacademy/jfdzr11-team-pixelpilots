@@ -39,7 +39,7 @@ const AddOffer = () => {
         highlight: e.target.highlight.checked,
         analysis: e.target.analysis.checked,
         support: e.target.support.checked,
-        contracts: e.target.highlight.checked,
+        contracts: e.target.contracts.checked,
       },
       date: serverTimestamp(),
       offer_number: nanoid(),
@@ -54,7 +54,14 @@ const AddOffer = () => {
     }
   };
 
-  return <OfferForm handleSubmit={handleSubmit} />;
+  return (
+    <OfferForm
+      chosenSkills={chosenSkills}
+      setChosenSkills={setChosenSkills}
+      handleSubmit={handleSubmit}
+      submitText={'Opublikuj'}
+    />
+  );
 };
 
 export default AddOffer;

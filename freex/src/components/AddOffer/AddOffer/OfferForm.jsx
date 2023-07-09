@@ -8,13 +8,22 @@ import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import PremiumOption from '../PremiumOption/PremiumOption';
 import Data from '../PremiumOption/PremiumOptionData.json';
 import Summary from '../Summary/Summary';
+import { useNavigate } from 'react-router-dom';
 
-const OfferForm = ({ handleSubmit }) => {
+const OfferForm = ({
+  offer,
+  handleSubmit,
+  disabled,
+  chosenSkills,
+  setChosenSkills,
+  submitText,
+}) => {
   const [titleLength, setTitleLength] = useState('0');
   const [summary, setSummary] = useState({});
   const [descriptionLength, setDescriptionLength] = useState('0');
-  const [chosenSkills, setChosenSkills] = useState([]);
   const [skills, setSkills] = useState(skillsData);
+
+  const navigate = useNavigate();
 
   const handleChange = (e, setLength) => {
     const length = e.target.value.length;
@@ -31,6 +40,7 @@ const OfferForm = ({ handleSubmit }) => {
         <h2 className={styles.title}>Wpisz tytuł projektu</h2>
 
         <input
+          defaultValue={offer?.title}
           maxLength="100"
           onChange={(e) => {
             handleChange(e, setTitleLength);
@@ -46,6 +56,7 @@ const OfferForm = ({ handleSubmit }) => {
 
         <h2 className={styles.title}>Opisz swój projekt</h2>
         <textarea
+          defaultValue={offer?.description}
           maxLength="600"
           onChange={(e) => {
             handleChange(e, setDescriptionLength);
@@ -77,20 +88,31 @@ const OfferForm = ({ handleSubmit }) => {
           setChosenSkills={setChosenSkills}
           skills={skills}
           setSkills={setSkills}
+          defaultSkills={offer?.skills}
         />
 
-        <PaymentMethod data={summary} setData={setSummary} />
+        <PaymentMethod
+          defaultPaymentMethod={offer?.payment_method}
+          data={summary}
+          setData={setSummary}
+          offer={offer}
+        />
 
         <div className={styles.premium_plan_section}>
-          {Data.map((option, idx) => (
-            <PremiumOption
-              key={idx}
-              plan_name={option.plan_name}
-              plan_title={option.plan_title}
-              plan_description={option.plan_description}
-              img={option.img}
-            />
-          ))}
+          {Data.map((option, idx) => {
+            let defaultValue = offer?.premium_plan?.[option.plan_name];
+            return (
+              <PremiumOption
+                disabled={disabled}
+                key={idx}
+                plan_name={option.plan_name}
+                plan_title={option.plan_title}
+                plan_description={option.plan_description}
+                img={option.img}
+                defaultValue={defaultValue}
+              />
+            );
+          })}
         </div>
         <h2 className={styles.title}>Podsumowanie</h2>
 
@@ -100,10 +122,16 @@ const OfferForm = ({ handleSubmit }) => {
           paymentMethod={summary.payment_method}
           description={summary.description}
         />
+        <h2 className={styles.total}>Łącznie: {summary.payment} pln</h2>
         <div className={styles.submit_section}>
-          <h2 className={styles.total}>Łącznie: {summary.payment} pln</h2>
+          <button
+            onClick={() => navigate('/mojeoferty')}
+            className={styles.submit_button}
+          >
+            Anuluj
+          </button>
           <button className={styles.submit_button} type="submit">
-            Opublikuj
+            {submitText}
           </button>
         </div>
       </form>

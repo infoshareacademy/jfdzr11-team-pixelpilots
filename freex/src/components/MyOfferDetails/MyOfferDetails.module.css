@@ -1,11 +1,14 @@
 .wrapper {
-  display: flex;
-  margin-top: 4rem;
+  margin: 4rem auto 0 auto;
   gap: 1rem;
+  max-width: 1200px;
+  margin-left: auto;
+  background-color: white;
 }
 
 .card {
   display: flex;
+  justify-content: space-between;
   min-width: 77%;
   color: #000000;
   padding: 2rem 3rem;

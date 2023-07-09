@@ -1,13 +1,23 @@
 /* eslint-disable react/prop-types */
 import styles from './PremiumOption.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const PremiumOption = ({ plan_name, plan_title, plan_description, img }) => {
-  const [isChecked, setIsChecked] = useState(false);
+const PremiumOption = ({
+  plan_name,
+  plan_title,
+  plan_description,
+  img,
+  defaultValue,
+}) => {
+  const [isChecked, setIsChecked] = useState();
 
   const handleChange = (e) => {
     setIsChecked(e.target.checked);
   };
+
+  useEffect(() => {
+    setIsChecked(defaultValue);
+  }, [defaultValue]);
 
   return (
     <div className={styles.premium_option}>
