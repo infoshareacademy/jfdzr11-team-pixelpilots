@@ -1,7 +1,14 @@
+import { useEffect } from 'react';
 import ChosenSkills from './ChosenSkills';
 import styles from './skills.module.css';
 
-const Skills = ({ skills, setSkills, chosenSkills, setChosenSkills }) => {
+const Skills = ({
+  skills,
+  setSkills,
+  chosenSkills,
+  setChosenSkills,
+  defaultSkills,
+}) => {
   const handleAdd = (e) => {
     setChosenSkills([...chosenSkills, e.target.innerText]);
     const unchosen = skills.filter((elem) => elem !== e.target.innerText);
@@ -13,6 +20,14 @@ const Skills = ({ skills, setSkills, chosenSkills, setChosenSkills }) => {
     const chosen = chosenSkills.filter((elem) => elem !== e.target.innerText);
     setChosenSkills(chosen);
   };
+
+  useEffect(() => {
+    if (!defaultSkills) {
+      setChosenSkills(chosenSkills);
+    } else {
+      setChosenSkills(defaultSkills);
+    }
+  }, [defaultSkills]);
 
   return (
     <>
