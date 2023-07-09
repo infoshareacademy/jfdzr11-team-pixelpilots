@@ -1,5 +1,5 @@
-import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { db, storage } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ContactUser from "./ContactUser/ContactUser";
@@ -12,6 +12,9 @@ import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 import Opinions from "./Opinions/Opinions";
 import Loader from "../UI/Loader/Loader";
 import { toast } from "react-hot-toast";
+import SecondaryButton from "../UI/SecondaryButton/SecondaryButton";
+import { deleteObject, ref } from "firebase/storage";
+import DeleteAccountConfirm from "./DeleteAccountConfirm/DeleteAccountConfirm";
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -21,6 +24,8 @@ const UserProfile = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isConfirmDeleteAccountVisible, setIsConfirmAccountVisible] =
+    useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -31,8 +36,10 @@ const UserProfile = () => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           setUser(userData);
-        } else {
+        } else if (currentUserID === userId) {
           setUser(null);
+        } else {
+          navigate("*");
         }
         setIsLoading(false);
       });
@@ -49,6 +56,69 @@ const UserProfile = () => {
 
   const addHandler = () => {
     navigate("/edytujprofil");
+  };
+
+  const removeLogos = async (itemArray, category) => {
+    if (itemArray && itemArray !== []) {
+      itemArray.forEach((item) => {
+        if (item.logo) {
+          const fileRef = ref(
+            storage,
+            `users/${currentUserID}/${category}/${item.id}`
+          );
+          deleteObject(fileRef);
+        }
+      });
+    }
+  };
+
+  const removeProfilePicture = async () => {
+    const fileRef = ref(storage, `users/${currentUserID}/profileImg`);
+    deleteObject(fileRef);
+  };
+
+  const deleteAccountHandler = async () => {
+    try {
+      if (user?.experience?.[0]) {
+        await removeLogos(user.experience, "experience");
+      }
+    } catch (error) {
+      console.log("Problems deleting user files" + error);
+    }
+    try {
+      if (user?.education?.[0]) {
+        await removeLogos(user.education, "education");
+      }
+    } catch (error) {
+      console.log("Problems deleting user files" + error);
+    }
+    try {
+      if (user?.imgURL) {
+        await removeProfilePicture();
+      }
+    } catch (error) {
+      console.log("Problems deleting user files" + error);
+    }
+
+    try {
+      const docRef = doc(db, "users", currentUserID);
+      await deleteDoc(docRef);
+    } catch (error) {
+      console.log("Problems deleting user data" + error);
+    }
+    try {
+      await currentUser.delete();
+      toast.success("Usunięto użytkownika");
+      navigate("/register");
+    } catch (error) {
+      if (error.code === "auth/requires-recent-login") {
+        toast.error(
+          "Przed usunięciem konta musisz się wylogować i ponownie zalogować"
+        );
+      } else {
+        toast.error("Nie udało sie usunąc użytkownika. Spróbuj później");
+      }
+    }
   };
 
   if (isLoading) {
@@ -70,6 +140,18 @@ const UserProfile = () => {
           <br />
           Dane, które dodasz, będą widoczne dla innych użytkowników.
         </p>
+        <SecondaryButton
+          className={styles.message_button}
+          type="button"
+          onClick={() => setIsConfirmAccountVisible(true)}
+        >
+          Usuń swoje konto
+        </SecondaryButton>
+        <DeleteAccountConfirm
+          isVisible={isConfirmDeleteAccountVisible}
+          setIsVisible={setIsConfirmAccountVisible}
+          deleteAccount={deleteAccountHandler}
+        />
       </div>
     );
   } else {
@@ -88,6 +170,18 @@ const UserProfile = () => {
               Dane, które dodasz do profilu, będą widoczne dla innych
               użytkowników
             </p>
+            <SecondaryButton
+              className={styles.message_button}
+              type="button"
+              onClick={() => setIsConfirmAccountVisible(true)}
+            >
+              Usuń swoje konto
+            </SecondaryButton>
+            <DeleteAccountConfirm
+              isVisible={isConfirmDeleteAccountVisible}
+              setIsVisible={setIsConfirmAccountVisible}
+              deleteAccount={deleteAccountHandler}
+            />
           </div>
         )}
 
@@ -126,7 +220,7 @@ const UserProfile = () => {
               header="Edukacja / Kwalifikacje"
             />
           )}
-          <ContactUser />
+          <ContactUser email={user.email} userName={user.userName} />
         </div>
       </>
     );
