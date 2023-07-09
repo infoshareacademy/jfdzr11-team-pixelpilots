@@ -12,7 +12,7 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
 
   useEffect(() => {
     setPaymentMethod(defaultPaymentMethod);
-  }, [offer]);
+  }, [defaultPaymentMethod]);
 
   let hoursRateChecked;
   let milestoneChecked;
@@ -39,13 +39,7 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
             type="radio"
             defaultChecked={hoursRateChecked}
           />
-          <label
-            name="payment_method"
-            // value="Płatność za godziny"
-            htmlFor="h_rate"
-          >
-            Płatność za godziny
-          </label>
+          <label htmlFor="h_rate">Płatność za godziny</label>
         </div>
         <div className={styles.radio}>
           <input
@@ -56,9 +50,7 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
             type="radio"
             defaultChecked={milestoneChecked}
           />
-          <label name="payment_method" htmlFor="milestones">
-            Płatność za kamienie milowe
-          </label>
+          <label htmlFor="milestones">Płatność za kamienie milowe</label>
         </div>
         <div className={styles.radio}>
           <input
@@ -69,9 +61,7 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
             type="radio"
             defaultChecked={oneTimePayChecked}
           />
-          <label name={'paymen_method'} htmlFor="one_time_payment">
-            Jednorazowa płatność
-          </label>
+          <label htmlFor="one_time_payment">Jednorazowa płatność</label>
         </div>
       </div>
       <>
