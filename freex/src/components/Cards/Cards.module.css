@@ -10,19 +10,21 @@
 	letter-spacing: -0.5px;
 	line-height: 1.5rem;
 	padding: 1rem;
-	/* margin: 1rem; */
 }
 
 .cardImg {
 	height: 15rem;
 	display: flex;
 	align-items: center;
+	background-color: var(--clr-primary-white);
+	margin: 2rem 0;
+	border-radius: 12px;
+	overflow: hidden;
 }
 
 .cardImg img {
 	width: 100%;
 	object-fit: contain;
-	bottom: 0;
 }
 
 .cardWrapper h3 {
@@ -30,4 +32,8 @@
 	font-weight: 700;
 	text-align: center;
 	padding: 0rem 0.75rem 1rem;
+}
+
+.cardWrapper p {
+	text-align: center;
 }
