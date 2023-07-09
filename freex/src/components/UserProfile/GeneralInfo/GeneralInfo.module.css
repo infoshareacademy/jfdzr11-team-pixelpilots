@@ -47,6 +47,12 @@
   flex-direction: column;
 }
 
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .user_name {
   font-size: 24px;
   padding-bottom: 5px;

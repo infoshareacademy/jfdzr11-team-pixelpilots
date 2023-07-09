@@ -3,6 +3,7 @@ import styles from "./GeneralInfo.module.css";
 import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import Rating from "../../UI/Rating/Rating";
+import HeartButton from "../../UI/HeartButton/HeartButton";
 
 const GeneralInfo = ({
   name,
@@ -36,7 +37,10 @@ const GeneralInfo = ({
         </div>
       </div>
       <div className={styles.general_info_right}>
-        <h4 className={styles.user_name}>{name}</h4>
+        <div className={styles.header_wrapper}>
+          <h4 className={styles.user_name}>{name}</h4>
+          <HeartButton />
+        </div>
         <h5 className={styles.user_role}>{role}</h5>
         <Rating
           className={styles.rating}
