@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
 import {
   Layout,
   Home,
@@ -16,8 +16,9 @@ import {
   EditUserProfile,
   ForgotPassword,
   MyOfferDetails,
-} from "./components";
-import Offer from "./components/Offer/Offer";
+} from './components';
+import Offer from './components/Offer/Offer';
+import EditOffer from './components/MyOffers/EditOffer/EditOffer';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/mojeoferty" element={<MyOffers />} />
           <Route path="/mojeoferty/:ofertaid" element={<MyOfferDetails />} />
+          <Route path="/mojeoferty/:ofertaid/edit" element={<EditOffer />} />
           <Route path="/dodajoferte" element={<AddOffer />} />
           <Route path="/freelancerzy" element={<Freelancers />} />
           <Route path="/freelancerzy/:userId" element={<UserProfile />} />
