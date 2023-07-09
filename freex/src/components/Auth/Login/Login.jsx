@@ -72,20 +72,6 @@ const Login = () => {
                 </button>
               </div>
             </form>
-<<<<<<< HEAD
-=======
-            <p>
-              Nie masz konta?
-              <button
-                className={styles.loginbutton}
-                onClick={() => {
-                  navigate("/register");
-                }}
-              >
-                Zarejestruj się
-              </button>
-            </p>
->>>>>>> develop
           </div>
         </div>
       ) : location.state ? (
