@@ -45,7 +45,7 @@ const Register = () => {
         </p>
         <div className={styles.image}>
           <img
-            src="../../../../public/Register/Register2.png"
+            src="../../../../public/Register/register_hero.png"
             alt="register icon"
           />
         </div>

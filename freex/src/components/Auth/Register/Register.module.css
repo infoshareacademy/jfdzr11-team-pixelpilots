@@ -1,21 +1,21 @@
 .container {
-	display: grid;
-	grid-template-areas: 'text form';
-	grid-template-columns: 1fr 1fr;
-	padding: 3rem 2rem 2rem 0;
+  display: grid;
+  grid-template-areas: "text form";
+  grid-template-columns: 1fr 1fr;
+  padding: 3rem 2rem 2rem 0;
 }
 
 .text {
-	grid-area: text;
-	padding-right: 2rem;
+  grid-area: text;
+  padding-right: 2rem;
 }
 
 .text h2 {
-	font-size: 3rem;
-	color: var(--clr-very-dark-blue);
-	line-height: 3.5rem;
-	margin-bottom: 2rem;
-	font-weight: 400;
+  font-size: 3rem;
+  color: var(--clr-very-dark-blue);
+  line-height: 3.5rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
 }
 
 .text p {
@@ -26,23 +26,21 @@
 }
 
 .image img {
-	width: 100%;
-	border-radius: 20px;
-	box-shadow: 0 0.2rem 0.4rem 0 #d9d9d9;
+  width: 100%;
 }
 
 .form {
-	grid-area: form;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-end;
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .form div {
-	display: flex;
-	flex-direction: column;
-	width: 80%;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
 
 .form input {
@@ -57,8 +55,8 @@
 }
 
 .form input:focus {
-	outline: none;
-	border: 2px solid var(--clr-base-darker-blue);
+  outline: none;
+  border: 2px solid var(--clr-base-darker-blue);
 }
 
 .form input::placeholder {
@@ -66,7 +64,7 @@
 }
 
 .form button {
-	height: 3rem;
-	font-size: inherit;
-	transition: all.2s ease;
+  height: 3rem;
+  font-size: inherit;
+  transition: all.2s ease;
 }
