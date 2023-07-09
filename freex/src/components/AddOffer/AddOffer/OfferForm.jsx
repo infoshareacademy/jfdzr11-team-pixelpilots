@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 const OfferForm = ({
   offer,
   handleSubmit,
-  disabled,
   chosenSkills,
   setChosenSkills,
   submitText,
@@ -50,6 +49,7 @@ const OfferForm = ({
           placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
           name="title"
           type="text"
+          required
         />
 
         <CharacterCounter length={titleLength} max="100" />
@@ -66,6 +66,7 @@ const OfferForm = ({
           placeholder="Opisz swój projekt tutaj"
           name="description"
           id="description"
+          required
         ></textarea>
 
         <CharacterCounter length={descriptionLength} max="5000" />
@@ -95,7 +96,9 @@ const OfferForm = ({
           defaultPaymentMethod={offer?.payment_method}
           data={summary}
           setData={setSummary}
-          offer={offer}
+          defaultHourRate={offer?.hourly_rate}
+          defaultMilestoneRate={offer?.milestone_rate}
+          defaultTotalPayment={offer?.total_payment}
         />
 
         <div className={styles.premium_plan_section}>
@@ -103,7 +106,6 @@ const OfferForm = ({
             let defaultValue = offer?.premium_plan?.[option.plan_name];
             return (
               <PremiumOption
-                disabled={disabled}
                 key={idx}
                 plan_name={option.plan_name}
                 plan_title={option.plan_title}
