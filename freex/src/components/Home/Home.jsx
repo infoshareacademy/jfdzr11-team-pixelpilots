@@ -15,9 +15,13 @@ const Home = () => {
         <>
           <div className={styles.container}>
             <div className={styles.left}>
-              <h1>Załóż konto już dziś</h1>
-              <h1>i dołącz do społeczności</h1>
-              <h1>profesjonalistów</h1>
+              <h2>
+                Załóż konto już dziś
+                <br />
+                i dołącz do społeczności
+                <br />
+                profesjonalistów
+              </h2>
               <p className={styles.text}>
                 Nieważne, czy jesteś doświadczonym freelancerem, który szuka
                 nowych możliwości i projektów, czy przedsiębiorcą dążącym do
