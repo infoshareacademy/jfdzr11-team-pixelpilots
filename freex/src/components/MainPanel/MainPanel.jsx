@@ -1,9 +1,9 @@
 import { Cards } from "../index";
-// import styles from './ProfilUzytkownika.module.css';
+import styles from "./MainPanel.module.css";
 
 const MainPanel = () => {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <Cards />
     </div>
   );

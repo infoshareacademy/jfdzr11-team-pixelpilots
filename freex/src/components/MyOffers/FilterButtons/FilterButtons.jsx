@@ -1,14 +1,34 @@
 import FilterButton from '../FilterButton/FilterButton';
 import styles from './FilterButtons.module.css';
 
-const FilterButtons = () => {
+const FilterButtons = ({ setFilter }) => {
   return (
     <div className={styles.filter_buttons}>
-      <FilterButton buttonText={'Wszystkie'} />
-      <FilterButton buttonText={'Opublikowane'} />
-      <FilterButton buttonText={'W trakcie'} />
-      <FilterButton buttonText={'Zakończone'} />
-      <FilterButton buttonText={'Do opłacenia'} />
+      <FilterButton
+        buttonText={'Wszystkie'}
+        setFilter={setFilter}
+        value="all"
+      />
+      <FilterButton
+        buttonText={'Opublikowane'}
+        setFilter={setFilter}
+        value="published"
+      />
+      <FilterButton
+        buttonText={'W trakcie'}
+        setFilter={setFilter}
+        value="pending"
+      />
+      <FilterButton
+        buttonText={'Zakończone'}
+        setFilter={setFilter}
+        value="closed"
+      />
+      <FilterButton
+        buttonText={'Do opłacenia'}
+        setFilter={setFilter}
+        value="unpaid"
+      />
     </div>
   );
 };

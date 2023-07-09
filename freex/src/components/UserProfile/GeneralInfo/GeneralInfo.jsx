@@ -1,16 +1,30 @@
 import ProfileCard from "../ProfileCard/ProfileCard";
 import styles from "./GeneralInfo.module.css";
+import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
+import { useNavigate } from "react-router-dom";
+import Rating from "../../UI/Rating/Rating";
 
 const GeneralInfo = ({
   name,
+  userId,
   role,
   imgURL,
-  rating,
-  opinionsNumber,
+  opinions,
   description,
   hourlyRate,
   joiningDate,
+  isButton = false,
 }) => {
+  const navigate = useNavigate();
+
+  const opinionsNumber = Number(opinions?.length);
+  const ratingSum = opinions?.reduce(
+    (accumulator, currentObject) =>
+      Number(accumulator) + Number(currentObject.rating),
+    0
+  );
+  const averageRating = (ratingSum / opinionsNumber).toFixed(2);
+
   return (
     <ProfileCard className={styles.general_info}>
       <div className={styles.general_info_left}>
@@ -24,19 +38,26 @@ const GeneralInfo = ({
       <div className={styles.general_info_right}>
         <h4 className={styles.user_name}>{name}</h4>
         <h5 className={styles.user_role}>{role}</h5>
-        <div className={styles.rating}>
-          <div className={styles.rating_stars}>
-            <img src="../../../../UserProfile/rating_star_no.svg" />
-            <img src="../../../UserProfile/rating_star_no.svg" />
-            <img src="../../../UserProfile/rating_star_no.svg" />
-            <img src="../../../UserProfile/rating_star_no.svg" />
-            <img src="../../../UserProfile/rating_star_no.svg" />
-          </div>
-          <span className={styles.rating_number}>{rating}</span>
-          <span>({opinionsNumber} opinii)</span>
-        </div>
+        <Rating
+          className={styles.rating}
+          rating={
+            averageRating && !isNaN(averageRating) ? averageRating : "0.00"
+          }
+          opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
+        />
         <p className={styles.description}>{description}</p>
-        <div className={styles.button_wrapper}></div>
+        {isButton ? (
+          <div className={styles.button_wrapper}>
+            <PrimaryButton
+              className={styles.button}
+              onClick={() => {
+                navigate(`/freelancerzy/${userId}`);
+              }}
+            >
+              Szczegóły
+            </PrimaryButton>
+          </div>
+        ) : null}
       </div>
     </ProfileCard>
   );

@@ -1,39 +1,9 @@
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../../../config/firebase';
-import useAuth from '../../Context/AuthContext';
-import { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
 import OfferListItem from '../OfferListItem/OfferListItem';
 
-const OffersList = () => {
-  const { currentUser } = useAuth();
-  const [userOffers, setUserOffers] = useState([]);
-
-  const q = query(
-    collection(db, 'offers'),
-    where('userId', '==', currentUser.uid)
-  );
-
-  const getOffers = async () => {
-    try {
-      const data = await getDocs(q);
-      const filteredData = data.docs.map((doc) => ({
-        ...doc.data(),
-      }));
-
-      setUserOffers(filteredData);
-    } catch (error) {
-      toast(`Błąd bazy danych`);
-    }
-  };
-
-  useEffect(() => {
-    getOffers();
-  }, []);
-
+const OffersList = ({ filteredItems }) => {
   return (
     <>
-      {userOffers.map((offer, idx) => {
+      {filteredItems.map((offer, idx) => {
         let cost = '';
         if (offer.payment_method === 'Jednorazowa płatność') {
           cost = offer.total_payment;
@@ -45,10 +15,11 @@ const OffersList = () => {
         const date = offer.date.toDate();
         const dateFormat = `${date.getDate()}.${
           date.getMonth() + 1
-        }.  ${date.getFullYear()}`;
+        }.${date.getFullYear()}`;
 
         return (
           <OfferListItem
+            offerId={offer.offer_number}
             key={idx}
             projectTitle={offer.title}
             publishDate={dateFormat}

@@ -1,33 +1,47 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ContactUser from "./ContactUser/ContactUser";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProfileList from "./ProfileList/ProfileList";
 import Skills from "./Skills/Skills";
 import styles from "./UserProfile.module.css";
 import useAuth from "../Context/AuthContext";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
+import Opinions from "./Opinions/Opinions";
+import Loader from "../UI/Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const UserProfile = () => {
-  const navigate = useNavigate();
+  const { userId } = useParams();
   const { currentUser } = useAuth();
   const currentUserID = currentUser.uid;
-  const docRef = doc(db, "users", currentUserID);
 
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    getDoc(docRef).then((docSnap) => {
-      if (docSnap.exists()) {
-        const userData = docSnap.data();
-        setUser(userData);
-      } else {
-        setUser(null);
-      }
-    });
-  }, []);
+    setIsLoading(true);
+    const docRef = doc(db, "users", userId);
+    try {
+      const unsubscribe = onSnapshot(docRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setUser(userData);
+        } else {
+          setUser(null);
+        }
+        setIsLoading(false);
+      });
+
+      return () => unsubscribe();
+    } catch (e) {
+      toast.error("Pojawił się błąd. Spróbuj później. Error: " + e);
+    }
+  }, [userId]);
 
   const editHandler = () => {
     navigate("/edytujprofil");
@@ -37,7 +51,10 @@ const UserProfile = () => {
     navigate("/edytujprofil");
   };
 
-  if (!user) {
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+  if (!user && currentUserID === userId) {
     return (
       <div className={styles.message_wrapper}>
         <p></p>
@@ -58,45 +75,57 @@ const UserProfile = () => {
   } else {
     return (
       <>
-        <div className={styles.message_wrapper}>
-          <PrimaryButton
-            className={styles.message_button}
-            type="button"
-            onClick={editHandler}
-          >
-            Edytuj swoje dane
-          </PrimaryButton>
-          <p className={styles.message_caption}>
-            Dane, które dodasz do profilu, będą widoczne dla innych użytkowników
-          </p>
-        </div>
+        {currentUserID === userId && (
+          <div className={styles.message_wrapper}>
+            <PrimaryButton
+              className={styles.message_button}
+              type="button"
+              onClick={editHandler}
+            >
+              Edytuj swoje dane
+            </PrimaryButton>
+            <p className={styles.message_caption}>
+              Dane, które dodasz do profilu, będą widoczne dla innych
+              użytkowników
+            </p>
+          </div>
+        )}
 
         <div className={styles.user_profile}>
           <GeneralInfo
             name={user.userName}
             role={user.role}
             imgURL={user.imgURL}
-            rating={user.rating}
-            opinionsNumber={user.opinionsNumber}
+            opinions={user.opinions}
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}
+            userId={user.Id}
           ></GeneralInfo>
 
-          <Skills skills={user.skills}></Skills>
+          {user.skills?.length !== 0 && <Skills skills={user.skills}></Skills>}
 
-          <ProfileList
-            className={styles.experience}
-            listData={user.experience}
-            header="Doświadczenie"
+          <Opinions
+            className={styles.opinions}
+            currentUserData={user}
+            setUser={setUser}
           />
 
-          <ProfileList
-            className={styles.education}
-            listData={user.education}
-            header="Edukacja / Kwalifikacje"
-          />
+          {user.experience?.length !== 0 && (
+            <ProfileList
+              className={styles.experience}
+              listData={user.experience}
+              header="Doświadczenie"
+            />
+          )}
 
+          {user.education?.length !== 0 && (
+            <ProfileList
+              className={styles.education}
+              listData={user.education}
+              header="Edukacja / Kwalifikacje"
+            />
+          )}
           <ContactUser />
         </div>
       </>

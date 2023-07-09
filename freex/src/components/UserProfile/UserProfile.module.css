@@ -23,6 +23,7 @@
   grid-template-areas:
     "general_info contact"
     "skills look"
+    "opinions empty"
     "experience empty"
     "education empty";
   margin: 2rem 0;
@@ -34,6 +35,10 @@
 
 .education {
   grid-area: education;
+}
+
+.opinions {
+  grid-area: opinions;
 }
 
 /* Look button */

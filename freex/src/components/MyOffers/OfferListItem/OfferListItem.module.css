@@ -9,6 +9,11 @@
 
 .offer_list_item {
   border-bottom: 1px solid #e8e9ec;
+  cursor: pointer;
+}
+
+.offer_list_item:hover {
+  background-color: rgb(238, 238, 238);
 }
 
 .headers p {

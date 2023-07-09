@@ -5,7 +5,6 @@ import {
   Home,
   Login,
   Register,
-  MainPanel,
   MyOffers,
   AddOffer,
   Freelancers,
@@ -16,6 +15,7 @@ import {
   Favorites,
   EditUserProfile,
   ForgotPassword,
+  MyOfferDetails,
 } from "./components";
 import Offer from "./components/Offer/Offer";
 
@@ -29,16 +29,16 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-
         {/* Ściezki prywatne */}
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/panelglowny" element={<MainPanel />} />
           <Route path="/mojeoferty" element={<MyOffers />} />
+          <Route path="/mojeoferty/:ofertaid" element={<MyOfferDetails />} />
           <Route path="/dodajoferte" element={<AddOffer />} />
           <Route path="/freelancerzy" element={<Freelancers />} />
+          <Route path="/freelancerzy/:userId" element={<UserProfile />} />
           <Route path="/zlecenia" element={<Offers />} />
           <Route path="/zlecenia/zlecenie/:zlecenieId" element={<Offer />} />
-          <Route path="/profil" element={<UserProfile />} />
+          <Route path="/profil/:userId" element={<UserProfile />} />
           <Route path="/edytujprofil" element={<EditUserProfile />} />
           <Route path="/ulubione" element={<Favorites />} />
         </Route>
