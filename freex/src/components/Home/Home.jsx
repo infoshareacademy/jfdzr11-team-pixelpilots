@@ -12,13 +12,16 @@ const Home = () => {
       {currentUser ? (
         <MainPanel />
       ) : (
-        //powrót do strony głównej//
         <>
           <div className={styles.container}>
             <div className={styles.left}>
-              <h1>Załóż konto już dziś</h1>
-              <h1>i dołącz do społeczności</h1>
-              <h1>profesjonalistów</h1>
+              <h2>
+                Załóż konto już dziś
+                <br />
+                i dołącz do społeczności
+                <br />
+                profesjonalistów
+              </h2>
               <p className={styles.text}>
                 Nieważne, czy jesteś doświadczonym freelancerem, który szuka
                 nowych możliwości i projektów, czy przedsiębiorcą dążącym do
@@ -30,20 +33,17 @@ const Home = () => {
               <div className={styles.relative}>
                 <button
                   className={`${styles.homebtn} ${styles.absolute}`}
-                  onClick={() => navigate("/login")}
-                >
+                  onClick={() => navigate("/login")}>
                   Zaloguj się
                 </button>
                 <img
                   className={styles.box}
-                  src="../Home/register_find.png"
-                ></img>
+                  src="../Home/register_find.png"></img>
               </div>
               <div className={styles.relative}>
                 <button
                   className={`${styles.homebtn} ${styles.absolute}`}
-                  onClick={() => navigate("/register")}
-                >
+                  onClick={() => navigate("/register")}>
                   Zarejestruj się
                 </button>
                 <img className={styles.box} src="../Home/register_in.png"></img>

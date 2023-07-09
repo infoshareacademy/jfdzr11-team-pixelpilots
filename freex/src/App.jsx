@@ -5,7 +5,6 @@ import {
   Home,
   Login,
   Register,
-  MainPanel,
   MyOffers,
   AddOffer,
   Freelancers,
@@ -15,6 +14,7 @@ import {
   UserProfile,
   Favorites,
   EditUserProfile,
+  ForgotPassword,
   MyOfferDetails,
 } from "./components";
 import Offer from "./components/Offer/Offer";
@@ -28,7 +28,7 @@ function App() {
         <Route path="*" element={<InvalidAddress />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         {/* Ściezki prywatne */}
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/mojeoferty" element={<MyOffers />} />

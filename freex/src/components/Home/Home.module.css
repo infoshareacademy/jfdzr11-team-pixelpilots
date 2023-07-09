@@ -1,17 +1,18 @@
 .container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10rem;
-  margin-bottom: 3rem;
+  display: grid;
+  grid-template-areas: "left right";
+  grid-template-columns: 1fr 1fr;
+  padding: 10rem 2rem 2rem 0;
 }
 
 .left {
-  padding-top: 3rem;
+  padding-top: 5rem;
 }
 
 .right {
-  display: grid;
-  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .relative {
@@ -30,32 +31,31 @@
   border: transparent;
   background-color: transparent;
   color: var(--clr-very-light-grey-100);
-  font-family: inherit;
+  font-family: "Nunito Sans", sans-serif;
   font-size: 2.2rem;
   text-transform: uppercase;
 }
 
 .homebtn:hover {
-  /* background-color: var(--clr-violet-hover); */
   color: #006699;
   cursor: pointer;
 }
 
 .homebtn:active {
-  background-color: var(--clr-violet-active);
 }
 
-h1 {
-  color: #006699;
+h2 {
   font-size: 3rem;
-  line-height: 4rem;
+  color: var(--clr-very-dark-blue);
+  line-height: 3.5rem;
   font-weight: 400;
 }
 
 .text {
-  color: #4b525b;
-  font-size: 1, 3rem;
-  margin-right: 23.5rem;
+  color: var(--clr-dark-grey-400);
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin-right: 18.5rem;
   margin-top: 2rem;
 }
 
