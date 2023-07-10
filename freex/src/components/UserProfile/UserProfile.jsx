@@ -194,7 +194,7 @@ const UserProfile = () => {
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}
-            userId={user.Id}
+            userId={user.id}
           ></GeneralInfo>
 
           {user.skills?.length !== 0 && <Skills skills={user.skills}></Skills>}
