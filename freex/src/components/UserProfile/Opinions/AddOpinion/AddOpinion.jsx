@@ -50,11 +50,11 @@ const AddOpinion = ({ setVisibility }) => {
       rating: e.target.rating.value,
       description: e.target.description.value,
       skills: chosenSkills,
-      author: userData.userName,
+      author: userData?.userName ? userData.userName : "Anonimowy użytkownik",
       dateAdded: formattedDate,
-      imgUrl: userData.imgURL,
+      imgUrl: userData?.imgURL ? userData?.imgURL : "",
       id: uuid(),
-      authorId: userData.id,
+      authorId: currentUserID,
     };
 
     try {

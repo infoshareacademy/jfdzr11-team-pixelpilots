@@ -45,6 +45,7 @@
 .general_info_right {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .header_wrapper {
@@ -71,6 +72,7 @@
   padding-bottom: 16px;
   text-align: justify;
   font-size: 14px;
+  overflow-wrap: break-word;
 }
 
 .button_wrapper {

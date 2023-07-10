@@ -27,7 +27,7 @@ export const CurrentUserDataProvider = ({ children }) => {
             const userData = docSnap.data();
             setCurrentUserData(userData);
           } else {
-            toast.error("Wystąpił problem z załadowaniem danych użytkownika");
+            setCurrentUserData(null);
           }
           setIsLoading(false);
         });

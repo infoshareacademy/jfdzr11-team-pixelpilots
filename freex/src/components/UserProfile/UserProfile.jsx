@@ -124,7 +124,7 @@ const UserProfile = () => {
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
-  if (!user && currentUserID === userId) {
+  if ((!user || !user.userName) && currentUserID === userId) {
     return (
       <div className={styles.message_wrapper}>
         <p></p>

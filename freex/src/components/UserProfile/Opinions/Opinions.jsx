@@ -53,7 +53,14 @@ const Opinions = ({ className, currentUserData, setUser }) => {
               </ul>
               <div className={styles.name_button_wrapper}>
                 <div className={styles.author_info}>
-                  <img className={styles.userImg} src={item.imgUrl} />
+                  <img
+                    className={styles.userImg}
+                    src={
+                      item.imgUrl
+                        ? item.imgUrl
+                        : "../../../../UserProfile/blank-profile.png"
+                    }
+                  />
                   <span className={styles.caption}>{item.author}</span>
                   <span className={styles.caption}>{item.dateAdded}</span>
                 </div>

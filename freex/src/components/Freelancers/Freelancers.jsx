@@ -6,10 +6,13 @@ import { v4 as uuid } from "uuid";
 import styles from "./Freelancers.module.css";
 import Loader from "../UI/Loader/Loader";
 import { toast } from "react-hot-toast";
+import useAuth from "../Context/AuthContext";
 
 const Freelancers = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser.uid;
   const collectionRef = collection(db, "users");
 
   useEffect(() => {
@@ -34,21 +37,27 @@ const Freelancers = () => {
   }
   return (
     <ul className={styles.list}>
-      {users.map((user) => (
-        <li key={uuid()} className={styles.list_item}>
-          <GeneralInfo
-            userId={user.id}
-            name={user.userName}
-            role={user.role}
-            imgURL={user.imgURL}
-            opinions={user.opinions}
-            description={user.description}
-            hourlyRate={user.hourlyRate}
-            joiningDate={user.joiningDate}
-            isButton={true}
-          ></GeneralInfo>
-        </li>
-      ))}
+      {users.map((user) => {
+        if (currentUserId === user.id || !user.userName) {
+          return null;
+        } else {
+          return (
+            <li key={uuid()} className={styles.list_item}>
+              <GeneralInfo
+                userId={user.id}
+                name={user.userName}
+                role={user.role}
+                imgURL={user.imgURL}
+                opinions={user.opinions}
+                description={user.description}
+                hourlyRate={user.hourlyRate}
+                joiningDate={user.joiningDate}
+                isButton={true}
+              ></GeneralInfo>
+            </li>
+          );
+        }
+      })}
     </ul>
   );
 };

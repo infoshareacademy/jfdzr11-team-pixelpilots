@@ -49,8 +49,12 @@ const EditUserProfile = () => {
         const userData = docSnap.data();
         setUser(userData);
         setChosenSkills(userData.skills);
-        setExperienceInputFields(userData.experience);
-        setEducationInputFields(userData.education);
+        if (userData.experience) {
+          setExperienceInputFields(userData.experience);
+        }
+        if (userData.education) {
+          setEducationInputFields(userData.education);
+        }
       } else {
         setUser(null);
       }

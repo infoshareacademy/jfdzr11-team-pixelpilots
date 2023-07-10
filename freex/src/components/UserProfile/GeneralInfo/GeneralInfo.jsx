@@ -35,8 +35,8 @@ const GeneralInfo = ({
   const averageRating = (ratingSum / opinionsNumber).toFixed(2);
 
   const toggleFavorite = async (userId) => {
-    const currentFavorites = currentUserData.favorites
-      ? currentUserData.favorites
+    const currentFavorites = currentUserData?.favorites
+      ? currentUserData?.favorites
       : [];
 
     let updatedFavorites;
@@ -77,7 +77,7 @@ const GeneralInfo = ({
   };
 
   const isUserFavorite = (userId) => {
-    if (currentUserData.favorites.includes(userId)) {
+    if (currentUserData?.favorites?.includes(userId)) {
       return true;
     }
     return false;
