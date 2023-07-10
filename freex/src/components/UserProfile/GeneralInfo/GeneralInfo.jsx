@@ -39,7 +39,10 @@ const GeneralInfo = ({
       <div className={styles.general_info_right}>
         <div className={styles.header_wrapper}>
           <h4 className={styles.user_name}>{name}</h4>
-          <HeartButton />
+          <HeartButton
+            isFavorite={false}
+            onClick={() => console.log("great")}
+          />
         </div>
         <h5 className={styles.user_role}>{role}</h5>
         <Rating

@@ -3,19 +3,32 @@ import styles from "./HeartButton.module.css";
 import heartIcon from "../../../../public/HeartButton/heart-icon.svg";
 import heartIconHovered from "../../../../public/HeartButton/heart-icon-full.svg";
 
-const HeartButton = ({ className }) => {
-  const [isFilled, setIsFilled] = useState(false);
+const HeartButton = ({ className, isFavorite, onClick }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsFilled(true);
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setIsFilled(false);
+    setIsHovered(false);
   };
+
+  let isFilled;
+
+  if (isHovered && isFavorite) {
+    isFilled = true;
+  } else if (isHovered && !isFavorite) {
+    isFilled = true;
+  } else if (!isHovered && isFavorite) {
+    isFilled = true;
+  } else if (!isHovered && !isFavorite) {
+    isFilled = false;
+  }
 
   return (
     <button
+      onClick={onClick}
       className={`${styles.button} ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
