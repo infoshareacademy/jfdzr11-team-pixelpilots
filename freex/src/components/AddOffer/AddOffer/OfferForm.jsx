@@ -9,6 +9,7 @@ import PremiumOption from '../PremiumOption/PremiumOption';
 import Data from '../PremiumOption/PremiumOptionData.json';
 import Summary from '../Summary/Summary';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const OfferForm = ({
   offer,
@@ -21,12 +22,18 @@ const OfferForm = ({
   const [summary, setSummary] = useState({});
   const [descriptionLength, setDescriptionLength] = useState('0');
   const [skills, setSkills] = useState(skillsData);
+  const [file, setFile] = useState();
 
   const navigate = useNavigate();
 
   const handleChange = (e, setLength) => {
     const length = e.target.value.length;
     setLength(length);
+  };
+
+  const attachFile = (e) => {
+    toast.success('Dodano plik');
+    setFile(e.target.files[0]);
   };
 
   return (
@@ -76,12 +83,14 @@ const OfferForm = ({
             Upload file
           </label>
           <input
+            onChange={attachFile}
             className={styles.add_file_input}
             id="add_file"
             name="add_file"
             type="file"
           />
         </div>
+        <div>{file?.name}</div>
         <h2 className={styles.title}>Jakie umiejętności są potrzebne?</h2>
 
         <Skills

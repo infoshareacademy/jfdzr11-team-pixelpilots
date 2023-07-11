@@ -33,11 +33,12 @@ const PaymentMethod = ({
     oneTimePayChecked = true;
   }
 
-  const getNumber = (string) => {
-    const arr = string.split(' ');
+  const getNumber = (string = '') => {
+    const arr = string?.split(' ');
     const val = Number(arr[0]);
-    return val;
+    return string ? val : null;
   };
+
   return (
     <>
       <h2 className={styles.title}>Jak chcesz zapłacić?</h2>
