@@ -1,0 +1,17 @@
+.skill {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  border: 1px solid rgb(128, 212, 255);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  padding: 0 15px;
+  background-color: transparent;
+  transition: border 0.1s linear;
+  font-family: inherit;
+}
+
+.chosen_skill {
+  background-color: var(--clr-base-darker-blue);
+  color: white;
+}
