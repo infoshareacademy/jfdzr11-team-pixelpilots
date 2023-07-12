@@ -1,0 +1,33 @@
+.personalData {
+	margin: 2rem auto;
+	padding: 2rem;
+	border: 1px solid var(--clr-primary-black);
+	border-radius: 8px;
+	text-align: center;
+	background-color: var(--clr-primary-white);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: fit-content;
+}
+
+.personalData li {
+	list-style: none;
+	line-height: 1.7rem;
+	font-size: 0.875rem;
+}
+
+.image {
+	width: 10rem;
+	border-radius: 50%;
+	margin-bottom: 1rem;
+}
+
+.rating {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.rating div {
+	display: flex;
+}
