@@ -22,11 +22,15 @@
   gap: 20px;
   grid-template-areas:
     "general_info contact"
-    "skills look"
+    "skills empty"
     "opinions empty"
     "experience empty"
     "education empty";
   margin: 2rem 0;
+}
+
+.portfolio {
+  grid-area: portfolio;
 }
 
 .experience {

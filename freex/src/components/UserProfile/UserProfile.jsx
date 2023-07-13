@@ -195,6 +195,8 @@ const UserProfile = () => {
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}
             userId={user.id}
+            portfolioLinks={user.portfolio}
+            isPortfolio={true}
           ></GeneralInfo>
 
           {user.skills?.length !== 0 && <Skills skills={user.skills}></Skills>}

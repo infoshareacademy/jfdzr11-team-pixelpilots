@@ -8,6 +8,7 @@ import useCurrentUserData from "../../Context/CurrentUserDataContext";
 import useAuth from "../../Context/AuthContext";
 import { toggleFavoriteUser } from "../../../utils/toggleFavorite";
 import { isUserFavorite } from "../../../utils/toggleFavorite";
+import Portfolio from "../Portfolio/Portfolio";
 
 const GeneralInfo = ({
   name,
@@ -18,7 +19,9 @@ const GeneralInfo = ({
   description,
   hourlyRate,
   joiningDate,
+  portfolioLinks,
   isButton = false,
+  isPortfolio = false,
 }) => {
   const navigate = useNavigate();
   const { currentUserData } = useCurrentUserData();
@@ -62,6 +65,10 @@ const GeneralInfo = ({
           opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
         />
         <p className={styles.description}>{description}</p>
+        {isPortfolio && portfolioLinks && (
+          <Portfolio portfolioLinks={portfolioLinks} />
+        )}
+
         {isButton ? (
           <div className={styles.button_wrapper}>
             <PrimaryButton

@@ -30,6 +30,7 @@ const EditUserProfile = () => {
 
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [portfolioInputFields, setPortfolioInputFields] = useState([]);
   const [skills, setSkills] = useState(skillsData);
   const [chosenSkills, setChosenSkills] = useState([]);
   const [experienceInputFields, setExperienceInputFields] = useState([]);
@@ -72,6 +73,9 @@ const EditUserProfile = () => {
         }
         if (userData.education) {
           setEducationInputFields(userData.education);
+        }
+        if (userData.portfolio) {
+          setPortfolioInputFields(userData.portfolio);
         }
       } else {
         setUser(null);
@@ -179,6 +183,7 @@ const EditUserProfile = () => {
         skills: chosenSkills,
         experience: experienceInputFields,
         education: educationInputFields,
+        portfolio: portfolioInputFields,
       };
 
       const docRef = doc(db, "users", currentUserID);
@@ -197,6 +202,7 @@ const EditUserProfile = () => {
       }
       navigate(`/profil/${currentUserID}`);
     } catch (e) {
+      console.log(e);
       toast.error("Wystąpił błąd. Error " + e);
     }
   };
@@ -211,6 +217,17 @@ const EditUserProfile = () => {
       data[itemIndex][e.target.name] = e.target.value;
     }
     setInputsValues(data);
+  };
+
+  const addPortfolioField = (e, setState) => {
+    e.preventDefault();
+    const newElementId = uuid();
+    let newfield = {
+      id: newElementId,
+      linkText: "",
+      url: "",
+    };
+    setState((previousState) => [...previousState, newfield]);
   };
 
   const addField = (e, setState) => {
@@ -237,10 +254,12 @@ const EditUserProfile = () => {
     e.preventDefault();
     const updatedItems = inputsValues.filter((item) => item.id !== itemId);
     setInputsValues(updatedItems);
-    setLogosToBeDeleted((previousLogosToBeDeleted) => [
-      ...previousLogosToBeDeleted,
-      itemId,
-    ]);
+    if (setLogosToBeDeleted) {
+      setLogosToBeDeleted((previousLogosToBeDeleted) => [
+        ...previousLogosToBeDeleted,
+        itemId,
+      ]);
+    }
   };
 
   if (isLoading) {
@@ -323,6 +342,75 @@ const EditUserProfile = () => {
             placeholder="Np. jan_kowalski@gmail.com"
             defaultValue={user ? user.email : currentUser.email}
           />
+        </fieldset>
+
+        <fieldset className={styles.form_fieldset}>
+          <legend className={styles.legend}>Portfolio</legend>
+          <PrimaryButton
+            className={styles.button}
+            onClick={(e) => addPortfolioField(e, setPortfolioInputFields)}
+          >
+            Dodaj kolejną pozycję
+          </PrimaryButton>
+          <ul className={styles.list}>
+            {portfolioInputFields.map((item) => {
+              return (
+                <li key={item.id} className={styles.listItem}>
+                  <label className={styles.input_label} htmlFor="linkText">
+                    Nazwa linku
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    id="linkText"
+                    name="linkText"
+                    placeholder="Np. Behance"
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        portfolioInputFields,
+                        setPortfolioInputFields
+                      )
+                    }
+                    defaultValue={item.linkText ? item.linkText : ""}
+                  />
+                  <label className={styles.input_label} htmlFor="url">
+                    Adres url
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    id="url"
+                    name="url"
+                    placeholder="Np. https://www.behance.net/"
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        portfolioInputFields,
+                        setPortfolioInputFields
+                      )
+                    }
+                    defaultValue={item.url ? item.url : ""}
+                  />
+                  <SecondaryButton
+                    className={styles.remove_button}
+                    onClick={(event) =>
+                      removeItem(
+                        event,
+                        item.id,
+                        portfolioInputFields,
+                        setPortfolioInputFields
+                      )
+                    }
+                  >
+                    Usuń
+                  </SecondaryButton>
+                </li>
+              );
+            })}
+          </ul>
         </fieldset>
 
         <fieldset className={styles.form_fieldset}>
