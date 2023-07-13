@@ -1,0 +1,16 @@
+.wrapper {
+  margin-top: 2rem;
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: 400;
+  color: rgb(0, 102, 153);
+  margin-bottom: 1rem;
+}
+
+.chip_wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}

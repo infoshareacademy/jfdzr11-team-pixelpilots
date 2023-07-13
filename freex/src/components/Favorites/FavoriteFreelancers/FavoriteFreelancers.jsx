@@ -1,19 +1,23 @@
-import { useEffect, useState } from "react";
-import GeneralInfo from "../UserProfile/GeneralInfo/GeneralInfo";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import { v4 as uuid } from "uuid";
-import styles from "./Freelancers.module.css";
-import Loader from "../UI/Loader/Loader";
+import { db } from "../../../config/firebase";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import useAuth from "../Context/AuthContext";
+import { v4 as uuid } from "uuid";
+import useAuth from "../../Context/AuthContext";
+import Loader from "../../UI/Loader/Loader";
+import styles from "./FavoriteFreelancers.module.css";
+import GeneralInfo from "../../UserProfile/GeneralInfo/GeneralInfo";
+import useCurrentUserData from "../../Context/CurrentUserDataContext";
 
-const Freelancers = () => {
-  const [users, setUsers] = useState([]);
+const FavoriteFreelancers = () => {
+  const [usersData, setUsersData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { currentUser } = useAuth();
+  const { currentUserData } = useCurrentUserData();
   const currentUserId = currentUser.uid;
   const collectionRef = collection(db, "users");
+
+  const favoriteUsers = currentUserData?.favoriteUsers;
 
   useEffect(() => {
     getDocs(collectionRef)
@@ -23,7 +27,7 @@ const Freelancers = () => {
         })
       )
       .then((data) => {
-        setUsers(data);
+        setUsersData(data);
         setIsLoading(false);
       })
       .catch((e) => {
@@ -37,8 +41,12 @@ const Freelancers = () => {
   }
   return (
     <ul className={styles.list}>
-      {users.map((user) => {
-        if (currentUserId === user.id || !user.userName) {
+      {usersData?.map((user) => {
+        if (
+          currentUserId === user.id ||
+          !user.userName ||
+          !favoriteUsers.includes(user.id)
+        ) {
           return null;
         } else {
           return (
@@ -62,4 +70,4 @@ const Freelancers = () => {
   );
 };
 
-export default Freelancers;
+export default FavoriteFreelancers;

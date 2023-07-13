@@ -124,7 +124,7 @@ const UserProfile = () => {
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
-  if (!user && currentUserID === userId) {
+  if ((!user || !user.userName) && currentUserID === userId) {
     return (
       <div className={styles.message_wrapper}>
         <p></p>
@@ -194,7 +194,9 @@ const UserProfile = () => {
             description={user.description}
             hourlyRate={user.hourlyRate}
             joiningDate={user.joiningDate}
-            userId={user.Id}
+            userId={user.id}
+            portfolioLinks={user.portfolio}
+            isPortfolio={true}
           ></GeneralInfo>
 
           {user.skills?.length !== 0 && <Skills skills={user.skills}></Skills>}

@@ -30,6 +30,7 @@ const EditUserProfile = () => {
 
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [portfolioInputFields, setPortfolioInputFields] = useState([]);
   const [skills, setSkills] = useState(skillsData);
   const [chosenSkills, setChosenSkills] = useState([]);
   const [experienceInputFields, setExperienceInputFields] = useState([]);
@@ -41,6 +42,24 @@ const EditUserProfile = () => {
     []
   );
 
+  const MAX_FILE_SIZE = 1048576;
+
+  const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    let month = now.getMonth() + 1;
+    let day = now.getDate();
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    if (day < 10) {
+      day = `0${day}`;
+    }
+    return `${year}-${month}-${day}`;
+  };
+
+  const maxDate = getCurrentDate();
+
   const docRef = doc(db, "users", currentUserID);
 
   useEffect(() => {
@@ -49,8 +68,15 @@ const EditUserProfile = () => {
         const userData = docSnap.data();
         setUser(userData);
         setChosenSkills(userData.skills);
-        setExperienceInputFields(userData.experience);
-        setEducationInputFields(userData.education);
+        if (userData.experience) {
+          setExperienceInputFields(userData.experience);
+        }
+        if (userData.education) {
+          setEducationInputFields(userData.education);
+        }
+        if (userData.portfolio) {
+          setPortfolioInputFields(userData.portfolio);
+        }
       } else {
         setUser(null);
       }
@@ -75,6 +101,7 @@ const EditUserProfile = () => {
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       const file = item.logo;
+
       if (file && file instanceof File) {
         const fileRef = ref(
           storage,
@@ -98,10 +125,35 @@ const EditUserProfile = () => {
     });
   };
 
+  const isFileTooBig = (file) => {
+    if (file instanceof File && file.size > MAX_FILE_SIZE) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
+      if (isFileTooBig(e.target.profileImg.files[0])) {
+        toast.error(
+          "Rozmiar dodanego zdjęcia profilowego jest za duży. Największy akceptowany rozmiar pliku to 1MB. Zmień plik przed zapisaniem zmian."
+        );
+        return;
+      }
+
+      if (
+        experienceInputFields.some((item) => isFileTooBig(item.logo)) ||
+        educationInputFields.some((item) => isFileTooBig(item.logo))
+      ) {
+        toast.error(
+          "Rozmiar dodanego logo jest za duży. Największy akceptowany rozmiar pliku to 1MB. Zmień plik przed zapisaniem zmian."
+        );
+        return;
+      }
+
       const profileImgUrl = await uploadFile(e);
 
       await removeRedundantLogos(experienceLogosToBeDeleted, "experience");
@@ -131,6 +183,7 @@ const EditUserProfile = () => {
         skills: chosenSkills,
         experience: experienceInputFields,
         education: educationInputFields,
+        portfolio: portfolioInputFields,
       };
 
       const docRef = doc(db, "users", currentUserID);
@@ -149,6 +202,7 @@ const EditUserProfile = () => {
       }
       navigate(`/profil/${currentUserID}`);
     } catch (e) {
+      console.log(e);
       toast.error("Wystąpił błąd. Error " + e);
     }
   };
@@ -157,11 +211,23 @@ const EditUserProfile = () => {
     let data = [...inputsValues];
     const itemIndex = data.findIndex((item) => item.id === id);
     if (e.target.name == "logo") {
-      data[itemIndex][e.target.name] = e.target.files[0];
+      const file = e.target.files[0];
+      data[itemIndex][e.target.name] = file;
     } else {
       data[itemIndex][e.target.name] = e.target.value;
     }
     setInputsValues(data);
+  };
+
+  const addPortfolioField = (e, setState) => {
+    e.preventDefault();
+    const newElementId = uuid();
+    let newfield = {
+      id: newElementId,
+      linkText: "",
+      url: "",
+    };
+    setState((previousState) => [...previousState, newfield]);
   };
 
   const addField = (e, setState) => {
@@ -188,10 +254,12 @@ const EditUserProfile = () => {
     e.preventDefault();
     const updatedItems = inputsValues.filter((item) => item.id !== itemId);
     setInputsValues(updatedItems);
-    setLogosToBeDeleted((previousLogosToBeDeleted) => [
-      ...previousLogosToBeDeleted,
-      itemId,
-    ]);
+    if (setLogosToBeDeleted) {
+      setLogosToBeDeleted((previousLogosToBeDeleted) => [
+        ...previousLogosToBeDeleted,
+        itemId,
+      ]);
+    }
   };
 
   if (isLoading) {
@@ -277,6 +345,75 @@ const EditUserProfile = () => {
         </fieldset>
 
         <fieldset className={styles.form_fieldset}>
+          <legend className={styles.legend}>Portfolio</legend>
+          <PrimaryButton
+            className={styles.button}
+            onClick={(e) => addPortfolioField(e, setPortfolioInputFields)}
+          >
+            Dodaj kolejną pozycję
+          </PrimaryButton>
+          <ul className={styles.list}>
+            {portfolioInputFields.map((item) => {
+              return (
+                <li key={item.id} className={styles.listItem}>
+                  <label className={styles.input_label} htmlFor="linkText">
+                    Nazwa linku
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    id="linkText"
+                    name="linkText"
+                    placeholder="Np. Behance"
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        portfolioInputFields,
+                        setPortfolioInputFields
+                      )
+                    }
+                    defaultValue={item.linkText ? item.linkText : ""}
+                  />
+                  <label className={styles.input_label} htmlFor="url">
+                    Adres url
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    id="url"
+                    name="url"
+                    placeholder="Np. https://www.behance.net/"
+                    onBlur={(e) =>
+                      handleBlur(
+                        e,
+                        item.id,
+                        portfolioInputFields,
+                        setPortfolioInputFields
+                      )
+                    }
+                    defaultValue={item.url ? item.url : ""}
+                  />
+                  <SecondaryButton
+                    className={styles.remove_button}
+                    onClick={(event) =>
+                      removeItem(
+                        event,
+                        item.id,
+                        portfolioInputFields,
+                        setPortfolioInputFields
+                      )
+                    }
+                  >
+                    Usuń
+                  </SecondaryButton>
+                </li>
+              );
+            })}
+          </ul>
+        </fieldset>
+
+        <fieldset className={styles.form_fieldset}>
           <legend className={styles.legend}>Umiejętności</legend>
           <Skills
             chosenSkills={chosenSkills}
@@ -345,6 +482,8 @@ const EditUserProfile = () => {
                     type="date"
                     id="start"
                     name="start"
+                    min="1950-01-01"
+                    max={maxDate}
                     onBlur={(e) =>
                       handleBlur(
                         e,
@@ -361,6 +500,8 @@ const EditUserProfile = () => {
                   <input
                     className={styles.input}
                     type="date"
+                    min="1950-01-01"
+                    max={maxDate}
                     id="end"
                     name="end"
                     onBlur={(e) =>
@@ -469,6 +610,8 @@ const EditUserProfile = () => {
                     type="date"
                     id="start"
                     name="start"
+                    min="1950-01-01"
+                    max={maxDate}
                     onBlur={(e) =>
                       handleBlur(
                         e,
@@ -487,6 +630,8 @@ const EditUserProfile = () => {
                     type="date"
                     id="end"
                     name="end"
+                    min="1950-01-01"
+                    max={maxDate}
                     onBlur={(e) =>
                       handleBlur(
                         e,
