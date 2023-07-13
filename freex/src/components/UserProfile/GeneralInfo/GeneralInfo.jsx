@@ -35,8 +35,8 @@ const GeneralInfo = ({
   const averageRating = (ratingSum / opinionsNumber).toFixed(2);
 
   const toggleFavorite = async (userId) => {
-    const currentFavorites = currentUserData?.favorites
-      ? currentUserData?.favorites
+    const currentFavorites = currentUserData?.favoriteUsers
+      ? currentUserData?.favoriteUsers
       : [];
 
     let updatedFavorites;
@@ -50,7 +50,7 @@ const GeneralInfo = ({
       isFavorite = false;
     }
 
-    const userUpdate = { favorites: updatedFavorites };
+    const userUpdate = { favoriteUsers: updatedFavorites };
 
     const docRef = doc(db, "users", currentUserId);
     const docSnap = await getDoc(docRef);
@@ -77,7 +77,7 @@ const GeneralInfo = ({
   };
 
   const isUserFavorite = (userId) => {
-    if (currentUserData?.favorites?.includes(userId)) {
+    if (currentUserData?.favoriteUsers?.includes(userId)) {
       return true;
     }
     return false;

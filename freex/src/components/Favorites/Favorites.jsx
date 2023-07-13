@@ -5,17 +5,17 @@ import FavoriteOffers from "./FavoriteOffers/FavoriteOffers";
 import styles from "./Favorites.module.css";
 
 const Favorites = () => {
-  const [visibility, setVisibility] = useState("freelancers");
+  const [resource, setResource] = useState("freelancers");
 
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Ulubione</h1>
       <div className={styles.chip_wrapper}>
-        <Chips onClick={() => setVisibility("freelancers")}>Freelancerzy</Chips>
-        <Chips onClick={() => setVisibility("offers")}>Oferty</Chips>
+        <Chips onClick={() => setResource("freelancers")}>Freelancerzy</Chips>
+        <Chips onClick={() => setResource("offers")}>Oferty</Chips>
       </div>
       <div className={styles.list_wrapper}>
-        {visibility === "freelancers" ? (
+        {resource === "freelancers" ? (
           <FavoriteFreelancers />
         ) : (
           <FavoriteOffers />
