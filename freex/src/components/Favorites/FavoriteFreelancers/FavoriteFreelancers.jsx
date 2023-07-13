@@ -17,7 +17,7 @@ const FavoriteFreelancers = () => {
   const currentUserId = currentUser.uid;
   const collectionRef = collection(db, "users");
 
-  const favoriteUsers = currentUserData.favoriteUsers;
+  const favoriteUsers = currentUserData?.favoriteUsers;
 
   useEffect(() => {
     getDocs(collectionRef)
@@ -41,7 +41,7 @@ const FavoriteFreelancers = () => {
   }
   return (
     <ul className={styles.list}>
-      {usersData.map((user) => {
+      {usersData?.map((user) => {
         if (
           currentUserId === user.id ||
           !user.userName ||

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { db } from '../../config/firebase';
+import { useEffect, useState } from "react";
+import { db } from "../../config/firebase";
 import {
   collection,
   getDocs,
@@ -7,17 +7,24 @@ import {
   query,
   where,
   orderBy,
-} from 'firebase/firestore';
-import styles from './Offers.module.css';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
-import { skills } from '../../utils/skills';
-import Skill from './Skill/Skill';
-import { nanoid } from 'nanoid';
+} from "firebase/firestore";
+import styles from "./Offers.module.css";
+import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { skills } from "../../utils/skills";
+import Skill from "./Skill/Skill";
+import { nanoid } from "nanoid";
+import HeartButton from "../UI/HeartButton/HeartButton";
+import {
+  isOfferFavorite,
+  toggleFavoriteOffer,
+} from "../../utils/toggleFavorite";
+import useCurrentUserData from "../Context/CurrentUserDataContext";
 
 const Offers = () => {
   const [offers, setOffers] = useState([]);
-  const offersCollectionRef = collection(db, 'offers');
+  const offersCollectionRef = collection(db, "offers");
+  const { currentUserData } = useCurrentUserData();
 
   const getOffers = (querySnapshot) => {
     return querySnapshot.docs.map((doc) => ({
@@ -30,8 +37,8 @@ const Offers = () => {
     const q = query(
       offersCollectionRef,
       searchTerm
-        ? where('skills', 'array-contains', searchTerm)
-        : orderBy('date', 'desc')
+        ? where("skills", "array-contains", searchTerm)
+        : orderBy("date", "desc")
     );
 
     try {
@@ -44,13 +51,13 @@ const Offers = () => {
 
       setOffers(offers);
     } catch (error) {
-      toast.error('Wystąpił błąd podczas pobierania danych');
+      toast.error("Wystąpił błąd podczas pobierania danych");
     }
   };
 
   useEffect(() => {
     onSnapshot(
-      query(offersCollectionRef, orderBy('date', 'desc')),
+      query(offersCollectionRef, orderBy("date", "desc")),
       (querySnapshot) => {
         const offers = getOffers(querySnapshot);
         setOffers(offers);
@@ -89,19 +96,29 @@ const Offers = () => {
       </form>
       {offers
         ? offers.map((offer) => {
-            let cost = '';
-            if (offer.payment_method === 'Jednorazowa płatność') {
+            let cost = "";
+            if (offer.payment_method === "Jednorazowa płatność") {
               cost = offer.total_payment;
-            } else if (offer.payment_method === 'Płatność za godziny') {
+            } else if (offer.payment_method === "Płatność za godziny") {
               cost = offer.hourly_rate;
-            } else if (offer.payment_method === 'Płatność za kamienie milowe')
+            } else if (offer.payment_method === "Płatność za kamienie milowe")
               cost = offer.milestone_rate;
 
             return (
               <div key={offer.id} className={styles.card}>
-                <h4>{offer.title}</h4>
+                <div className={styles.header_wrapper}>
+                  <h4>{offer.title}</h4>
+                  <div className={styles.cost_heart_wrapper}>
+                    <strong className={styles.strong}>{cost}</strong>
+                    <HeartButton
+                      isFavorite={isOfferFavorite(offer.id, currentUserData)}
+                      onClick={() =>
+                        toggleFavoriteOffer(offer.id, currentUserData)
+                      }
+                    />
+                  </div>
+                </div>
                 <p>{offer.description}</p>
-                <strong>{cost}</strong>
                 <ul>
                   {offer.skills.map((skill) => (
                     <li key={nanoid()}>{skill}</li>

@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 import Rating from "../../UI/Rating/Rating";
 import HeartButton from "../../UI/HeartButton/HeartButton";
 import useCurrentUserData from "../../Context/CurrentUserDataContext";
-import { toast } from "react-hot-toast";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../../config/firebase";
 import useAuth from "../../Context/AuthContext";
+import { toggleFavoriteUser } from "../../../utils/toggleFavorite";
+import { isUserFavorite } from "../../../utils/toggleFavorite";
 
 const GeneralInfo = ({
   name,
@@ -34,55 +33,6 @@ const GeneralInfo = ({
   );
   const averageRating = (ratingSum / opinionsNumber).toFixed(2);
 
-  const toggleFavorite = async (userId) => {
-    const currentFavorites = currentUserData?.favoriteUsers
-      ? currentUserData?.favoriteUsers
-      : [];
-
-    let updatedFavorites;
-    let isFavorite;
-
-    if (currentFavorites.includes(userId)) {
-      updatedFavorites = currentFavorites.filter((item) => item !== userId);
-      isFavorite = true;
-    } else {
-      updatedFavorites = [...currentFavorites, userId];
-      isFavorite = false;
-    }
-
-    const userUpdate = { favoriteUsers: updatedFavorites };
-
-    const docRef = doc(db, "users", currentUserId);
-    const docSnap = await getDoc(docRef);
-    try {
-      if (docSnap.exists()) {
-        await updateDoc(docRef, userUpdate);
-        if (!isFavorite) {
-          toast.success("Dodano freelancera do ulubionych");
-        } else if (isFavorite) {
-          toast.success("Usunięto freelancera z ulubionych");
-        }
-      } else {
-        await setDoc(docRef, userUpdate);
-        if (!isFavorite) {
-          toast.success("Dodano freelancera do ulubionych");
-        } else if (isFavorite) {
-          toast.success("Usunięto freelancera z ulubionych");
-        }
-      }
-    } catch (e) {
-      toast.error("Wystąpił błąd. Error " + e);
-      console.log(e);
-    }
-  };
-
-  const isUserFavorite = (userId) => {
-    if (currentUserData?.favoriteUsers?.includes(userId)) {
-      return true;
-    }
-    return false;
-  };
-
   return (
     <ProfileCard className={styles.general_info}>
       <div className={styles.general_info_left}>
@@ -98,8 +48,8 @@ const GeneralInfo = ({
           <h4 className={styles.user_name}>{name}</h4>
           {currentUserId === userId ? null : (
             <HeartButton
-              isFavorite={isUserFavorite(userId)}
-              onClick={() => toggleFavorite(userId)}
+              isFavorite={isUserFavorite(userId, currentUserData)}
+              onClick={() => toggleFavoriteUser(userId, currentUserData)}
             />
           )}
         </div>
