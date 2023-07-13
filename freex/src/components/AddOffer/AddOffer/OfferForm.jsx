@@ -9,11 +9,11 @@ import PremiumOption from '../PremiumOption/PremiumOption';
 import Data from '../PremiumOption/PremiumOptionData.json';
 import Summary from '../Summary/Summary';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const OfferForm = ({
   offer,
   handleSubmit,
-  disabled,
   chosenSkills,
   setChosenSkills,
   submitText,
@@ -22,12 +22,18 @@ const OfferForm = ({
   const [summary, setSummary] = useState({});
   const [descriptionLength, setDescriptionLength] = useState('0');
   const [skills, setSkills] = useState(skillsData);
+  const [file, setFile] = useState();
 
   const navigate = useNavigate();
 
   const handleChange = (e, setLength) => {
     const length = e.target.value.length;
     setLength(length);
+  };
+
+  const attachFile = (e) => {
+    toast.success('Dodano plik');
+    setFile(e.target.files[0]);
   };
 
   return (
@@ -50,6 +56,7 @@ const OfferForm = ({
           placeholder="Wpisz tytuł który będzie najlepiej odzwierciedlał Twój projekt"
           name="title"
           type="text"
+          required
         />
 
         <CharacterCounter length={titleLength} max="100" />
@@ -66,6 +73,7 @@ const OfferForm = ({
           placeholder="Opisz swój projekt tutaj"
           name="description"
           id="description"
+          required
         ></textarea>
 
         <CharacterCounter length={descriptionLength} max="5000" />
@@ -75,12 +83,14 @@ const OfferForm = ({
             Upload file
           </label>
           <input
+            onChange={attachFile}
             className={styles.add_file_input}
             id="add_file"
             name="add_file"
             type="file"
           />
         </div>
+        <div>{file?.name}</div>
         <h2 className={styles.title}>Jakie umiejętności są potrzebne?</h2>
 
         <Skills
@@ -95,7 +105,9 @@ const OfferForm = ({
           defaultPaymentMethod={offer?.payment_method}
           data={summary}
           setData={setSummary}
-          offer={offer}
+          defaultHourRate={offer?.hourly_rate}
+          defaultMilestoneRate={offer?.milestone_rate}
+          defaultTotalPayment={offer?.total_payment}
         />
 
         <div className={styles.premium_plan_section}>
@@ -103,7 +115,6 @@ const OfferForm = ({
             let defaultValue = offer?.premium_plan?.[option.plan_name];
             return (
               <PremiumOption
-                disabled={disabled}
                 key={idx}
                 plan_name={option.plan_name}
                 plan_title={option.plan_title}
