@@ -41,6 +41,24 @@ const EditUserProfile = () => {
     []
   );
 
+  const MAX_FILE_SIZE = 1048576;
+
+  const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    let month = now.getMonth() + 1;
+    let day = now.getDate();
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    if (day < 10) {
+      day = `0${day}`;
+    }
+    return `${year}-${month}-${day}`;
+  };
+
+  const maxDate = getCurrentDate();
+
   const docRef = doc(db, "users", currentUserID);
 
   useEffect(() => {
@@ -79,6 +97,7 @@ const EditUserProfile = () => {
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       const file = item.logo;
+
       if (file && file instanceof File) {
         const fileRef = ref(
           storage,
@@ -102,10 +121,35 @@ const EditUserProfile = () => {
     });
   };
 
+  const isFileTooBig = (file) => {
+    if (file instanceof File && file.size > MAX_FILE_SIZE) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
+      if (isFileTooBig(e.target.profileImg.files[0])) {
+        toast.error(
+          "Rozmiar dodanego zdjęcia profilowego jest za duży. Największy akceptowany rozmiar pliku to 1MB. Zmień plik przed zapisaniem zmian."
+        );
+        return;
+      }
+
+      if (
+        experienceInputFields.some((item) => isFileTooBig(item.logo)) ||
+        educationInputFields.some((item) => isFileTooBig(item.logo))
+      ) {
+        toast.error(
+          "Rozmiar dodanego logo jest za duży. Największy akceptowany rozmiar pliku to 1MB. Zmień plik przed zapisaniem zmian."
+        );
+        return;
+      }
+
       const profileImgUrl = await uploadFile(e);
 
       await removeRedundantLogos(experienceLogosToBeDeleted, "experience");
@@ -161,7 +205,8 @@ const EditUserProfile = () => {
     let data = [...inputsValues];
     const itemIndex = data.findIndex((item) => item.id === id);
     if (e.target.name == "logo") {
-      data[itemIndex][e.target.name] = e.target.files[0];
+      const file = e.target.files[0];
+      data[itemIndex][e.target.name] = file;
     } else {
       data[itemIndex][e.target.name] = e.target.value;
     }
@@ -349,6 +394,8 @@ const EditUserProfile = () => {
                     type="date"
                     id="start"
                     name="start"
+                    min="1950-01-01"
+                    max={maxDate}
                     onBlur={(e) =>
                       handleBlur(
                         e,
@@ -365,6 +412,8 @@ const EditUserProfile = () => {
                   <input
                     className={styles.input}
                     type="date"
+                    min="1950-01-01"
+                    max={maxDate}
                     id="end"
                     name="end"
                     onBlur={(e) =>
@@ -473,6 +522,8 @@ const EditUserProfile = () => {
                     type="date"
                     id="start"
                     name="start"
+                    min="1950-01-01"
+                    max={maxDate}
                     onBlur={(e) =>
                       handleBlur(
                         e,
@@ -491,6 +542,8 @@ const EditUserProfile = () => {
                     type="date"
                     id="end"
                     name="end"
+                    min="1950-01-01"
+                    max={maxDate}
                     onBlur={(e) =>
                       handleBlur(
                         e,
