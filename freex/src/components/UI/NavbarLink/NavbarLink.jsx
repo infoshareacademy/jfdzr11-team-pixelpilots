@@ -7,7 +7,7 @@ const NavbarLink = ({ linkURL, children }) => {
     <NavLink
       className={styles.navlink}
       style={({ isActive }) => ({
-        fontWeight: isActive && "700",
+        textShadow: isActive && "0 0 0.6px rgb(55, 63, 73)",
       })}
       to={linkURL}
     >

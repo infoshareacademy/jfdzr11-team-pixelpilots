@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db, storage } from '../../../config/firebase';
 import useAuth from '../../Context/AuthContext';
-import { ref, uploadBytesResumable } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -19,12 +19,24 @@ const AddOffer = () => {
 
   const offersCollectionRef = collection(db, 'offers');
 
+  const offer_number = nanoid();
+
+  const uploadFile = async (e) => {
+    const file = e.target.add_file.files[0];
+    if (file) {
+      const fileRef = ref(storage, `offerImages/${offer_number}`);
+      await uploadBytesResumable(fileRef, file);
+      const imageURL = await getDownloadURL(fileRef);
+      return imageURL;
+    } else {
+      return null;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const file = e.target.add_file.files[0];
-    const storageRef = ref(storage, `files/${file?.name}`);
-    if (file) uploadBytesResumable(storageRef, file);
+    const imageUrl = await uploadFile(e);
 
     const offerData = {
       userId: currentUser.uid,
@@ -42,7 +54,8 @@ const AddOffer = () => {
         contracts: e.target.contracts.checked,
       },
       date: serverTimestamp(),
-      offer_number: nanoid(),
+      imageUrl,
+      offer_number,
     };
 
     try {

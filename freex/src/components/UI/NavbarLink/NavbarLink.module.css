@@ -4,8 +4,9 @@
   font-size: 1rem;
   font-weight: 400;
   padding: 12px;
+  transition: text-shadow 0.2s;
 }
 
 .navlink:hover {
-  opacity: 0.5;
+  text-shadow: 0 0 0.6px rgb(55, 63, 73);
 }

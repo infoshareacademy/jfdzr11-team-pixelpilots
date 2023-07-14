@@ -1,0 +1,12 @@
+.button {
+  border: none;
+  background-color: transparent;
+}
+
+.icon {
+  width: 21px;
+  max-height: 21px;
+  /* filter: brightness(0%) saturate(100%) invert(51%) sepia(93%) saturate(5617%)
+    hue-rotate(204deg) brightness(100%) contrast(102%); */
+  fill: red;
+}

@@ -3,6 +3,12 @@ import styles from "./GeneralInfo.module.css";
 import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import Rating from "../../UI/Rating/Rating";
+import HeartButton from "../../UI/HeartButton/HeartButton";
+import useCurrentUserData from "../../Context/CurrentUserDataContext";
+import useAuth from "../../Context/AuthContext";
+import { toggleFavoriteUser } from "../../../utils/toggleFavorite";
+import { isUserFavorite } from "../../../utils/toggleFavorite";
+import Portfolio from "../Portfolio/Portfolio";
 
 const GeneralInfo = ({
   name,
@@ -13,9 +19,14 @@ const GeneralInfo = ({
   description,
   hourlyRate,
   joiningDate,
+  portfolioLinks,
   isButton = false,
+  isPortfolio = false,
 }) => {
   const navigate = useNavigate();
+  const { currentUserData } = useCurrentUserData();
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser.uid;
 
   const opinionsNumber = Number(opinions?.length);
   const ratingSum = opinions?.reduce(
@@ -36,7 +47,15 @@ const GeneralInfo = ({
         </div>
       </div>
       <div className={styles.general_info_right}>
-        <h4 className={styles.user_name}>{name}</h4>
+        <div className={styles.header_wrapper}>
+          <h4 className={styles.user_name}>{name}</h4>
+          {currentUserId === userId ? null : (
+            <HeartButton
+              isFavorite={isUserFavorite(userId, currentUserData)}
+              onClick={() => toggleFavoriteUser(userId, currentUserData)}
+            />
+          )}
+        </div>
         <h5 className={styles.user_role}>{role}</h5>
         <Rating
           className={styles.rating}
@@ -46,6 +65,10 @@ const GeneralInfo = ({
           opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
         />
         <p className={styles.description}>{description}</p>
+        {isPortfolio && portfolioLinks && (
+          <Portfolio portfolioLinks={portfolioLinks} />
+        )}
+
         {isButton ? (
           <div className={styles.button_wrapper}>
             <PrimaryButton

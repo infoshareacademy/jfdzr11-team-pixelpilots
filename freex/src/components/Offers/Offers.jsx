@@ -14,12 +14,19 @@ import { toast } from 'react-hot-toast';
 import { skills } from '../../utils/skills';
 import Skill from './Skill/Skill';
 import { nanoid } from 'nanoid';
+import HeartButton from '../UI/HeartButton/HeartButton';
+import {
+	isOfferFavorite,
+	toggleFavoriteOffer,
+} from '../../utils/toggleFavorite';
+import useCurrentUserData from '../Context/CurrentUserDataContext';
 import Loader from '../UI/Loader/Loader';
 
 const Offers = () => {
 	const [offers, setOffers] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const offersCollectionRef = collection(db, 'offers');
+	const { currentUserData } = useCurrentUserData();
 
 	const getOffers = (querySnapshot) => {
 		return querySnapshot.docs.map((doc) => ({
@@ -110,9 +117,27 @@ const Offers = () => {
 
 						return (
 							<div key={offer.id} className={styles.card}>
-								<h4>{offer.title}</h4>
+								<div className={styles.header_wrapper}>
+									<h4>{offer.title}</h4>
+									<div className={styles.cost_heart_wrapper}>
+										<strong className={styles.strong}>
+											{cost}
+										</strong>
+										<HeartButton
+											isFavorite={isOfferFavorite(
+												offer.id,
+												currentUserData
+											)}
+											onClick={() =>
+												toggleFavoriteOffer(
+													offer.id,
+													currentUserData
+												)
+											}
+										/>
+									</div>
+								</div>
 								<p>{offer.description}</p>
-								<strong>{cost}</strong>
 								<ul>
 									{offer.skills.map((skill) => (
 										<li key={nanoid()}>{skill}</li>

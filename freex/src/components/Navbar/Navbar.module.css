@@ -63,10 +63,11 @@
   font-size: 1rem;
   font-weight: 400;
   padding: 12px;
+  transition: text-shadow 0.2s;
 }
 
 .button_logout:hover {
-  opacity: 0.5;
+  text-shadow: 0 0 0.6px rgb(55, 63, 73);
   cursor: pointer;
 }
 
