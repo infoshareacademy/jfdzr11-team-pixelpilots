@@ -7,34 +7,21 @@ import { nanoid } from 'nanoid';
 import { UserCard } from '../../index';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
-
-function Arrow(props) {
-	const { className, style, onClick } = props;
-	return (
-		<div
-			className={className}
-			style={{
-				...style,
-				display: 'block',
-				background: 'grey',
-			}}
-			onClick={onClick}
-		/>
-	);
-}
+import { CiCircleChevLeft, CiCircleChevRight } from 'react-icons/ci';
 
 const Carousel = () => {
 	const [users, setUsers] = useState([]);
+	const [sliderRef, setSliderRef] = useState(null);
+
 	const collectionRef = collection(db, 'users');
 
 	const settings = {
 		dots: true,
-		infinite: true,
-		speed: 500,
+		arrows: false,
 		slidesToShow: 3,
 		slidesToScroll: 1,
-		nextArrow: <Arrow />,
-		prevArrow: <Arrow />,
+		infinite: true,
+		speed: 500,
 	};
 
 	useEffect(() => {
@@ -61,11 +48,26 @@ const Carousel = () => {
 				<h3>Najbardziej polecani freelancerzy</h3>
 
 				<div className={styles.list}>
-					<Slider {...settings}>
+					<div className={styles.controls}>
+						<button
+							onClick={sliderRef?.slickPrev}
+							className={styles.controlsPrev}
+						>
+							<CiCircleChevLeft />
+						</button>
+						<button
+							onClick={sliderRef?.slickNext}
+							className={styles.controlsNext}
+						>
+							<CiCircleChevRight />
+						</button>
+					</div>
+					<Slider ref={setSliderRef} {...settings}>
 						{users.map((user) => (
 							<Link
 								to={`/freelancerzy/${user.id}`}
 								key={nanoid()}
+								className={styles.wrapper}
 							>
 								<UserCard
 									key={nanoid()}
