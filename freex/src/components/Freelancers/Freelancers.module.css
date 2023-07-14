@@ -50,7 +50,7 @@
   cursor: pointer;
 }
 
-.sorter_item.active {
+.sorter_item_active {
   text-shadow: 0 0 0.6px rgb(55, 63, 73);
   cursor: pointer;
 }

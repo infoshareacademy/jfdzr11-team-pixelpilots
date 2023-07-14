@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import GeneralInfo from "../UserProfile/GeneralInfo/GeneralInfo";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { v4 as uuid } from "uuid";
 import styles from "./Freelancers.module.css";
 import Loader from "../UI/Loader/Loader";
 import { toast } from "react-hot-toast";
@@ -14,30 +13,58 @@ const Freelancers = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [skillFilters, setSkillFilters] = useState([]);
-  // const [sortingCategory, setSortingCategory] = useState("ratingUp");
+  const [sortingCategory, setSortingCategory] = useState("ratingUp");
   const { currentUser } = useAuth();
   const currentUserId = currentUser.uid;
   const collectionRef = collection(db, "users");
 
+  const convertToDate = (dateString) => {
+    const [day, month, year] = dateString.split(".");
+    const dateObject = new Date(year, month - 1, day);
+    return dateObject;
+  };
+
   const sortUsers = (category, users) => {
-    const sortedUsers = [...users];
-    if (category === "joiningDateUp") {
-      sortedUsers.sort((a, b) => b.joiningDate - a.joiningDate);
+    if (users) {
+      const sortedUsers = [...users];
+      if (category === "joiningDateUp") {
+        sortedUsers.sort(
+          (a, b) =>
+            convertToDate(b.joiningDate).getTime() -
+            convertToDate(a.joiningDate).getTime()
+        );
+      }
+      if (category === "joiningDateDown") {
+        sortedUsers.sort(
+          (a, b) =>
+            convertToDate(a.joiningDate).getTime() -
+            convertToDate(b.joiningDate).getTime()
+        );
+      }
+      if (category === "ratingDown") {
+        sortedUsers.sort(
+          (a, b) => getUserRating(a.opinions) - getUserRating(b.opinions)
+        );
+      }
+      if (category === "ratingUp") {
+        sortedUsers.sort(
+          (a, b) => getUserRating(b.opinions) - getUserRating(a.opinions)
+        );
+      }
+      return sortedUsers;
     }
-    if (category === "joiningDateDown") {
-      sortedUsers.sort((a, b) => a.joiningDate - b.joiningDate);
-    }
-    if (category === "ratingUp") {
-      sortedUsers.sort(
-        (a, b) => getUserRating(a.opinions) - getUserRating(b.opinions)
-      );
-    }
-    if (category === "ratingDown") {
-      sortedUsers.sort(
-        (a, b) => getUserRating(b.opinions) - getUserRating(a.opinions)
-      );
-    }
-    setUsers(sortedUsers);
+  };
+
+  const filterUsersData = (usersData) => {
+    const filteredUsersData = usersData.filter(
+      (userData) =>
+        userData.userName &&
+        userData.role &&
+        userData.joiningDate &&
+        userData.hourlyRate &&
+        userData.description
+    );
+    return filteredUsersData;
   };
 
   useEffect(() => {
@@ -48,7 +75,9 @@ const Freelancers = () => {
         })
       )
       .then((data) => {
-        setUsers(data);
+        const filteredData = filterUsersData(data);
+        const sortedData = sortUsers(sortingCategory, filteredData);
+        setUsers(sortedData);
         setIsLoading(false);
       })
       .catch((e) => {
@@ -56,12 +85,6 @@ const Freelancers = () => {
         toast.error("Pojawił się błąd. Spróbuj później. Error " + e);
       });
   }, []);
-
-  // useEffect(() => {
-  //   const unsortedusers = [...users];
-  //   const sortedUsers = sortUsers(sortingCategory, unsortedusers);
-  //   setUsers(sortedUsers);
-  // }, [sortingCategory]);
 
   const clearFilters = () => {
     setSkillFilters([]);
@@ -80,21 +103,26 @@ const Freelancers = () => {
   };
 
   const sortingCategories = [
-    { id: "joiningDateUp", text: "data dołączenia: od najnowszej" },
-    { id: "joiningDateDown", text: "data dołączenia: od najstarszej" },
     { id: "ratingUp", text: "ocena: od najwyższej" },
     { id: "ratingDown", text: "ocena: od najniższej" },
+    { id: "joiningDateUp", text: "data dołączenia: od najnowszej" },
+    { id: "joiningDateDown", text: "data dołączenia: od najstarszej" },
   ];
 
   const getUserRating = (opinions) => {
     const opinionsNumber = Number(opinions?.length);
-    const ratingSum = opinions?.reduce(
-      (accumulator, currentObject) =>
-        Number(accumulator) + Number(currentObject.rating),
-      0
-    );
-    const averageRating = ratingSum / opinionsNumber;
-    return averageRating;
+    if (opinionsNumber === 0 || !opinions) {
+      const averageRating = 0;
+      return averageRating;
+    } else {
+      const ratingSum = opinions?.reduce(
+        (accumulator, currentObject) =>
+          Number(accumulator) + Number(currentObject.rating),
+        0
+      );
+      const averageRating = ratingSum / opinionsNumber;
+      return averageRating;
+    }
   };
 
   const filterUsers = (users) => {
@@ -136,10 +164,14 @@ const Freelancers = () => {
         <span>Sortuj wg: </span>
         {sortingCategories.map((item) => (
           <button
-            className={styles.sorter_item}
+            className={`${styles.sorter_item} ${
+              item.id === sortingCategory && styles.sorter_item_active
+            }`}
             key={item.id}
             onClick={() => {
-              sortUsers(item.id, users);
+              setSortingCategory(item.id);
+              const sortedUsers = sortUsers(item.id, users);
+              setUsers(sortedUsers);
             }}
           >
             {item.text}
