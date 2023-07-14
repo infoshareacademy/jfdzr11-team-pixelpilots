@@ -1,7 +1,7 @@
 .personalData {
 	margin: 2rem auto;
 	padding: 2rem;
-	border: 1px solid var(--clr-primary-black);
+	border: 1.5px solid var(--clr-base-lighter-blue);
 	border-radius: 8px;
 	text-align: center;
 	background-color: var(--clr-primary-white);
