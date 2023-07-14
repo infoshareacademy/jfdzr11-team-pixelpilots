@@ -59,7 +59,7 @@ const UserProfile = () => {
   };
 
   const removeLogos = async (itemArray, category) => {
-    if (itemArray && itemArray !== []) {
+    if (itemArray) {
       itemArray.forEach((item) => {
         if (item.logo) {
           const fileRef = ref(
