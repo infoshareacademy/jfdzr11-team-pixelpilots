@@ -2,11 +2,15 @@ import styles from "../Home/Home.module.css";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../Context/AuthContext";
 import MainPanel from "../MainPanel/MainPanel";
+import Loader from "../UI/Loader/Loader";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, isAuth } = useAuth();
 
+  if (isAuth === null) {
+    return <Loader isLoading={isAuth} />;
+  }
   return (
     <>
       {currentUser ? (
@@ -33,17 +37,20 @@ const Home = () => {
               <div className={styles.relative}>
                 <button
                   className={`${styles.homebtn} ${styles.absolute}`}
-                  onClick={() => navigate("/login")}>
+                  onClick={() => navigate("/login")}
+                >
                   Zaloguj się
                 </button>
                 <img
                   className={styles.box}
-                  src="../Home/register_find.png"></img>
+                  src="../Home/register_find.png"
+                ></img>
               </div>
               <div className={styles.relative}>
                 <button
                   className={`${styles.homebtn} ${styles.absolute}`}
-                  onClick={() => navigate("/register")}>
+                  onClick={() => navigate("/register")}
+                >
                   Zarejestruj się
                 </button>
                 <img className={styles.box} src="../Home/register_in.png"></img>

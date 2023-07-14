@@ -16,6 +16,7 @@ const useAuth = () => {
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isAuth, setIsAuth] = useState(null);
 
   function register(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -31,7 +32,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+        setCurrentUser(null);
+      }
     });
 
     return unsubscribe;
@@ -42,6 +49,7 @@ export const AuthProvider = ({ children }) => {
     register,
     login,
     logout,
+    isAuth,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
