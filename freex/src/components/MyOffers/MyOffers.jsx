@@ -17,6 +17,7 @@ const MyOffers = () => {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [isLoading, setIsLoading] = useState(true);
 
   const getFilteredItems = (searchPhrase, filterClicked, items) => {
     const searched = items.filter((offer) =>
@@ -48,6 +49,7 @@ const MyOffers = () => {
     } catch (error) {
       toast(`Błąd bazy danych`);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -84,10 +86,10 @@ const MyOffers = () => {
       </div>
       <SearchBar setSearch={setSearch} />
       <Headers />
-      {userOffers.length > 0 ? (
-        <OffersList filteredItems={filteredItems} />
+      {isLoading ? (
+        <Loader isLoading={isLoading} />
       ) : (
-        <Loader />
+        <OffersList filteredItems={filteredItems} />
       )}
     </div>
   );
