@@ -14,9 +14,31 @@ const Freelancers = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [skillFilters, setSkillFilters] = useState([]);
+  // const [sortingCategory, setSortingCategory] = useState("ratingUp");
   const { currentUser } = useAuth();
   const currentUserId = currentUser.uid;
   const collectionRef = collection(db, "users");
+
+  const sortUsers = (category, users) => {
+    const sortedUsers = [...users];
+    if (category === "joiningDateUp") {
+      sortedUsers.sort((a, b) => b.joiningDate - a.joiningDate);
+    }
+    if (category === "joiningDateDown") {
+      sortedUsers.sort((a, b) => a.joiningDate - b.joiningDate);
+    }
+    if (category === "ratingUp") {
+      sortedUsers.sort(
+        (a, b) => getUserRating(a.opinions) - getUserRating(b.opinions)
+      );
+    }
+    if (category === "ratingDown") {
+      sortedUsers.sort(
+        (a, b) => getUserRating(b.opinions) - getUserRating(a.opinions)
+      );
+    }
+    setUsers(sortedUsers);
+  };
 
   useEffect(() => {
     getDocs(collectionRef)
@@ -35,6 +57,12 @@ const Freelancers = () => {
       });
   }, []);
 
+  // useEffect(() => {
+  //   const unsortedusers = [...users];
+  //   const sortedUsers = sortUsers(sortingCategory, unsortedusers);
+  //   setUsers(sortedUsers);
+  // }, [sortingCategory]);
+
   const clearFilters = () => {
     setSkillFilters([]);
   };
@@ -51,8 +79,26 @@ const Freelancers = () => {
     }
   };
 
+  const sortingCategories = [
+    { id: "joiningDateUp", text: "data dołączenia: od najnowszej" },
+    { id: "joiningDateDown", text: "data dołączenia: od najstarszej" },
+    { id: "ratingUp", text: "ocena: od najwyższej" },
+    { id: "ratingDown", text: "ocena: od najniższej" },
+  ];
+
+  const getUserRating = (opinions) => {
+    const opinionsNumber = Number(opinions?.length);
+    const ratingSum = opinions?.reduce(
+      (accumulator, currentObject) =>
+        Number(accumulator) + Number(currentObject.rating),
+      0
+    );
+    const averageRating = ratingSum / opinionsNumber;
+    return averageRating;
+  };
+
   const filterUsers = (users) => {
-    if (skillFilters === []) {
+    if (!skillFilters) {
       return users;
     } else {
       return users?.filter((user) =>
@@ -85,13 +131,29 @@ const Freelancers = () => {
           </ChipsFreelancerFilter>
         ))}
       </div>
+
+      <div className={styles.sorter}>
+        <span>Sortuj wg: </span>
+        {sortingCategories.map((item) => (
+          <button
+            className={styles.sorter_item}
+            key={item.id}
+            onClick={() => {
+              sortUsers(item.id, users);
+            }}
+          >
+            {item.text}
+          </button>
+        ))}
+      </div>
+
       <ul className={styles.list}>
         {filteredUsers.map((user) => {
           if (currentUserId === user.id || !user.userName) {
             return null;
           } else {
             return (
-              <li key={uuid()} className={styles.list_item}>
+              <li key={user.id} className={styles.list_item}>
                 <GeneralInfo
                   userId={user.id}
                   name={user.userName}

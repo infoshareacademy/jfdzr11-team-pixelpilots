@@ -14,6 +14,7 @@
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   margin-bottom: 2rem;
+  color: hsl(213, 14%, 25%);
 }
 
 .chip.active_chip {
@@ -29,4 +30,27 @@
 
 .list_item {
   margin: 2rem 0;
+}
+
+.sorter {
+  display: flex;
+  gap: 1rem;
+}
+
+.sorter_item {
+  background-color: transparent;
+  border: none;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  transition: text-shadow 0.2s;
+}
+
+.sorter_item:hover {
+  text-shadow: 0 0 0.6px rgb(55, 63, 73);
+  cursor: pointer;
+}
+
+.sorter_item.active {
+  text-shadow: 0 0 0.6px rgb(55, 63, 73);
+  cursor: pointer;
 }
