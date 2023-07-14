@@ -45,6 +45,14 @@
 .general_info_right {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 266px;
+}
+
+.info_wrapper_right {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -78,6 +86,7 @@
 .button_wrapper {
   display: flex;
   justify-content: end;
+  justify-self: flex-end;
 }
 
 .button {
