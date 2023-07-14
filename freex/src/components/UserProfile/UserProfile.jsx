@@ -1,4 +1,10 @@
-import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  getDocs,
+} from "firebase/firestore";
 import { db, storage } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -106,6 +112,26 @@ const UserProfile = () => {
     } catch (error) {
       console.log("Problems deleting user data" + error);
     }
+
+    try {
+      const offersCollectionRef = collection(db, "offers");
+      const offersSnapshot = await getDocs(offersCollectionRef);
+      const offersWithIds = offersSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      for (let i = 0; i < offersWithIds.length; i++) {
+        let item = offersWithIds[i];
+        if (item.userId === currentUserID) {
+          const docRef = doc(db, "offers", item.id);
+          await deleteDoc(docRef);
+        }
+      }
+    } catch (error) {
+      console.log("Problems deleting user offers" + error);
+    }
+
     try {
       await currentUser.delete();
       toast.success("Usunięto użytkownika");

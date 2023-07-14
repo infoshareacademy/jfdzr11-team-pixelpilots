@@ -180,7 +180,7 @@ const Freelancers = () => {
       </div>
 
       <ul className={styles.list}>
-        {filteredUsers.map((user) => {
+        {filteredUsers?.map((user) => {
           if (currentUserId === user.id || !user.userName) {
             return null;
           } else {
