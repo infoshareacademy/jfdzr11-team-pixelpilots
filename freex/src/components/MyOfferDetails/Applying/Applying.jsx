@@ -11,7 +11,6 @@ import { db } from '../../../config/firebase';
 import { useParams } from 'react-router-dom';
 import styles from './Applying.module.css';
 import Loader from '../../UI/Loader/Loader';
-import { toast } from 'react-hot-toast';
 
 const Applying = () => {
   const { ofertaid } = useParams();

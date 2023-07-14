@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { toast } from 'react-hot-toast';
 import styles from './Offer.module.css';
@@ -53,7 +53,8 @@ const Offer = () => {
 
   useEffect(() => {
     getOffer();
-  }, []);
+    offer.applying?.includes(currentUser.uid) ? setApply(true) : null;
+  }, [offer]);
 
   useEffect(() => {
     if (userId !== '') {
@@ -71,20 +72,20 @@ const Offer = () => {
 
   const handleApply = async () => {
     try {
-      await setDoc(
-        docRef,
-        { applying: [...offer.applying, currentUser.uid] },
-        { merge: true }
-      );
+      await updateDoc(docRef, {
+        applying: offer.applying
+          ? [...offer.applying, currentUser.uid]
+          : [currentUser.uid],
+      });
       toast.success('Złożono aplikację na tę ofertę');
     } catch (error) {
       toast.error('Wystąpił błąd podczas aplikowania na tę ofertę');
     }
-    setApply(!apply);
+    setApply(true);
   };
 
   const handleStopApplying = async () => {
-    const filtered = offer.applying.filter(
+    const filtered = offer?.applying?.filter(
       (applying) => applying !== currentUser.uid
     );
     try {
@@ -123,22 +124,27 @@ const Offer = () => {
 
         <div className={styles.number}>
           <span>Numer zlecenia: {offer?.offer_number}</span>
+
           {!apply ? (
-            <PrimaryButton
-              onClick={handleApply}
-              className={styles.apply_button}
-            >
-              Aplikuj
-            </PrimaryButton>
-          ) : (
-            <>
-              <p>Aplikujesz na tą ofertę</p>
+            <div className={styles.apply_wrapper}>
               <PrimaryButton
-                onClick={handleStopApplying}
+                onClick={handleApply}
                 className={styles.apply_button}
               >
-                Wycofaj aplikację
+                Aplikuj
               </PrimaryButton>
+            </div>
+          ) : (
+            <>
+              <div className={styles.apply_wrapper}>
+                <p className={styles.apply_info}>Aplikujesz na tę ofertę</p>
+                <PrimaryButton
+                  onClick={handleStopApplying}
+                  className={styles.apply_button}
+                >
+                  Wycofaj aplikację
+                </PrimaryButton>
+              </div>
             </>
           )}
         </div>
