@@ -2,6 +2,7 @@ import styles from "../Home/Home.module.css";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../Context/AuthContext";
 import MainPanel from "../MainPanel/MainPanel";
+import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,21 +32,13 @@ const Home = () => {
             </div>
             <div className={styles.right}>
               <div className={styles.relative}>
-                <button
-                  className={`${styles.homebtn} ${styles.absolute}`}
-                  onClick={() => navigate("/login")}>
-                  Zaloguj się
-                </button>
+                <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
                 <img
                   className={styles.box}
                   src="../Home/register_find.png"></img>
               </div>
               <div className={styles.relative}>
-                <button
-                  className={`${styles.homebtn} ${styles.absolute}`}
-                  onClick={() => navigate("/register")}>
-                  Zarejestruj się
-                </button>
+                <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
                 <img className={styles.box} src="../Home/register_in.png"></img>
               </div>
             </div>
