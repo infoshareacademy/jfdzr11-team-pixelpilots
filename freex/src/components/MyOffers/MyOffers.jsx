@@ -9,6 +9,7 @@ import { db } from '../../config/firebase';
 import useAuth from '../../components/Context/AuthContext';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import Loader from '../UI/Loader/Loader';
 
 const MyOffers = () => {
   const { currentUser } = useAuth();
@@ -83,7 +84,11 @@ const MyOffers = () => {
       </div>
       <SearchBar setSearch={setSearch} />
       <Headers />
-      <OffersList filteredItems={filteredItems} />
+      {userOffers.length > 0 ? (
+        <OffersList filteredItems={filteredItems} />
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };

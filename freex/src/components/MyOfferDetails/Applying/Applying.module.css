@@ -1,6 +1,5 @@
 .wrapper {
   background-color: #eaf8ff;
-  /* display: flex; */
   width: 100%;
   padding: 2rem 1rem 2rem 1rem;
   margin: 2rem 0;
@@ -36,5 +35,4 @@
 
 .description {
   font-size: 0.875rem;
-  /* max-width: 85  %; */
 }
