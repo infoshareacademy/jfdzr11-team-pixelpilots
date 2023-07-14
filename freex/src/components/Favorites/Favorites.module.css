@@ -14,3 +14,9 @@
   gap: 1rem;
   margin-bottom: 2rem;
 }
+
+.active {
+  background-color: var(--clr-light-blue);
+  color: var(--clr-very-dark-blue);
+  border: 1px solid var(--clr-base-darker-blue);
+}

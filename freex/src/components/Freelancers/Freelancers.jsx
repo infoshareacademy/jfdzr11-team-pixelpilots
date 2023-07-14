@@ -7,7 +7,7 @@ import Loader from "../UI/Loader/Loader";
 import { toast } from "react-hot-toast";
 import useAuth from "../Context/AuthContext";
 import { skills } from "../../utils/skills";
-import ChipsFreelancerFilter from "../UI/ChipsFreelancerFilter/ChipsFreelancerFilter";
+import ChipsFilter from "../UI/ChipsFilter/ChipsFilter";
 
 const Freelancers = () => {
   const [users, setUsers] = useState([]);
@@ -144,11 +144,11 @@ const Freelancers = () => {
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Freelancerzy</h1>
       <div className={styles.chip_wrapper}>
-        <ChipsFreelancerFilter className={styles.chip} onClick={clearFilters}>
+        <ChipsFilter className={styles.chip} onClick={clearFilters}>
           Wyświetl wszystkich
-        </ChipsFreelancerFilter>
+        </ChipsFilter>
         {skills.map((item) => (
-          <ChipsFreelancerFilter
+          <ChipsFilter
             key={item}
             className={`${styles.chip} ${
               skillFilters.includes(item) && styles.active_chip
@@ -156,7 +156,7 @@ const Freelancers = () => {
             onClick={() => toggleFilter(item)}
           >
             {item}
-          </ChipsFreelancerFilter>
+          </ChipsFilter>
         ))}
       </div>
 
