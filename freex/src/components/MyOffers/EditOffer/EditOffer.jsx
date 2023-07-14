@@ -16,7 +16,6 @@ const EditOffer = () => {
   const { ofertaid } = useParams();
   const { currentUser } = useAuth();
   const [chosenSkills, setChosenSkills] = useState([]);
-
   const [offer, setOffer] = useState([]);
 
   const getOffer = async () => {

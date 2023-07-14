@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react';
 import styles from './PaymentMethod.module.css';
 import { updateSummary } from '../../../utils/updateSummary';
 
-const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
+const PaymentMethod = ({
+  data,
+  setData,
+  defaultPaymentMethod,
+  defaultHourRate,
+  defaultMilestoneRate,
+  defaultTotalPayment,
+}) => {
   const [paymentMethod, setPaymentMethod] = useState();
 
   const handleChange = (e) => {
@@ -25,6 +32,12 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
   } else if (defaultPaymentMethod === 'Jednorazowa płatność') {
     oneTimePayChecked = true;
   }
+
+  const getNumber = (string = '') => {
+    const arr = string?.split(' ');
+    const val = Number(arr[0]);
+    return string ? val : null;
+  };
 
   return (
     <>
@@ -79,7 +92,8 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
                 onChange={(e) =>
                   updateSummary(e, data, setData, e.target.value)
                 }
-                defaultValue={offer?.hourly_rate}
+                defaultValue={getNumber(defaultHourRate)}
+                required
               />
             </>
           ) : paymentMethod === 'Płatność za kamienie milowe' ? (
@@ -95,7 +109,8 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
                 onChange={(e) =>
                   updateSummary(e, data, setData, e.target.value)
                 }
-                defaultValue={offer?.milestone_rate}
+                defaultValue={getNumber(defaultMilestoneRate)}
+                required
               />
             </>
           ) : paymentMethod === 'Jednorazowa płatność' ? (
@@ -111,7 +126,8 @@ const PaymentMethod = ({ data, setData, defaultPaymentMethod, offer }) => {
                 onChange={(e) =>
                   updateSummary(e, data, setData, e.target.value)
                 }
-                defaultValue={offer?.total_payment}
+                defaultValue={getNumber(defaultTotalPayment)}
+                required
               />
             </>
           ) : null}
