@@ -100,3 +100,9 @@
 	border: 1px solid #1cb0fb;
 	border-radius: 4px;
 }
+
+.link {
+	text-decoration: none;
+	color: var(--clr-primary-black);
+	display: contents;
+}

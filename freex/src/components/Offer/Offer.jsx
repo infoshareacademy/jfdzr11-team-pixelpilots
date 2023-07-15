@@ -8,6 +8,7 @@ import UserData from './UserData/UserData';
 import Loader from '../UI/Loader/Loader';
 import PrimaryButton from '../UI/PrimaryButton/PrimaryButton';
 import useAuth from '../Context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Offer = () => {
 	const { zlecenieId } = useParams();
@@ -49,7 +50,7 @@ const Offer = () => {
 	useEffect(() => {
 		getOffer();
 		offer.applying?.includes(currentUser.uid) ? setApply(true) : null;
-	}, [offer]);
+	}, []);
 
 	useEffect(() => {
 		if (userId !== '') {
@@ -163,14 +164,16 @@ const Offer = () => {
 			</div>
 
 			{user && Object.keys(user).length > 0 ? (
-				<UserData
-					date={user.joiningDate}
-					role={user.role}
-					email={user.email}
-					src={user.imgURL}
-					name={user.userName}
-					opinions={user.opinions}
-				/>
+				<Link to={`/freelancerzy/${user.id}`} className={styles.link}>
+					<UserData
+						date={user.joiningDate}
+						role={user.role}
+						email={user.email}
+						src={user.imgURL}
+						name={user.userName}
+						opinions={user.opinions}
+					/>
+				</Link>
 			) : (
 				<UserData
 					date={anonymousUser.joiningDate}
