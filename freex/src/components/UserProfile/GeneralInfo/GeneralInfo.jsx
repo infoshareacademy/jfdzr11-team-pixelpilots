@@ -68,7 +68,7 @@ const GeneralInfo = ({
             opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
           />
           <p className={styles.description}>{description}</p>
-          {isPortfolio && portfolioLinks && (
+          {isPortfolio && portfolioLinks && portfolioLinks.length > 0 && (
             <Portfolio portfolioLinks={portfolioLinks} />
           )}
         </div>
