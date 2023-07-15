@@ -20,7 +20,7 @@ const Footer = () => {
       <div className={styles.right}>
         <p className={styles.autor}>Pixel-Pilot develop team:</p>
         <a href="https://github.com/aleksandra-roguszewska">
-          Aleskandra Roguszewska
+          Aleksandra Roguszewska
         </a>
         <a href="https://github.com/hanna-hajduszewska">Hanna Hajduszewska</a>
         <a href="https://github.com/kubameyza">Jakub Meyza</a>
