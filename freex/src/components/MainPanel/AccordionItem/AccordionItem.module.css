@@ -4,6 +4,7 @@
 	background-color: var(--clr-primary-white);
 	margin: 1rem 0;
 	border-radius: 8px;
+	cursor: pointer;
 }
 
 .accordionTitle {
@@ -22,5 +23,16 @@
 
 .accordionContent {
 	padding: 1.25rem 2.5rem;
+	background-color: var(--clr-very-light-blue);
+}
+
+.accordionBtn {
+	padding: 0.5rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.accordionItem:hover {
 	background-color: var(--clr-very-light-blue);
 }

@@ -16,12 +16,22 @@ const Carousel = () => {
 	const collectionRef = collection(db, 'users');
 
 	const settings = {
-		dots: true,
+		dots: false,
 		arrows: false,
 		slidesToShow: 3,
 		slidesToScroll: 1,
 		infinite: true,
 		speed: 500,
+	};
+
+	const calculateAverageRating = (opinions) => {
+		const ratingsSum = opinions.reduce(
+			(accumulator, currentObject) =>
+				accumulator + Number(currentObject.rating),
+			0
+		);
+		const averageRating = ratingsSum / opinions.length;
+		return averageRating;
 	};
 
 	useEffect(() => {
@@ -31,7 +41,12 @@ const Carousel = () => {
 					query(collectionRef, orderBy('opinions', 'desc'))
 				);
 				const data = querySnapshot.docs.map((doc) => doc.data());
-				setUsers(data);
+				const sortedData = data.sort((a, b) => {
+					const ratingA = calculateAverageRating(a.opinions);
+					const ratingB = calculateAverageRating(b.opinions);
+					return ratingB - ratingA;
+				});
+				setUsers(sortedData);
 			} catch (error) {
 				toast.error(
 					'Pojawił się błąd. Spróbuj później. Error ' + error
@@ -63,23 +78,26 @@ const Carousel = () => {
 						</button>
 					</div>
 					<Slider ref={setSliderRef} {...settings}>
-						{users.map((user) => (
-							<Link
-								to={`/freelancerzy/${user.id}`}
-								key={nanoid()}
-								className={styles.wrapper}
-							>
-								<UserCard
+						{users
+							.filter((user) => user.opinions.length > 0)
+							.map((user) => (
+								<Link
+									to={`/freelancerzy/${user.id}`}
 									key={nanoid()}
-									role={user.role}
-									email={user.email}
-									src={user.imgURL}
-									name={user.userName}
-									opinions={user.opinions}
-									id={user.id}
-								/>
-							</Link>
-						))}
+									className={styles.link}
+								>
+									<UserCard
+										key={nanoid()}
+										role={user.role}
+										email={user.email}
+										src={user.imgURL}
+										name={user.userName}
+										opinions={user.opinions}
+										id={user.id}
+										rating={user.rating}
+									/>
+								</Link>
+							))}
 					</Slider>
 				</div>
 			</div>
