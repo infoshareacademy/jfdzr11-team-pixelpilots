@@ -17,7 +17,7 @@ const HeartButton = ({ className, isFavorite, onClick }) => {
   let isFilled;
 
   if (isHovered && isFavorite) {
-    isFilled = true;
+    isFilled = false;
   } else if (isHovered && !isFavorite) {
     isFilled = true;
   } else if (!isHovered && isFavorite) {
