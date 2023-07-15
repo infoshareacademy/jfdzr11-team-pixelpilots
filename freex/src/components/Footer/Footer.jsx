@@ -1,4 +1,4 @@
-import styles from "../Footer/Footer.module.css";
+import styles from '../Footer/Footer.module.css';
 
 const Footer = () => {
   return (
@@ -18,7 +18,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <p className={styles.autor}>Pixel-Pilot develop team:</p>
+        <p className={styles.autor}>Pixel-Pilots develop team:</p>
         <a href="https://github.com/aleksandra-roguszewska">
           Aleskandra Roguszewska
         </a>

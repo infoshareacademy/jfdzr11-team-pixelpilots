@@ -30,7 +30,10 @@ const MyOfferActions = () => {
       >
         Edytuj
       </PrimaryButton>
-      <PrimaryButton className={styles.button}>
+      <PrimaryButton
+        onClick={() => navigate(`/zlecenia`)}
+        className={styles.button}
+      >
         Podgląd na stronie głównej
       </PrimaryButton>
       <PrimaryButton onClick={deleteOffer} className={styles.button}>
