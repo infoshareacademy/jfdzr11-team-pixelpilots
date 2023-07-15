@@ -32,13 +32,27 @@ const Home = () => {
             </div>
             <div className={styles.right}>
               <div className={styles.relative}>
-                <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
+                <PrimaryButton
+                  type="submit"
+                  onClick={() => {
+                    navigate("/login");
+                  }}>
+                  Zaloguj się
+                </PrimaryButton>
+
                 <img
                   className={styles.box}
                   src="../Home/register_find.png"></img>
               </div>
               <div className={styles.relative}>
-                <PrimaryButton type="submit">Zaloguj się</PrimaryButton>
+                <PrimaryButton
+                  type="submit"
+                  onClick={() => {
+                    navigate("/register");
+                  }}>
+                  Zarejestruj się
+                </PrimaryButton>
+
                 <img className={styles.box} src="../Home/register_in.png"></img>
               </div>
             </div>
