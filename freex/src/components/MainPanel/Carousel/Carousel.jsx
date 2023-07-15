@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-hot-toast';
 import styles from './Carousel.module.css';
@@ -37,9 +37,7 @@ const Carousel = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const querySnapshot = await getDocs(
-					query(collectionRef, orderBy('opinions', 'desc'))
-				);
+				const querySnapshot = await getDocs(collectionRef);
 				const data = querySnapshot.docs.map((doc) => doc.data());
 				const sortedData = data.sort((a, b) => {
 					const ratingA = calculateAverageRating(a.opinions);
