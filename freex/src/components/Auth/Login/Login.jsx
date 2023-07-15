@@ -45,7 +45,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="Wpisz adres email..."
+                  placeholder="Wpisz adres e-mail..."
                 />
                 <label htmlFor="password">Hasło</label>
                 <input
