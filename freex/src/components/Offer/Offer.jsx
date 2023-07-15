@@ -99,7 +99,7 @@ const Offer = () => {
 	const anonymousUser = {
 		userName: 'Anonimowy Użytkownik',
 		email: 'anonimowy@example.com',
-		imgURL: '/public/user.png',
+		imgURL: '/user.png',
 		role: 'Użytkownik',
 		joiningDate: 'Brak danych',
 		opinions: [],
