@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import styles from './skills.module.css';
-import Skill from './Skill/Skill.jsx';
-import { v4 as uuid } from 'uuid';
+import { useEffect } from "react";
+import styles from "./skills.module.css";
+import Skill from "./Skill/Skill.jsx";
+import { v4 as uuid } from "uuid";
 
 const Skills = ({ skills, chosenSkills, setChosenSkills, defaultSkills }) => {
   const chooseSkill = (e) => {
@@ -25,7 +25,12 @@ const Skills = ({ skills, chosenSkills, setChosenSkills, defaultSkills }) => {
     <>
       <div className={styles.skills}>
         {skills.map((skill, idx) => (
-          <Skill key={idx} skill={skill} chooseSkill={chooseSkill} />
+          <Skill
+            key={idx}
+            skill={skill}
+            chooseSkill={chooseSkill}
+            chosenSkills={chosenSkills}
+          />
         ))}
       </div>
     </>
