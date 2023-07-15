@@ -53,7 +53,9 @@ const GeneralInfo = ({
             {currentUserId === userId ? null : (
               <HeartButton
                 isFavorite={isUserFavorite(userId, currentUserData)}
-                onClick={() => toggleFavoriteUser(userId, currentUserData)}
+                onClick={() =>
+                  toggleFavoriteUser(userId, currentUserId, currentUserData)
+                }
               />
             )}
           </div>

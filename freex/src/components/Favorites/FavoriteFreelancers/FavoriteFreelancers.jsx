@@ -8,6 +8,7 @@ import Loader from "../../UI/Loader/Loader";
 import styles from "./FavoriteFreelancers.module.css";
 import GeneralInfo from "../../UserProfile/GeneralInfo/GeneralInfo";
 import useCurrentUserData from "../../Context/CurrentUserDataContext";
+import ProfileCard from "../../UserProfile/ProfileCard/ProfileCard";
 
 const FavoriteFreelancers = () => {
   const [usersData, setUsersData] = useState([]);
@@ -41,31 +42,37 @@ const FavoriteFreelancers = () => {
   }
   return (
     <ul className={styles.list}>
-      {usersData?.map((user) => {
-        if (
-          currentUserId === user.id ||
-          !user.userName ||
-          !favoriteUsers.includes(user.id)
-        ) {
-          return null;
-        } else {
-          return (
-            <li key={uuid()} className={styles.list_item}>
-              <GeneralInfo
-                userId={user.id}
-                name={user.userName}
-                role={user.role}
-                imgURL={user.imgURL}
-                opinions={user.opinions}
-                description={user.description}
-                hourlyRate={user.hourlyRate}
-                joiningDate={user.joiningDate}
-                isButton={true}
-              ></GeneralInfo>
-            </li>
-          );
-        }
-      })}
+      {favoriteUsers && favoriteUsers.length > 0 ? (
+        usersData?.map((user) => {
+          if (
+            currentUserId === user.id ||
+            !user.userName ||
+            !favoriteUsers.includes(user.id)
+          ) {
+            return null;
+          } else {
+            return (
+              <li key={uuid()} className={styles.list_item}>
+                <GeneralInfo
+                  userId={user.id}
+                  name={user.userName}
+                  role={user.role}
+                  imgURL={user.imgURL}
+                  opinions={user.opinions}
+                  description={user.description}
+                  hourlyRate={user.hourlyRate}
+                  joiningDate={user.joiningDate}
+                  isButton={true}
+                ></GeneralInfo>
+              </li>
+            );
+          }
+        })
+      ) : (
+        <ProfileCard>
+          <p>Nie dodałeś jeszcze żadnego freelancera do ulubionych</p>
+        </ProfileCard>
+      )}
     </ul>
   );
 };

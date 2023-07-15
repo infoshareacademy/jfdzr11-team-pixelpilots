@@ -20,11 +20,14 @@ import {
   toggleFavoriteOffer,
 } from "../../utils/toggleFavorite";
 import useCurrentUserData from "../Context/CurrentUserDataContext";
+import useAuth from "../Context/AuthContext";
 
 const Offers = () => {
   const [offers, setOffers] = useState([]);
   const offersCollectionRef = collection(db, "offers");
   const { currentUserData } = useCurrentUserData();
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser.uid;
 
   const getOffers = (querySnapshot) => {
     return querySnapshot.docs.map((doc) => ({
@@ -113,7 +116,11 @@ const Offers = () => {
                     <HeartButton
                       isFavorite={isOfferFavorite(offer.id, currentUserData)}
                       onClick={() =>
-                        toggleFavoriteOffer(offer.id, currentUserData)
+                        toggleFavoriteOffer(
+                          offer.id,
+                          currentUserData,
+                          currentUserId
+                        )
                       }
                     />
                   </div>
