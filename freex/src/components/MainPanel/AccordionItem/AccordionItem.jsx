@@ -11,10 +11,14 @@ const AccordionItem = ({ title, content, id }) => {
 				className={styles.accordionTitle}
 			>
 				<span>{title}</span>
-				<img
-					src="public/Accordion.png"
-					style={{ transform: isActive ? 'rotate(180deg)' : 'none' }}
-				/>
+				<button className={styles.accordionBtn}>
+					<img
+						src="public/Accordion.png"
+						style={{
+							transform: isActive ? 'rotate(180deg)' : 'none',
+						}}
+					/>
+				</button>
 			</div>
 			{isActive && <p className={styles.accordionContent}>{content}</p>}
 		</div>

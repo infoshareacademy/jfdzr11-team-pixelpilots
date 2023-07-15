@@ -5,6 +5,7 @@ import { db } from '../../config/firebase';
 import { toast } from 'react-hot-toast';
 import styles from './Offer.module.css';
 import UserData from './UserData/UserData';
+import Loader from '../UI/Loader/Loader';
 
 const Offer = () => {
 	const { zlecenieId } = useParams();
@@ -12,6 +13,7 @@ const Offer = () => {
 	const [offer, setOffer] = useState([]);
 	const [user, setUser] = useState([]);
 	const [userId, setUserId] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
 
 	const getOffer = async () => {
 		try {
@@ -21,8 +23,10 @@ const Offer = () => {
 				const offerData = docSnap.data();
 				setOffer(offerData);
 				setUserId(offerData.userId);
+				setIsLoading(false);
 			} else {
 				toast.error('Nie ma takiego zlecenia');
+				setIsLoading(false);
 			}
 		} catch (error) {
 			toast.error('Nie udało się pobrać zlecenia');
@@ -36,10 +40,10 @@ const Offer = () => {
 			if (docSnap.exists()) {
 				setUser(docSnap.data());
 			} else {
-				toast.error('Profil klienta nie został uzupełniony');
+				toast.error('Profil klienta nie został jeszcze uzupełniony');
 			}
 		} catch (error) {
-			toast.error('Nie ma takiej osoby w bazie');
+			toast.error('Wystąpił błąd w pobraniu profilu klienta');
 		}
 	};
 
@@ -60,6 +64,10 @@ const Offer = () => {
 		cost = offer.hourly_rate;
 	} else if (offer.payment_method === 'Płatność za kamienie milowe')
 		cost = offer.milestone_rate;
+
+	if (isLoading) {
+		return <Loader isLoading={isLoading} />;
+	}
 
 	return (
 		<div className={styles.wrapper}>

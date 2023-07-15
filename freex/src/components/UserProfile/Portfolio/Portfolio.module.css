@@ -1,0 +1,35 @@
+.heading {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.link {
+  color: var(--clr-ver-dark-grey-500);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.1s ease;
+  background-color: var(--clr-light-grey-200);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: text-shadow 0.2s;
+}
+
+.link:hover {
+  text-shadow: 0 0 0.6px rgb(55, 63, 73);
+}
+
+.list_item {
+  margin-bottom: 1rem;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  margin-left: 0.5rem;
+  height: 0.7rem;
+}

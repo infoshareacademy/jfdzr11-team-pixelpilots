@@ -22,11 +22,15 @@
   gap: 20px;
   grid-template-areas:
     "general_info contact"
-    "skills look"
+    "skills empty"
     "opinions empty"
     "experience empty"
     "education empty";
   margin: 2rem 0;
+}
+
+.portfolio {
+  grid-area: portfolio;
 }
 
 .experience {
@@ -60,15 +64,3 @@
   border-radius: 0.5rem;
   box-shadow: 1px 1px 10px rgba(66, 68, 90, 0.07);
 }
-
-/* .h4 {
-  font-size: 24px;
-}
-
-.h5 {
-  font-size: 20px;
-}
-
-ul {
-  list-style: none;
-} */
