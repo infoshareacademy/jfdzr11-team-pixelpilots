@@ -5,10 +5,17 @@ import styles from "../ForgotPassword/ForgotPassword.module.css";
 import { PrimaryButton } from "../../index";
 
 const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
-  <form onSubmit={onSubmit}>
+  <form className={styles.form} onSubmit={onSubmit}>
     <div>
-      <label htmlFor="email">Podaj email</label>
-      <input type="email" name="email" id="email" />
+      <label htmlFor="email">
+        Podaj swój adres e-mail do przypomnienia hasła
+      </label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Wpisz adres e-mail..."
+      />
     </div>
     {!isPasswordHidden && (
       <div>
@@ -31,7 +38,7 @@ export const ForgotPassword = () => {
 
   return (
     <Form
-      submitText="Poproś o przypomnienie hasła"
+      submitText="Wyślij przypomnienie na e-mail"
       onSubmit={handlePasswordReset}
       isPasswordHidden
     />
