@@ -27,6 +27,7 @@
   position: relative;
   margin-bottom: 3rem;
   align-items: center;
+  justify-content: space-between;
 }
 
 .absolute {
@@ -47,7 +48,7 @@ h2 {
   color: var(--clr-dark-grey-400);
   font-size: 1.25rem;
   line-height: 2rem;
-  margin-right: 18.5rem;
+  margin-right: 14rem;
   margin-top: 2rem;
 }
 /* 
