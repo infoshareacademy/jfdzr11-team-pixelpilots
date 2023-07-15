@@ -13,7 +13,7 @@ const AccordionItem = ({ title, content, id }) => {
 				<span>{title}</span>
 				<button className={styles.accordionBtn}>
 					<img
-						src="public/Accordion.png"
+						src="/Accordion.png"
 						style={{
 							transform: isActive ? 'rotate(180deg)' : 'none',
 						}}
