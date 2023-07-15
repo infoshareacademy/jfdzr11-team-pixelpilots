@@ -16,7 +16,7 @@
 .heading {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: baseline;
 }
 
 .heading h4 {
@@ -37,6 +37,7 @@
 	font-size: 1.25rem;
 	justify-content: end;
 	color: #000000;
+	white-space: nowrap;
 }
 
 .card span {
@@ -76,10 +77,15 @@
 	left: 3rem;
 }
 
+.number span {
+	align-self: flex-end;
+}
+
 .apply_button {
 	width: 160px;
 	height: 60px;
 }
+
 .apply_wrapper {
 	display: flex;
 	flex-direction: column;
@@ -87,11 +93,5 @@
 }
 
 .apply_info {
-	display: flex;
-	text-align: center;
-	align-items: center;
-	width: 160px;
-	height: 60px;
-	border: 1px solid #1cb0fb;
-	border-radius: 12px;
+	padding: 0.75rem 2rem;
 }
