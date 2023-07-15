@@ -125,7 +125,7 @@ const Offer = () => {
         <div className={styles.number}>
           <span>Numer zlecenia: {offer?.offer_number}</span>
 
-          {!apply ? (
+          {!apply && currentUser.uid !== offer.userId ? (
             <div className={styles.apply_wrapper}>
               <PrimaryButton
                 onClick={handleApply}
@@ -134,7 +134,7 @@ const Offer = () => {
                 Aplikuj
               </PrimaryButton>
             </div>
-          ) : (
+          ) : currentUser.uid === offer.userId ? null : (
             <>
               <div className={styles.apply_wrapper}>
                 <p className={styles.apply_info}>Aplikujesz na tę ofertę</p>
