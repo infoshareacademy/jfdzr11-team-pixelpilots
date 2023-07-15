@@ -20,10 +20,12 @@ import {
   toggleFavoriteOffer,
 } from "../../utils/toggleFavorite";
 import useCurrentUserData from "../Context/CurrentUserDataContext";
+import Loader from "../UI/Loader/Loader";
 import useAuth from "../Context/AuthContext";
 
 const Offers = () => {
   const [offers, setOffers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const offersCollectionRef = collection(db, "offers");
   const { currentUserData } = useCurrentUserData();
   const { currentUser } = useAuth();
@@ -64,13 +66,17 @@ const Offers = () => {
       (querySnapshot) => {
         const offers = getOffers(querySnapshot);
         setOffers(offers);
+        setIsLoading(false);
       }
     );
   }, []);
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+
   return (
     <div className={styles.wrapper}>
-      <h2>Oferty:</h2>
       <form className={styles.form}>
         <Skill
           type="radio"
@@ -118,6 +124,7 @@ const Offers = () => {
                       onClick={() =>
                         toggleFavoriteOffer(
                           offer.id,
+
                           currentUserData,
                           currentUserId
                         )
