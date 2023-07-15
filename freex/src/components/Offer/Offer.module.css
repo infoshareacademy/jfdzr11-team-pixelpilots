@@ -6,7 +6,7 @@
 
 .card {
 	width: 75%;
-	padding: 2rem 3rem 4rem;
+	padding: 2rem 3rem 8rem;
 	border: 2px solid var(--clr-base-lighter-blue);
 	border-radius: 12px;
 	background-color: var(--clr-primary-white);
@@ -70,11 +70,11 @@
 
 .number {
 	display: flex;
-	width: 90%;
 	justify-content: space-between;
 	position: absolute;
 	bottom: 2rem;
 	left: 3rem;
+	right: 3rem;
 }
 
 .number span {
@@ -82,16 +82,21 @@
 }
 
 .apply_button {
-	width: 160px;
-	height: 60px;
+	padding: 0.75rem 1.5rem;
+	font-size: 0.875rem;
 }
 
 .apply_wrapper {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 }
 
 .apply_info {
-	padding: 0.75rem 2rem;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	padding: 0.75rem 1.5rem;
+	font-size: 0.875rem;
+	border: 1px solid #1cb0fb;
+	border-radius: 4px;
 }
