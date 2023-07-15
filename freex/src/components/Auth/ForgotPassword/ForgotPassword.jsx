@@ -3,6 +3,7 @@ import { auth } from "../../../config/firebase";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
 import styles from "../ForgotPassword/ForgotPassword.module.css";
 import { PrimaryButton } from "../../index";
+import { toast } from "react-hot-toast";
 
 const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
   <form className={styles.form} onSubmit={onSubmit}>
@@ -27,21 +28,18 @@ const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
   </form>
 );
 
-
 export const ForgotPassword = () => {
   const handlePasswordReset = (e) => {
     e.preventDefault();
     sendPasswordResetEmail(auth, e.target.email.value).catch((error) => {
       console.log(error.code);
-      alert(firebaseErrors[error.code]);
-
+      toast.error(firebaseErrors[error.code]);
     });
   };
 
   return (
     <Form
       submitText="Wyślij przypomnienie na e-mail"
-
       onSubmit={handlePasswordReset}
       isPasswordHidden
     />
