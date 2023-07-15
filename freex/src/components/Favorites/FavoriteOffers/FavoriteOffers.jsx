@@ -21,7 +21,6 @@ const FavoriteOffers = () => {
   const collectionRef = collection(db, "offers");
 
   const favoriteOffers = currentUserData?.favoriteOffers;
-  console.log(favoriteOffers);
 
   useEffect(() => {
     getDocs(collectionRef)
