@@ -1,15 +1,30 @@
 import { sendPasswordResetEmail } from "@firebase/auth";
 import { auth } from "../../../config/firebase";
-import { Form } from "../../Form/Form";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
 import styles from "../ForgotPassword/ForgotPassword.module.css";
+
+const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
+  <form onSubmit={onSubmit}>
+    <div>
+      <label htmlFor="email">Podaj email</label>
+      <input type="email" name="email" id="email" />
+    </div>
+    {!isPasswordHidden && (
+      <div>
+        <label htmlFor="password">Podaj hasło</label>
+        <input type="password" name="password" id="password" />
+      </div>
+    )}
+    <button>{submitText}</button>
+  </form>
+);
 
 export const ForgotPassword = () => {
   const handlePasswordReset = (e) => {
     e.preventDefault();
-    sendPasswordResetEmail(auth, e.target.email.value).catch((e) => {
-      console.log(e.code);
-      alert(firebaseErrors[e.code]);
+    sendPasswordResetEmail(auth, e.target.email.value).catch((error) => {
+      console.log(error.code);
+      alert(firebaseErrors[error.code]);
     });
   };
 
