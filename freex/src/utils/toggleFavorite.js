@@ -2,7 +2,11 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { toast } from "react-hot-toast";
 
-export const toggleFavoriteUser = async (userId, currentUserData) => {
+export const toggleFavoriteUser = async (
+  userId,
+  currentUserId,
+  currentUserData
+) => {
   const currentFavorites = currentUserData?.favoriteUsers
     ? currentUserData?.favoriteUsers
     : [];
@@ -20,7 +24,7 @@ export const toggleFavoriteUser = async (userId, currentUserData) => {
 
   const userUpdate = { favoriteUsers: updatedFavorites };
 
-  const docRef = doc(db, "users", currentUserData.id);
+  const docRef = doc(db, "users", currentUserId);
   const docSnap = await getDoc(docRef);
   try {
     if (docSnap.exists()) {
@@ -51,7 +55,11 @@ export const isUserFavorite = (userId, currentUserData) => {
   return false;
 };
 
-export const toggleFavoriteOffer = async (offerId, currentUserData) => {
+export const toggleFavoriteOffer = async (
+  offerId,
+  currentUserData,
+  currentUserId
+) => {
   const currentFavorites = currentUserData?.favoriteOffers
     ? currentUserData?.favoriteOffers
     : [];
@@ -69,7 +77,7 @@ export const toggleFavoriteOffer = async (offerId, currentUserData) => {
 
   const userUpdate = { favoriteOffers: updatedFavorites };
 
-  const docRef = doc(db, "users", currentUserData.id);
+  const docRef = doc(db, "users", currentUserId);
   const docSnap = await getDoc(docRef);
   try {
     if (docSnap.exists()) {

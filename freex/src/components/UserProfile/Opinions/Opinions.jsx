@@ -31,7 +31,7 @@ const Opinions = ({ className, currentUserData, setUser }) => {
   };
 
   return (
-    <ProfileCard className={className}>
+    <ProfileCard className={`${styles.wrapper} ${className}`}>
       <h4 className={styles.heading}>Opinie</h4>
       <ul className={styles.list}>
         {opinions?.map((item) => {

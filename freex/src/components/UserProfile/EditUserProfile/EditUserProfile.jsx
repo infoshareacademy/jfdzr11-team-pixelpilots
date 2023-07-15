@@ -420,6 +420,7 @@ const EditUserProfile = () => {
             setChosenSkills={setChosenSkills}
             skills={skills}
             setSkills={setSkills}
+            defaultSkills={user?.skills}
           />
         </fieldset>
 

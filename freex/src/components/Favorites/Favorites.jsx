@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Chips from "../UI/Chips/Chips";
 import FavoriteFreelancers from "./FavoriteFreelancers/FavoriteFreelancers";
 import FavoriteOffers from "./FavoriteOffers/FavoriteOffers";
 import styles from "./Favorites.module.css";
+import ChipsFilter from "../UI/ChipsFilter/ChipsFilter";
 
 const Favorites = () => {
   const [resource, setResource] = useState("freelancers");
@@ -11,8 +11,18 @@ const Favorites = () => {
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Ulubione</h1>
       <div className={styles.chip_wrapper}>
-        <Chips onClick={() => setResource("freelancers")}>Freelancerzy</Chips>
-        <Chips onClick={() => setResource("offers")}>Oferty</Chips>
+        <ChipsFilter
+          onClick={() => setResource("freelancers")}
+          className={resource === "freelancers" && styles.active}
+        >
+          Freelancerzy
+        </ChipsFilter>
+        <ChipsFilter
+          onClick={() => setResource("offers")}
+          className={resource === "offers" && styles.active}
+        >
+          Oferty
+        </ChipsFilter>
       </div>
       <div className={styles.list_wrapper}>
         {resource === "freelancers" ? (

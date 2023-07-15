@@ -47,27 +47,31 @@ const GeneralInfo = ({
         </div>
       </div>
       <div className={styles.general_info_right}>
-        <div className={styles.header_wrapper}>
-          <h4 className={styles.user_name}>{name}</h4>
-          {currentUserId === userId ? null : (
-            <HeartButton
-              isFavorite={isUserFavorite(userId, currentUserData)}
-              onClick={() => toggleFavoriteUser(userId, currentUserData)}
-            />
+        <div className={styles.info_wrapper_right}>
+          <div className={styles.header_wrapper}>
+            <h4 className={styles.user_name}>{name}</h4>
+            {currentUserId === userId ? null : (
+              <HeartButton
+                isFavorite={isUserFavorite(userId, currentUserData)}
+                onClick={() =>
+                  toggleFavoriteUser(userId, currentUserId, currentUserData)
+                }
+              />
+            )}
+          </div>
+          <h5 className={styles.user_role}>{role}</h5>
+          <Rating
+            className={styles.rating}
+            rating={
+              averageRating && !isNaN(averageRating) ? averageRating : "0.00"
+            }
+            opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
+          />
+          <p className={styles.description}>{description}</p>
+          {isPortfolio && portfolioLinks && portfolioLinks.length > 0 && (
+            <Portfolio portfolioLinks={portfolioLinks} />
           )}
         </div>
-        <h5 className={styles.user_role}>{role}</h5>
-        <Rating
-          className={styles.rating}
-          rating={
-            averageRating && !isNaN(averageRating) ? averageRating : "0.00"
-          }
-          opinionsNumber={opinionsNumber ? opinionsNumber : "0"}
-        />
-        <p className={styles.description}>{description}</p>
-        {isPortfolio && portfolioLinks && (
-          <Portfolio portfolioLinks={portfolioLinks} />
-        )}
 
         {isButton ? (
           <div className={styles.button_wrapper}>
