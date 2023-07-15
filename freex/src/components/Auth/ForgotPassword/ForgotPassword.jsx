@@ -5,7 +5,7 @@ import styles from "../ForgotPassword/ForgotPassword.module.css";
 import { PrimaryButton } from "../../index";
 import { toast } from "react-hot-toast";
 
-const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
+const Form = ({ submitText, onSubmit }) => (
   <div className={styles.container}>
     <div className={styles.left}>
       <img className={styles.box} src="./Login/login_photo.png"></img>
