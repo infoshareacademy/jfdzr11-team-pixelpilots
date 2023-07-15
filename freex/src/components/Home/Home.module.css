@@ -2,7 +2,8 @@
   display: grid;
   grid-template-areas: "left right";
   grid-template-columns: 1fr 1fr;
-  padding: 10rem 2rem 2rem 0;
+  padding: 4rem 2rem 2rem 0;
+
 }
 
 .left {
@@ -10,14 +11,23 @@
 }
 
 .right {
+  padding-top: 3rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+}
+
+.right button {
+  width: 210px;
+  height: 3rem;
+  font-size: inherit;
 }
 
 .relative {
+  display: flex;
   position: relative;
   margin-bottom: 3rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .absolute {
@@ -27,27 +37,11 @@
   transform: translate(-50%, -50%);
 }
 
-.homebtn {
-  border: transparent;
-  background-color: transparent;
-  color: var(--clr-very-light-grey-100);
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-}
-
-.homebtn:hover {
-  color: #006699;
-  cursor: pointer;
-}
-
-.homebtn:active {
-}
-
 h2 {
   font-size: 3rem;
   color: var(--clr-very-dark-blue);
   line-height: 3.5rem;
+  margin-bottom: 2rem;
   font-weight: 400;
 }
 
@@ -55,11 +49,6 @@ h2 {
   color: var(--clr-dark-grey-400);
   font-size: 1.25rem;
   line-height: 2rem;
-  margin-right: 18.5rem;
+  margin-right: 14rem;
   margin-top: 2rem;
-}
-
-.box {
-  border-radius: 1.2rem;
-  /* display: flex; */
 }

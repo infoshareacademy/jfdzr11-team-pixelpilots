@@ -22,7 +22,6 @@ import { ForgotPassword } from './Auth/ForgotPassword/ForgotPassword';
 import Accordion from './MainPanel/Accordion/Accordion';
 import UserCard from './MainPanel/Carousel/UserCard/UserCard';
 import Carousel from './MainPanel/Carousel/Carousel';
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 

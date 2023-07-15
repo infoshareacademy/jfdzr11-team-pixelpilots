@@ -45,7 +45,7 @@ const Register = () => {
         </p>
         <div className={styles.image}>
           <img
-            src="../../../../public/Register/Register2.png"
+            src="../../../../public/Register/register_hero.png"
             alt="register icon"
           />
         </div>
@@ -57,7 +57,7 @@ const Register = () => {
             type="email"
             name="email"
             id="email"
-            placeholder="Wpisz adres email..."
+            placeholder="Wpisz adres e-mail..."
           />
           <label htmlFor="password">Hasło</label>
           <input
