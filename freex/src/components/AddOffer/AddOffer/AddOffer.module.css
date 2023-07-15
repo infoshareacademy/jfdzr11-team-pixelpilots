@@ -87,8 +87,10 @@
 .submit_section {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 20px;
   align-items: flex-end;
+  margin: 2rem 0;
 }
 
 .submit_button {

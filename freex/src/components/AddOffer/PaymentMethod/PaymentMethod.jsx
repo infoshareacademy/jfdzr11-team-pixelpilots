@@ -84,6 +84,8 @@ const PaymentMethod = ({
               <p>Stawka godzinowa</p>
 
               <input
+                min="0"
+                max="10000"
                 key="1"
                 className={styles.rate_input}
                 placeholder="Podaj stawkę pln za godzinę"
@@ -101,6 +103,7 @@ const PaymentMethod = ({
               <p>Stawka za kamienie milowe</p>
 
               <input
+                maxLength="10"
                 key="2"
                 className={styles.rate_input}
                 placeholder="Podaj stawkę pln za kamień milowy"
@@ -118,6 +121,7 @@ const PaymentMethod = ({
               <p>Jednorazowa płatność</p>
 
               <input
+                maxLength="10"
                 key="3"
                 className={styles.rate_input}
                 placeholder="Podaj stawkę pln za całość"
