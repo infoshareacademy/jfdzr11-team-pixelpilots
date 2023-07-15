@@ -3,11 +3,16 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../Context/AuthContext";
 import MainPanel from "../MainPanel/MainPanel";
 import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
+import Loader from "../UI/Loader/Loader";
+
 
 const Home = () => {
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, isAuth } = useAuth();
 
+  if (isAuth === null) {
+    return <Loader isLoading={isAuth} />;
+  }
   return (
     <>
       {currentUser ? (

@@ -45,6 +45,21 @@
 .general_info_right {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 266px;
+}
+
+.info_wrapper_right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .user_name {
@@ -65,11 +80,13 @@
   padding-bottom: 16px;
   text-align: justify;
   font-size: 14px;
+  overflow-wrap: break-word;
 }
 
 .button_wrapper {
   display: flex;
   justify-content: end;
+  justify-self: flex-end;
 }
 
 .button {

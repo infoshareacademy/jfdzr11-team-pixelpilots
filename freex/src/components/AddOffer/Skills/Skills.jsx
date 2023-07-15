@@ -1,41 +1,38 @@
-import ChosenSkills from './ChosenSkills';
-import styles from './skills.module.css';
+import { useEffect } from "react";
+import styles from "./skills.module.css";
+import Skill from "./Skill/Skill.jsx";
+import { v4 as uuid } from "uuid";
 
-const Skills = ({ skills, setSkills, chosenSkills, setChosenSkills }) => {
-  const handleAdd = (e) => {
-    setChosenSkills([...chosenSkills, e.target.innerText]);
-    const unchosen = skills.filter((elem) => elem !== e.target.innerText);
-    setSkills([...unchosen]);
+const Skills = ({ skills, chosenSkills, setChosenSkills, defaultSkills }) => {
+  const chooseSkill = (e) => {
+    if (!chosenSkills.includes(e.target.innerText)) {
+      setChosenSkills([...chosenSkills, e.target.innerText]);
+    } else {
+      const chosen = chosenSkills.filter((elem) => elem !== e.target.innerText);
+      setChosenSkills(chosen);
+    }
   };
 
-  const handleRemove = (e) => {
-    setSkills([...skills, e.target.innerText]);
-    const chosen = chosenSkills.filter((elem) => elem !== e.target.innerText);
-    setChosenSkills(chosen);
-  };
+  useEffect(() => {
+    if (!defaultSkills) {
+      setChosenSkills(chosenSkills);
+    } else {
+      setChosenSkills(defaultSkills);
+    }
+  }, [defaultSkills]);
 
   return (
     <>
       <div className={styles.skills}>
         {skills.map((skill, idx) => (
-          <button
-            name="skill"
-            type="button"
-            onClick={handleAdd}
-            className={styles.skill}
+          <Skill
             key={idx}
-          >
-            {skill}
-          </button>
+            skill={skill}
+            chooseSkill={chooseSkill}
+            chosenSkills={chosenSkills}
+          />
         ))}
       </div>
-
-      <ChosenSkills
-        chosenSkills={chosenSkills}
-        handleRemove={handleRemove}
-        skillClassName={styles.skill}
-        skillsClassName={styles.chosen_skills}
-      />
     </>
   );
 };

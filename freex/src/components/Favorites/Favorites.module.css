@@ -1,0 +1,22 @@
+.wrapper {
+  margin-top: 2rem;
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: 400;
+  color: rgb(0, 102, 153);
+  margin-bottom: 1rem;
+}
+
+.chip_wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.active {
+  background-color: var(--clr-light-blue);
+  color: var(--clr-very-dark-blue);
+  border: 1px solid var(--clr-base-darker-blue);
+}

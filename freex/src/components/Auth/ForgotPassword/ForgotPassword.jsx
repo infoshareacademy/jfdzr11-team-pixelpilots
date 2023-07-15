@@ -27,18 +27,21 @@ const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
   </form>
 );
 
+
 export const ForgotPassword = () => {
   const handlePasswordReset = (e) => {
     e.preventDefault();
     sendPasswordResetEmail(auth, e.target.email.value).catch((error) => {
       console.log(error.code);
       alert(firebaseErrors[error.code]);
+
     });
   };
 
   return (
     <Form
       submitText="Wyślij przypomnienie na e-mail"
+
       onSubmit={handlePasswordReset}
       isPasswordHidden
     />

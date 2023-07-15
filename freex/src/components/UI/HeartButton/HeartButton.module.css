@@ -1,0 +1,11 @@
+.button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.icon {
+  width: 21px;
+  max-height: 21px;
+  fill: red;
+}

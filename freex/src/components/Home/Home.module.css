@@ -3,10 +3,11 @@
   grid-template-areas: "left right";
   grid-template-columns: 1fr 1fr;
   padding: 4rem 2rem 2rem 0;
+
 }
 
 .left {
-  padding-top: 3rem;
+  padding-top: 5rem;
 }
 
 .right {

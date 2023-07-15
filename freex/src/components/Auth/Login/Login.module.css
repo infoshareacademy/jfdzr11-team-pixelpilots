@@ -8,7 +8,7 @@
 .left {
   grid-area: left;
   width: 100%;
-  /* padding-right: 2rem; */
+  padding-right: 2rem;
 }
 
 .right {
@@ -73,6 +73,43 @@
 .box {
   border-radius: 1.3rem;
   width: 75%;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.separator .line {
+  height: 1px;
+  flex: 1;
+  background-color: black;
+}
+
+.separator p {
+  padding: 0 2rem;
+}
+
+.right button {
+  height: 3rem;
+  font-size: inherit;
+  transition: all.2s ease;
+}
+
+.forgotpass {
+  margin: -1.2rem 0rem 1.5rem 0rem;
+  text-align: right;
+}
+
+.forgotpass a {
+  text-decoration: none;
+  color: var(--clr-very-dark-grey-500);
+}
+
+.forgotpass a:hover {
+  cursor: pointer;
+  opacity: 35%;
 }
 
 .separator {

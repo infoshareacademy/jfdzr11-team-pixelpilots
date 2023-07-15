@@ -8,7 +8,7 @@ const ChosenSkills = ({
 }) => {
   return (
     <div className={skillsClassName}>
-      {chosenSkills.map((skill) => (
+      {chosenSkills?.map((skill) => (
         <button
           type="button"
           onClick={handleRemove}
