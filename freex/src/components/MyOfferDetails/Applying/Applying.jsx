@@ -11,6 +11,7 @@ import { db } from '../../../config/firebase';
 import { useParams } from 'react-router-dom';
 import styles from './Applying.module.css';
 import Loader from '../../UI/Loader/Loader';
+import Applicant from './Applicant/Applicant';
 
 const Applying = () => {
   const { ofertaid } = useParams();
@@ -55,22 +56,7 @@ const Applying = () => {
     <div className={styles.wrapper}>
       <p>{`Zgłaszający się (${applicants.length})`}</p>
       {applicants.map((applicant, idx) => {
-        return (
-          <div className={styles.applicant} key={idx}>
-            <img
-              className={styles.applicant_picture}
-              src={applicant.imgURL}
-              alt="user profile picture"
-            />
-            <div className={styles.info}>
-              <p className={styles.name}>{applicant.userName}</p>
-              <p className={styles.description}>{applicant.description}</p>
-            </div>
-            <div className={styles.rate}>
-              {applicant.hourlyRate} PLN / godz.
-            </div>
-          </div>
-        );
+        return <Applicant key={idx} applicant={applicant} />;
       })}
     </div>
   );
