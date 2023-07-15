@@ -1,0 +1,94 @@
+.general_info {
+  grid-area: general_info;
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.general_info_left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 72px;
+}
+
+.user_img {
+  width: 188px;
+  height: 188px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.elems_under_img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rate {
+  margin: 0.25rem 0;
+}
+
+.underline {
+  height: 1px;
+  width: 100%;
+  background-color: hsl(213, 14%, 25%);
+}
+
+.joiningDate {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.general_info_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 266px;
+}
+
+.info_wrapper_right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user_name {
+  font-size: 24px;
+  padding-bottom: 5px;
+}
+
+.user_role {
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.rating {
+  margin-bottom: 1rem;
+}
+
+.description {
+  padding-bottom: 16px;
+  text-align: justify;
+  font-size: 14px;
+  overflow-wrap: break-word;
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: end;
+  justify-self: flex-end;
+}
+
+.button {
+  width: 150px;
+}

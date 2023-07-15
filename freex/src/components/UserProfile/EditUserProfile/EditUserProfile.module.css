@@ -1,0 +1,136 @@
+.wrapper {
+  width: 80%;
+  max-width: 864px;
+  margin: 0 auto;
+  border: 2px solid var(--clr-base-lighter-blue);
+  border-radius: 12px;
+  padding: 2rem 6rem 3rem;
+  margin-top: 4rem;
+  background-color: white;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: none;
+  margin: 1rem 0;
+  gap: 0.3rem;
+}
+
+.legend {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.input {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  padding-left: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.875rem;
+}
+
+.input::placeholder {
+  color: hsla(213, 14%, 25%, 0.8);
+}
+
+.input_label {
+  font-size: 0.875rem;
+}
+
+.file_input {
+  margin-top: 0.3rem;
+}
+
+.file_input::file-selector-button {
+  color: var(--clr-light-grey-200);
+  background-color: var(--clr-base-darker-blue);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-family: "Nunito Sans", sans-serif;
+  transition: all 0.2s ease;
+  margin-right: 1rem;
+}
+
+.file_input::file-selector-button:hover {
+  color: var(--clr-base-darker-blue);
+  background-color: var(--clr-very-light-blue);
+  box-shadow: 0 0.2rem 0.4rem 0 #d9d9d9;
+  cursor: pointer;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.3rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.875rem;
+}
+
+.textarea::placeholder {
+  color: hsla(213, 14%, 25%, 0.8);
+}
+
+.description_label {
+  margin-top: 0.5rem;
+}
+
+.button {
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  display: block;
+}
+
+.list {
+  list-style: none;
+  width: 100%;
+}
+
+.listItem {
+  border: 1px solid #c2c2c2;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.3rem;
+}
+
+.remove_button {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  display: block;
+  align-self: flex-end;
+}
+
+.button_wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+}

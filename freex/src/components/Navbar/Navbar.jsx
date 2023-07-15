@@ -7,6 +7,8 @@ const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
+  const currentUserId = currentUser?.uid;
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.wrapper}>
@@ -16,7 +18,6 @@ const Navbar = () => {
           </NavLink>
           {!currentUser ? null : (
             <>
-              <NavbarLink linkURL="/panelglowny">Panel główny</NavbarLink>
               <NavbarLink linkURL="/mojeoferty">Moje oferty</NavbarLink>
               <NavbarLink linkURL="/dodajoferte">Dodaj ofertę</NavbarLink>
               <NavbarLink linkURL="/freelancerzy">
@@ -38,21 +39,25 @@ const Navbar = () => {
               >
                 Wyloguj się
               </button>
-              <button className={styles.button_icon}>
+              <button
+                className={styles.button_icon}
+                onClick={() => {
+                  navigate("/ulubione");
+                }}
+              >
                 <img
                   className={styles.icon}
-                  onClick={() => {
-                    navigate("/ulubione");
-                  }}
                   src="../../../Navbar/icon_ulubione.png"
                 />
               </button>
-              <button className={styles.button_icon}>
+              <button
+                className={styles.button_icon}
+                onClick={() => {
+                  navigate(`/profil/${currentUserId}`);
+                }}
+              >
                 <img
                   className={styles.icon}
-                  onClick={() => {
-                    navigate("/profil");
-                  }}
                   src="../../../Navbar/icon_profil.png"
                 />
               </button>
@@ -73,7 +78,7 @@ const Navbar = () => {
                   navigate("/register");
                 }}
               >
-                Zarejetruj się
+                Zarejestruj się
               </button>
             </>
           )}

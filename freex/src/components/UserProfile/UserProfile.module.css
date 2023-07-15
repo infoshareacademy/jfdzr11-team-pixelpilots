@@ -1,0 +1,66 @@
+.message_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem 0 1rem;
+}
+
+.message_button {
+  margin: 1rem 0;
+}
+
+.message_caption {
+  font-size: 14px;
+  text-align: center;
+}
+
+.user_profile {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 20px;
+  grid-template-areas:
+    "general_info contact"
+    "skills empty"
+    "opinions empty"
+    "experience empty"
+    "education empty";
+  margin: 2rem 0;
+}
+
+.portfolio {
+  grid-area: portfolio;
+}
+
+.experience {
+  grid-area: experience;
+}
+
+.education {
+  grid-area: education;
+}
+
+.opinions {
+  grid-area: opinions;
+}
+
+/* Look button */
+
+.look {
+  grid-area: look;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: fit-content;
+}
+
+.look_button {
+  width: 100%;
+  border: 1.5px solid var(--clr-base-darker-blue);
+  background-color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 10px rgba(66, 68, 90, 0.07);
+}

@@ -1,0 +1,53 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3rem 0rem 2rem 0;
+
+}
+
+.adress {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.left {
+  display: grid;
+  justify-content: left;
+}
+
+.right {
+  display: grid;
+  align-content: center;
+  justify-items: end;
+}
+
+.right a {
+  text-decoration: none;
+  color: var(--clr-very-dark-grey-500);
+  font-size: 1rem;
+  line-height: 2rem;
+}
+.right a:hover {
+  text-decoration: underline;
+}
+.right p {
+  color: var(--clr-very-dark-grey-500);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  height: 2.18rem;
+  margin-right: 1.25rem;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  column-gap: 0.75rem;
+}

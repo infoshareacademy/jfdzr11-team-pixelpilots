@@ -1,0 +1,38 @@
+.accordionItem {
+	border: 1px solid var(--clr-base-lighter-blue);
+	line-height: 1.625rem;
+	background-color: var(--clr-primary-white);
+	margin: 1rem 0;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.accordionTitle {
+	font-size: 1.25rem;
+	font-weight: 700;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.25rem 2.5rem;
+}
+
+.accordionTitle img {
+	width: 1rem;
+	height: 0.7rem;
+}
+
+.accordionContent {
+	padding: 1.25rem 2.5rem;
+	background-color: var(--clr-very-light-blue);
+}
+
+.accordionBtn {
+	padding: 0.5rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.accordionItem:hover {
+	background-color: var(--clr-very-light-blue);
+}

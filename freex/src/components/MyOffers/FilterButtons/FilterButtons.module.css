@@ -1,0 +1,4 @@
+.filter_buttons {
+  display: flex;
+  gap: 30px;
+}

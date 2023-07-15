@@ -1,0 +1,48 @@
+.wrapper h3 {
+	font-size: 1.5rem;
+	margin: 3rem 0;
+}
+
+.list {
+	width: 60rem;
+	margin: 0 auto;
+	position: relative;
+}
+
+.link {
+	text-decoration: none;
+	color: var(--clr-primary-black);
+	width: fit-content !important;
+	margin: 0.5rem 2rem;
+}
+
+.controls button {
+	position: absolute;
+	z-index: 5;
+	border: none;
+	color: var(--clr-base-darker-blue);
+	background-color: transparent;
+	transform: translate(0, -50%);
+}
+
+.controls button svg {
+	height: 2.5rem;
+	width: 2.5rem;
+}
+
+.controls button svg:hover {
+	cursor: pointer;
+	border-radius: 50%;
+	color: white;
+	background-color: var(--clr-light-blue);
+}
+
+.controlsPrev {
+	top: 50%;
+	left: -1.8rem;
+}
+
+.controlsNext {
+	top: 50%;
+	right: -1.8rem;
+}

@@ -1,0 +1,63 @@
+.userWrapper {
+	width: 25%;
+	padding: 2rem;
+	border: 2px solid var(--clr-base-lighter-blue);
+	border-radius: 12px;
+	background-color: var(--clr-primary-white);
+	display: flex;
+	flex-direction: column;
+}
+
+.userWrapper strong {
+	border-bottom: 1px solid black;
+	text-align: center;
+	font-size: 1.5rem;
+	padding-bottom: 0.5rem;
+	color: #000000;
+}
+
+.personalData {
+	display: flex;
+	flex-direction: column;
+}
+
+.personalData img {
+	max-width: 70%;
+	border-radius: 50%;
+	margin: 1rem auto;
+	display: flex;
+	line-height: 1.2rem;
+	font-size: 0.8rem;
+	text-align: center;
+}
+.personalData strong {
+	font-weight: 700;
+	border: none;
+	display: inline-block;
+	margin: 0.5rem 0;
+	padding: unset;
+}
+
+.personalData li {
+	list-style: none;
+	line-height: 1.7rem;
+	font-size: 0.875rem;
+}
+
+.rating {
+	flex-wrap: wrap;
+}
+
+.rating div {
+	display: flex;
+	margin-right: 8px;
+}
+
+.rating img {
+	margin: unset;
+}
+
+.rating span {
+	margin: unset;
+	margin-right: 8px;
+}

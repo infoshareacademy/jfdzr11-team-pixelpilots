@@ -1,0 +1,31 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.image {
+	width: 40%;
+}
+
+.content span {
+	font-size: 10rem;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.content p {
+	font-size: 1.5rem;
+	color: #000;
+	margin-bottom: 1.5rem;
+}
+
+.content strong {
+	margin-left: 2rem;
+	font-size: 2rem;
+}

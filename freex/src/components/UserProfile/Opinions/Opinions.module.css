@@ -1,0 +1,80 @@
+.wrapper {
+  padding-right: 2.5rem !important;
+}
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.list {
+  list-style: none;
+  max-height: 500px;
+  overflow: auto;
+  padding-right: 2rem;
+}
+
+.list_item {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.rating {
+  margin-bottom: 0.75rem;
+}
+
+.h5 {
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+}
+
+.p {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.skills {
+  margin-bottom: 0.5rem;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.skill {
+  border: 1.5px solid var(--clr-base-darker-blue);
+  padding: 0.25rem 1rem;
+  border-radius: 8px;
+}
+
+.author_info {
+  display: flex;
+  align-items: center;
+}
+
+.caption {
+  font-size: 0.75rem;
+  margin-left: 1rem;
+}
+
+.userImg {
+  height: 2rem;
+  width: 2rem;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 1rem;
+}
+
+.button {
+  margin-top: 1.5rem;
+}
+
+.name_button_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 0.25rem;
+}

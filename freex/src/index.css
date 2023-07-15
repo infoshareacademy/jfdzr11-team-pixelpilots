@@ -13,6 +13,7 @@
 
 	--clr-primary-white: rgb(255, 255, 255);
 	--clr-primary-black: rgb(55, 63, 73);
+	--clr-background: rgb(250, 250, 250);
 
 	/*grey*/
 	--clr-very-light-grey-100: rgb(248, 249, 252);
@@ -53,6 +54,7 @@
 }
 
 body {
-	max-width: 1280px;
-	margin: 0 auto;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--clr-background);
 }

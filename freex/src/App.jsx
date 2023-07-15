@@ -1,11 +1,10 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
 import {
   Layout,
   Home,
   Login,
   Register,
-  MainPanel,
   MyOffers,
   AddOffer,
   Freelancers,
@@ -14,7 +13,12 @@ import {
   InvalidAddress,
   UserProfile,
   Favorites,
-} from "./components";
+  EditUserProfile,
+  ForgotPassword,
+  MyOfferDetails,
+} from './components';
+import Offer from './components/Offer/Offer';
+import EditOffer from './components/MyOffers/EditOffer/EditOffer';
 
 function App() {
   return (
@@ -25,15 +29,19 @@ function App() {
         <Route path="*" element={<InvalidAddress />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         {/* Ściezki prywatne */}
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/panelglowny" element={<MainPanel />} />
           <Route path="/mojeoferty" element={<MyOffers />} />
+          <Route path="/mojeoferty/:ofertaid" element={<MyOfferDetails />} />
+          <Route path="/mojeoferty/:ofertaid/edit" element={<EditOffer />} />
           <Route path="/dodajoferte" element={<AddOffer />} />
           <Route path="/freelancerzy" element={<Freelancers />} />
+          <Route path="/freelancerzy/:userId" element={<UserProfile />} />
           <Route path="/zlecenia" element={<Offers />} />
-          <Route path="/profil" element={<UserProfile />} />
+          <Route path="/zlecenia/zlecenie/:zlecenieId" element={<Offer />} />
+          <Route path="/profil/:userId" element={<UserProfile />} />
+          <Route path="/edytujprofil" element={<EditUserProfile />} />
           <Route path="/ulubione" element={<Favorites />} />
         </Route>
       </Route>

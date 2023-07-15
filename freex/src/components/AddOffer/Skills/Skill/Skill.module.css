@@ -1,0 +1,20 @@
+.skill {
+  background-color: var(--clr-primary-white);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--clr-base-darker-blue);
+  border-radius: 4px;
+  color: var(--clr-base-darker-blue);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.skill:hover {
+  cursor: pointer;
+}
+
+.chosen_skill {
+  background-color: var(--clr-light-blue);
+  color: var(--clr-very-dark-blue);
+  border: 1px solid var(--clr-base-darker-blue);
+}
