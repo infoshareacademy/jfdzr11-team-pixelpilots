@@ -16,7 +16,7 @@ const Carousel = () => {
 	const collectionRef = collection(db, 'users');
 
 	const settings = {
-		dots: true,
+		dots: false,
 		arrows: false,
 		slidesToShow: 3,
 		slidesToScroll: 1,
@@ -67,7 +67,7 @@ const Carousel = () => {
 							<Link
 								to={`/freelancerzy/${user.id}`}
 								key={nanoid()}
-								className={styles.wrapper}
+								className={styles.link}
 							>
 								<UserCard
 									key={nanoid()}
