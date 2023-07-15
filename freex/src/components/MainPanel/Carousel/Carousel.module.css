@@ -1,6 +1,6 @@
 .wrapper h3 {
 	font-size: 1.5rem;
-	margin-bottom: 2rem;
+	margin: 3rem 0;
 }
 
 .list {
@@ -9,19 +9,25 @@
 	position: relative;
 }
 
-.wrapper {
+.link {
 	text-decoration: none;
 	color: var(--clr-primary-black);
+	width: fit-content !important;
+	margin: 0.5rem 2rem;
 }
 
 .controls button {
 	position: absolute;
 	z-index: 5;
-	outline-style: none;
-	transform: scale(3);
 	border: none;
 	color: var(--clr-base-darker-blue);
 	background-color: transparent;
+	transform: translate(0, -50%);
+}
+
+.controls button svg {
+	height: 2.5rem;
+	width: 2.5rem;
 }
 
 .controls button svg:hover {
