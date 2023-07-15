@@ -2,6 +2,7 @@ import { sendPasswordResetEmail } from "@firebase/auth";
 import { auth } from "../../../config/firebase";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
 import styles from "../ForgotPassword/ForgotPassword.module.css";
+import { PrimaryButton } from "../../index";
 
 const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
   <form onSubmit={onSubmit}>
@@ -15,7 +16,7 @@ const Form = ({ submitText, isPasswordHidden = false, onSubmit }) => (
         <input type="password" name="password" id="password" />
       </div>
     )}
-    <button>{submitText}</button>
+    <PrimaryButton>{submitText}</PrimaryButton>
   </form>
 );
 
