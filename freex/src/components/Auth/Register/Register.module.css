@@ -1,70 +1,91 @@
 .container {
-  display: grid;
-  grid-template-areas: "text form";
-  grid-template-columns: 1fr 1fr;
-  padding: 3rem 2rem 2rem 0;
+	display: grid;
+	grid-template-areas: 'text form';
+	grid-template-columns: 1fr 1fr;
+	padding: 3rem 2rem 2rem 0;
 }
 
 .text {
-  grid-area: text;
-  padding-right: 2rem;
+	grid-area: text;
+	padding-right: 2rem;
 }
 
 .text h2 {
-  font-size: 3rem;
-  color: var(--clr-very-dark-blue);
-  line-height: 3.5rem;
-  margin-bottom: 2rem;
-  font-weight: 400;
+	font-size: 3rem;
+	color: var(--clr-very-dark-blue);
+	line-height: 3.5rem;
+	margin-bottom: 2rem;
+	font-weight: 400;
 }
 
 .text p {
-  font-size: 1.25rem;
-  line-height: 2rem;
-  color: var(--clr-dark-grey-400);
-  margin-bottom: 2rem;
+	font-size: 1.25rem;
+	line-height: 2rem;
+	color: var(--clr-dark-grey-400);
+	margin-bottom: 2rem;
 }
 
 .image img {
-  width: 75%;
+	width: 75%;
 }
 
 .form {
-  grid-area: form;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
+	grid-area: form;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+}
+.formWrapper {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
 }
 
-.form div {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
+.formWrapper div {
+	width: 100%;
 }
 
 .form input {
-  height: 3rem;
-  padding-left: 1rem;
-  margin-bottom: 1.5rem;
-  margin-top: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid var(--clr-very-dark-grey-500);
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1rem;
+	height: 3rem;
+	padding-left: 1rem;
+	margin-bottom: 1.5rem;
+	margin-top: 0.5rem;
+	border-radius: 4px;
+	border: 1px solid var(--clr-very-dark-grey-500);
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 1rem;
+}
+
+.passwordField {
+	display: flex;
+	position: relative;
+	width: 100%;
+}
+
+.passwordField input {
+	width: 100%;
+}
+
+.passwordToggle {
+	border: none;
+	background-color: transparent;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 
 .form input:focus {
-  outline: none;
-  border: 2px solid var(--clr-base-darker-blue);
+	outline: none;
+	border: 2px solid var(--clr-base-darker-blue);
 }
 
 .form input::placeholder {
-  color: var(--clr-medium-grey-300);
+	color: var(--clr-medium-grey-300);
 }
 
 .form button {
-  height: 3rem;
-  font-size: inherit;
-  transition: all.2s ease;
+	height: 3rem;
+	font-size: inherit;
+	transition: all.2s ease;
 }

@@ -4,10 +4,13 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { firebaseErrors } from '../../../utils/firebaseErrors';
 import { PrimaryButton } from '../../index';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useState } from 'react';
 
 const Register = () => {
 	const navigate = useNavigate();
 	const { register } = useAuth();
+	const [showPassword, setShowPassword] = useState(false);
 
 	const handleSubmit = async (formEvent) => {
 		formEvent.preventDefault();
@@ -35,6 +38,10 @@ const Register = () => {
 		}
 	};
 
+	const handleTogglePasswordVisibility = () => {
+		setShowPassword((prevShowPassword) => !prevShowPassword);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.text}>
@@ -55,7 +62,7 @@ const Register = () => {
 				</div>
 			</div>
 			<form onSubmit={handleSubmit} className={styles.form}>
-				<div>
+				<div className={styles.formWrapper}>
 					<label htmlFor="email">Adres email</label>
 					<input
 						type="email"
@@ -63,20 +70,36 @@ const Register = () => {
 						id="email"
 						placeholder="Wpisz adres e-mail..."
 					/>
-					<label htmlFor="password">Hasło</label>
-					<input
-						type="password"
-						name="password"
-						id="password"
-						placeholder="Wpisz hasło..."
-					/>
-					<label htmlFor="password_confirm">Potwierdź hasło</label>
-					<input
-						type="password"
-						name="password_confirm"
-						id="password_confirm"
-						placeholder="Potwierdź hasło..."
-					/>
+					<div className={styles.passwordField}>
+						<input
+							type={showPassword ? 'text' : 'password'}
+							name="password"
+							id="password"
+							placeholder="Wpisz hasło..."
+						/>
+						<button
+							type="button"
+							className={styles.passwordToggle}
+							onClick={handleTogglePasswordVisibility}
+						>
+							{showPassword ? <FaEye /> : <FaEyeSlash />}
+						</button>
+					</div>
+					<div className={styles.passwordField}>
+						<input
+							type={showPassword ? 'text' : 'password'}
+							name="password"
+							id="password"
+							placeholder="Potwierdź hasło..."
+						/>
+						<button
+							type="button"
+							className={styles.passwordToggle}
+							onClick={handleTogglePasswordVisibility}
+						>
+							{showPassword ? <FaEye /> : <FaEyeSlash />}
+						</button>
+					</div>
 					<PrimaryButton type="submit">Zarejestruj się</PrimaryButton>
 				</div>
 			</form>
