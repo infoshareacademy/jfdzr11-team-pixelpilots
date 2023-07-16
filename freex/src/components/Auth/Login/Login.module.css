@@ -4,17 +4,14 @@
   grid-template-columns: 1fr 1fr;
   padding: 8rem 2rem 2rem 0;
 }
-
 .left {
   grid-area: left;
   width: 100%;
   padding-right: 2rem;
 }
-
 .right {
   grid-area: right;
 }
-
 .right h2 {
   text-align: center;
   font-size: 3rem;
@@ -23,19 +20,16 @@
   margin-bottom: 2rem;
   font-weight: 400;
 }
-
 .form {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-
 .forminnerdiv {
   display: flex;
   flex-direction: column;
   width: 80%;
 }
-
 .form input {
   height: 3rem;
   padding-left: 1rem;
@@ -46,14 +40,11 @@
   font-family: "Nunito Sans", sans-serif;
   font-size: 1rem;
 }
-
 .form input::placeholder {
-  padding-left: 1rem;
   font-family: "Nunito Sans", sans-serif;
   font-size: 1rem;
   color: var(--clr-medium-grey-300);
 }
-
 .loginbutton {
   margin-bottom: 1.5rem;
   margin-top: 1rem;
@@ -65,85 +56,86 @@
   font-size: inherit;
 }
 
+.passwordField {
+  display: flex;
+  position: relative;
+}
+
+.passwordField input {
+  width: 100%;
+}
+
+.passwordToggle {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 .loginbutton:hover {
   cursor: pointer;
   opacity: 35%;
 }
-
 .box {
   border-radius: 1.3rem;
   width: 75%;
 }
-
 .separator {
   display: flex;
   align-items: center;
   margin-top: 15px;
 }
-
 .separator .line {
   height: 1px;
   flex: 1;
   background-color: black;
 }
-
 .separator p {
   padding: 0 2rem;
 }
-
 .right button {
   height: 3rem;
   font-size: inherit;
   transition: all.2s ease;
 }
-
 .forgotpass {
   margin: -1.2rem 0rem 1.5rem 0rem;
   text-align: right;
 }
-
 .forgotpass a {
   text-decoration: none;
   color: var(--clr-very-dark-grey-500);
 }
-
 .forgotpass a:hover {
   cursor: pointer;
   opacity: 35%;
 }
-
 .separator {
   display: flex;
   align-items: center;
   margin-top: 15px;
 }
-
 .separator .line {
   height: 1px;
   flex: 1;
   background-color: black;
 }
-
 .separator p {
   padding: 0 2rem;
 }
-
 .right button {
   height: 3rem;
   font-size: inherit;
   transition: all.2s ease;
 }
-
 .forgotpass {
   margin: -1.2rem 0rem 1.5rem 0rem;
   text-align: right;
 }
-
 .forgotpass a {
   text-decoration: none;
   color: var(--clr-very-dark-grey-500);
 }
-
 .forgotpass a:hover {
   cursor: pointer;
   opacity: 35%;
