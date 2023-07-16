@@ -46,7 +46,7 @@ const Carousel = () => {
         });
         setUsers(sortedData);
       } catch (error) {
-        toast.error('Pojawił się błąd. Spróbuj później. Error ' + error);
+        console.log('Pojawił się błąd. Spróbuj później. Error ' + error);
       }
     };
 
