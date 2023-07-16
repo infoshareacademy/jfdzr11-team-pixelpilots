@@ -23,7 +23,7 @@ const InvalidAddress = () => {
 	return (
 		<div className={styles.wrapper}>
 			<img
-				src="InvalidAddress/Running-man-nobg.png
+				src="/InvalidAddress/Running-man-nobg.png
       "
 				alt="running man"
 				className={styles.image}
