@@ -163,27 +163,14 @@ const Offer = () => {
 				</div>
 			</div>
 
-			{user && Object.keys(user).userName ? (
-				<Link to={`/freelancerzy/${user.id}`} className={styles.link}>
-					<UserData
-						date={user.joiningDate}
-						role={user.role}
-						email={user.email}
-						src={user.imgURL}
-						name={user.userName}
-						opinions={user.opinions}
-					/>
-				</Link>
-			) : (
-				<UserData
-					date={anonymousUser.joiningDate}
-					role={anonymousUser.role}
-					email={anonymousUser.email}
-					src={anonymousUser.imgURL}
-					name={anonymousUser.userName}
-					opinions={anonymousUser.opinions}
-				/>
-			)}
+			<UserData
+				date={user.joiningDate}
+				role={user.role}
+				email={user.email}
+				src={user.imgURL}
+				name={user.userName}
+				opinions={user.opinions}
+			/>
 		</div>
 	);
 };
