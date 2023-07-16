@@ -72,7 +72,7 @@ const Register = () => {
 					/>
 					<div className={styles.passwordField}>
 						<input
-							type={showPassword ? 'text' : 'password'}
+							type="password"
 							name="password"
 							id="password"
 							placeholder="Wpisz hasło..."
@@ -87,9 +87,9 @@ const Register = () => {
 					</div>
 					<div className={styles.passwordField}>
 						<input
-							type={showPassword ? 'text' : 'password'}
-							name="password"
-							id="password"
+							type="password"
+							name="password_confirm"
+							id="password_confirm"
 							placeholder="Potwierdź hasło..."
 						/>
 						<button
