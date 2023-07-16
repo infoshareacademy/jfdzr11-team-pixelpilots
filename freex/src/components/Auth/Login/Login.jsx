@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import styles from "./Login.module.css";
 import useAuth from "../../Context/AuthContext";
 import { toast } from "react-hot-toast";
 import { firebaseErrors } from "../../../utils/firebaseErrors";
 import { PrimaryButton } from "../../index";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { login, currentUser } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,12 +32,20 @@ const Login = () => {
     }
   };
 
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
   return (
     <>
       {!currentUser ? (
         <div className={styles.container}>
           <div className={styles.left}>
-            <img className={styles.box} src="./Login/login_photo.png"></img>
+            <img
+              className={styles.box}
+              src="./Login/login_photo.png"
+              alt="Login"
+            />
           </div>
           <div className={styles.right}>
             <form onSubmit={handleSubmit} className={styles.form}>
@@ -48,12 +59,20 @@ const Login = () => {
                   placeholder="Wpisz adres e-mail..."
                 />
                 <label htmlFor="password">Hasło</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Wpisz hasło..."
-                />
+                <div className={styles.passwordField}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder="Wpisz hasło..."
+                  />
+                  <button
+                    type="button"
+                    className={styles.passwordToggle}
+                    onClick={handleTogglePasswordVisibility}>
+                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                  </button>
+                </div>
                 <p className={styles.forgotpass}>
                   <a href="/forgotpassword">Zapomniałeś hasła?</a>
                 </p>

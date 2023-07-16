@@ -1,10 +1,10 @@
 .accordionItem {
 	border: 1px solid var(--clr-base-lighter-blue);
 	line-height: 1.625rem;
-	background-color: var(--clr-primary-white);
 	margin: 1rem 0;
 	border-radius: 8px;
 	cursor: pointer;
+	background-color: var(--clr-primary-white);
 }
 
 .accordionTitle {
@@ -23,7 +23,6 @@
 
 .accordionContent {
 	padding: 1.25rem 2.5rem;
-	background-color: var(--clr-very-light-blue);
 }
 
 .accordionBtn {
@@ -33,6 +32,6 @@
 	cursor: pointer;
 }
 
-.accordionItem:hover {
+.accordionTitle:hover {
 	background-color: var(--clr-very-light-blue);
 }

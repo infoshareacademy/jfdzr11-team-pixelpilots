@@ -28,6 +28,11 @@
   margin-bottom: 0.3rem;
 }
 
+.description {
+  resize: none;
+  min-height: 200px;
+}
+
 .description,
 .skills {
   width: 100%;
