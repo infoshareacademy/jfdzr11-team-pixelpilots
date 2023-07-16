@@ -95,10 +95,8 @@ const Freelancers = () => {
       setSkillFilters((previousFilters) =>
         previousFilters.filter((filter) => filter !== item)
       );
-      console.log(skillFilters);
     } else {
       setSkillFilters((previousFilters) => [...previousFilters, item]);
-      console.log(skillFilters);
     }
   };
 
