@@ -20,7 +20,7 @@ const Sort = ({ sortByNewest, sortByOldest, menu, setMenu, handleClick }) => {
       <div className={styles.sort}>
         <p>Sortuj</p>
         <button onClick={handleClick}>
-          <img src="../../../../public/MyOffers/sort_icon.png" />
+          <img src="/MyOffers/sort_icon.png" />
         </button>
       </div>
       <div className={styles.manu_parent}>
