@@ -163,16 +163,14 @@ const Offer = () => {
 				</div>
 			</div>
 
-			<Link to={`/freelancerzy/${user.id}`} className={styles.link}>
-				<UserData
-					date={user.joiningDate}
-					role={user.role}
-					email={user.email}
-					src={user.imgURL}
-					name={user.userName}
-					opinions={user.opinions}
-				/>
-			</Link>
+			<UserData
+				date={user.joiningDate}
+				role={user.role}
+				email={user.email}
+				src={user.imgURL}
+				name={user.userName}
+				opinions={user.opinions}
+			/>
 		</div>
 	);
 };
