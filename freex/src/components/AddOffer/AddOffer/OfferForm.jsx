@@ -10,6 +10,7 @@ import Data from '../PremiumOption/PremiumOptionData.json';
 import Summary from '../Summary/Summary';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import PrimaryButton from '../../UI/PrimaryButton/PrimaryButton';
 
 const OfferForm = ({
   offer,
@@ -135,15 +136,10 @@ const OfferForm = ({
         />
         <h2 className={styles.total}>Łącznie: {summary.payment} pln</h2>
         <div className={styles.submit_section}>
-          <button
-            onClick={() => navigate('/mojeoferty')}
-            className={styles.submit_button}
-          >
+          <PrimaryButton onClick={() => navigate('/mojeoferty')}>
             Anuluj
-          </button>
-          <button className={styles.submit_button} type="submit">
-            {submitText}
-          </button>
+          </PrimaryButton>
+          <PrimaryButton type="submit">{submitText}</PrimaryButton>
         </div>
       </form>
     </div>

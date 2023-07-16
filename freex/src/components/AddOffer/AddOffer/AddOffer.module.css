@@ -28,6 +28,11 @@
   margin-bottom: 0.3rem;
 }
 
+.description {
+  resize: none;
+  min-height: 200px;
+}
+
 .description,
 .skills {
   width: 100%;
@@ -87,8 +92,10 @@
 .submit_section {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 20px;
   align-items: flex-end;
+  margin: 2rem 0;
 }
 
 .submit_button {

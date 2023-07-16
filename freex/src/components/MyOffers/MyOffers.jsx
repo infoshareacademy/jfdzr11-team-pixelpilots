@@ -9,6 +9,7 @@ import { db } from '../../config/firebase';
 import useAuth from '../../components/Context/AuthContext';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import Loader from '../UI/Loader/Loader';
 
 const MyOffers = () => {
   const { currentUser } = useAuth();
@@ -16,6 +17,7 @@ const MyOffers = () => {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [isLoading, setIsLoading] = useState(true);
 
   const getFilteredItems = (searchPhrase, filterClicked, items) => {
     const searched = items.filter((offer) =>
@@ -47,6 +49,7 @@ const MyOffers = () => {
     } catch (error) {
       toast(`Błąd bazy danych`);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -83,7 +86,11 @@ const MyOffers = () => {
       </div>
       <SearchBar setSearch={setSearch} />
       <Headers />
-      <OffersList filteredItems={filteredItems} />
+      {isLoading ? (
+        <Loader isLoading={isLoading} />
+      ) : (
+        <OffersList filteredItems={filteredItems} />
+      )}
     </div>
   );
 };

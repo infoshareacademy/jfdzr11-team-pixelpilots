@@ -4,7 +4,10 @@
 	padding: 2rem 0;
 }
 
-.wrapper h2 {
+.heading {
+	font-size: 3rem;
+	font-weight: 400;
+	color: var(--clr-very-dark-blue);
 	margin-bottom: 1rem;
 }
 

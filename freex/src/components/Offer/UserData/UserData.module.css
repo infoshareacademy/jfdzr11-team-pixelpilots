@@ -1,6 +1,4 @@
 .userWrapper {
-	/* max-width: 25%;
-	min-width: 18%; */
 	width: 25%;
 	padding: 2rem;
 	border: 2px solid var(--clr-base-lighter-blue);

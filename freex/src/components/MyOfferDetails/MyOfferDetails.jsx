@@ -5,6 +5,7 @@ import { db } from '../../config/firebase';
 import { toast } from 'react-hot-toast';
 import styles from './MyOfferDetails.module.css';
 import MyOfferActions from './MyOfferActions/MyOfferActions';
+import Applying from './Applying/Applying';
 
 const MyOfferDetails = () => {
   const { ofertaid } = useParams();
@@ -64,6 +65,7 @@ const MyOfferDetails = () => {
           <div>
             <span>Numer zlecenia: {offer?.offer_number}</span>
           </div>
+          <Applying />
         </div>
         <MyOfferActions />
       </div>

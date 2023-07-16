@@ -6,7 +6,7 @@
 
 .card {
 	width: 75%;
-	padding: 2rem 3rem 4rem;
+	padding: 2rem 3rem 8rem;
 	border: 2px solid var(--clr-base-lighter-blue);
 	border-radius: 12px;
 	background-color: var(--clr-primary-white);
@@ -16,7 +16,7 @@
 .heading {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: baseline;
 }
 
 .heading h4 {
@@ -37,6 +37,7 @@
 	font-size: 1.25rem;
 	justify-content: end;
 	color: #000000;
+	white-space: nowrap;
 }
 
 .card span {
@@ -68,7 +69,40 @@
 }
 
 .number {
+	display: flex;
+	justify-content: space-between;
 	position: absolute;
 	bottom: 2rem;
 	left: 3rem;
+	right: 3rem;
+}
+
+.number span {
+	align-self: flex-end;
+}
+
+.apply_button {
+	padding: 0.75rem 1.5rem;
+	font-size: 0.875rem;
+}
+
+.apply_wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.apply_info {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	padding: 0.75rem 1.5rem;
+	font-size: 0.875rem;
+	border: 1px solid #1cb0fb;
+	border-radius: 4px;
+}
+
+.link {
+	text-decoration: none;
+	color: var(--clr-primary-black);
+	display: contents;
 }
