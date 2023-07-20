@@ -94,6 +94,7 @@ const PaymentMethod = ({
                 onChange={(e) =>
                   updateSummary(e, data, setData, e.target.value)
                 }
+                onWheel={(e) => e.target.blur()}
                 defaultValue={getNumber(defaultHourRate)}
                 required
               />
@@ -112,6 +113,7 @@ const PaymentMethod = ({
                 onChange={(e) =>
                   updateSummary(e, data, setData, e.target.value)
                 }
+                onWheel={(e) => e.target.blur()}
                 defaultValue={getNumber(defaultMilestoneRate)}
                 required
               />
@@ -130,6 +132,7 @@ const PaymentMethod = ({
                 onChange={(e) =>
                   updateSummary(e, data, setData, e.target.value)
                 }
+                onWheel={(e) => e.target.blur()}
                 defaultValue={getNumber(defaultTotalPayment)}
                 required
               />
