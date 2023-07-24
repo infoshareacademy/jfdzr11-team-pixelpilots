@@ -9,7 +9,7 @@ Do aplikacji można zalogowac się przykładowymi danymi (lub założyć własne
 
 Aplikacja powstała jako finalny projekt naszej grupy podczas bootcampu Frontend w infoShare Academy.
 
-### Stos technologiczny:
+### Stos technologiczny
 javascript, React, Firebase, CSS Modules
 
 ### Wykorzystane paczki
@@ -22,7 +22,7 @@ react, firebase, react-router-dom, uuid, nanoid, react-slick, react-icons, react
 - [Damian Śmigielski](https://github.com/damsmigielski)
 
 
-### Funkcjonalności:
+### Funkcjonalności
 - rejestracja, logowanie, przypominanie hasła
 - panel główny z sekcją pytania i odpowiedzi oraz zestawieniem najbardziej polecanych użytkowników
 - dodawanie, edycja, usuwanie ofert
