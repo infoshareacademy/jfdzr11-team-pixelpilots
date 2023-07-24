@@ -10,7 +10,10 @@ Do aplikacji można zalogowac się przykładowymi danymi (lub założyć własne
 Aplikacja powstała jako finalny projekt naszej grupy podczas bootcampu Frontend w infoShare Academy.
 
 ### Stos technologiczny:
-javascript, React, Firebase, CSS Modules, react-router
+javascript, React, Firebase, CSS Modules
+
+### Wykorzystane paczki
+react, firebase, react-router-dom, uuid, nanoid, react-slick, react-icons, react-hot-toast, react-spinners, slick-carousel.
 
 ### Twórcy
 - [Hanna Hajduszewska](https://github.com/hanna-hajduszewska)
